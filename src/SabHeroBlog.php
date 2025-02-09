@@ -2,4 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog;
 
-class SabHeroBlog {}
+class SabHeroBlog
+{
+}

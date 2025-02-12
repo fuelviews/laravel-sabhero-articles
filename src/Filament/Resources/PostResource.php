@@ -2,14 +2,7 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
-use Fuelviews\SabHeroBlog\Enums\MetroType;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\CreatePost;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ListPosts;
-use Fuelviews\SabHeroBlog\Filament\Tables\Columns\UserPhotoName;
-use Fuelviews\SabHeroBlog\Models\Category;
-use Fuelviews\SabHeroBlog\Models\Metro;
-use Fuelviews\SabHeroBlog\Models\Tag;
-use Fuelviews\SabHeroBlog\Models\User;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Fieldset;
@@ -23,11 +16,18 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Fuelviews\SabHeroBlog\Enums\MetroType;
 use Fuelviews\SabHeroBlog\Enums\PostStatus;
-use Fuelviews\SabHeroBlog\Models\Post;
+use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\CreatePost;
 use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\EditPost;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ViewPost;
+use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ListPosts;
 use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Widgets\BlogPostPublishedChart;
+use Fuelviews\SabHeroBlog\Filament\Tables\Columns\UserAvatar;
+use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ViewPost;
+use Fuelviews\SabHeroBlog\Models\Category;
+use Fuelviews\SabHeroBlog\Models\Metro;
+use Fuelviews\SabHeroBlog\Models\Post;
+use Fuelviews\SabHeroBlog\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
@@ -82,7 +82,7 @@ class PostResource extends Resource
                     ->collection('post_feature_image')
                 ->label('Featured Image'),
 
-                UserPhotoName::make('user')
+                UserAvatar::make('user')
                     ->label('Author'),
 
                 Tables\Columns\TextColumn::make('created_at')
@@ -104,12 +104,12 @@ class PostResource extends Resource
             ])
             ->headerActions([
                 Tables\Actions\ImportAction::make()
-                    ->label('Import from ZIP')
+                    ->label('Import posts')
                     ->icon('heroicon-o-arrow-up-tray')
-                    ->color('primary')
+                    ->color('gray')
                     ->form([
                         Forms\Components\FileUpload::make('zip_file')
-                            ->label('Upload ZIP File')
+                            ->label('Zip files only')
                             ->acceptedFileTypes(['application/zip'])
                             ->required(),
                     ])
@@ -117,18 +117,17 @@ class PostResource extends Resource
                     ->requiresConfirmation(),
             ])
             ->actions([
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\ViewAction::make(),
-                ]),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('export_csv_and_images')
-                        ->label('Export to ZIP')
+                        ->label('Export posts')
                         ->icon('heroicon-o-arrow-down-tray')
-                        ->color('info')
+                        ->color('gray')
                         ->action(fn ($records) => static::exportToZip($records))
                         ->requiresConfirmation(),
                 ]),
@@ -189,10 +188,10 @@ class PostResource extends Resource
                         ->schema([
                             SpatieMediaLibraryImageEntry::make('feature_image')
                                 ->collection('post_feature_image')
-                                ->label('Feature Photo'),
+                                ->label('Feature Image'),
 
                             TextEntry::make('feature_image_alt_text')
-                                ->label('Photo Alt Text'),
+                                ->label('Alt Text'),
                         ]),
                     Fieldset::make('Publishing Information')
                         ->schema([

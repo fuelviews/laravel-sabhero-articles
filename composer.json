@@ -24,7 +24,6 @@
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "filament/support": "^3.2",
         "fuelviews/laravel-sabhero-wrapper": ">=0.0.13",
-        "jeffgreco13/filament-breezy": "^2.5",
         "spatie/filament-markdown-editor": "^2.0",
         "spatie/laravel-package-tools": "^1.19",
         "spatie/laravel-permission": "^6.13"

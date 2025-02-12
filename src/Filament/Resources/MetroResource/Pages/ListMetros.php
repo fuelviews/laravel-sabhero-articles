@@ -2,11 +2,11 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages;
 
-use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource;
 
-class ListMetro extends ListRecords
+class ListMetros extends ListRecords
 {
     protected static string $resource = MetroResource::class;
 

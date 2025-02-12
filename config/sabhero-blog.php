@@ -11,7 +11,7 @@
  * | The recaptcha configuration is for setting up the recaptcha for the blog.
  */
 
-use Fuelviews\SabHeroBlog\Models\User;
+use App\Models\User;
 
 return [
     'tables' => [
@@ -32,7 +32,6 @@ return [
         'foreign_key' => 'user_id',
         'columns' => [
             'name' => 'name',
-            'avatar' => 'profile_photo_path',
             'slug' => 'slug'
         ],
     ],

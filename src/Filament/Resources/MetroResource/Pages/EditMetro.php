@@ -2,9 +2,9 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages;
 
-use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource;
 
 class EditMetro extends EditRecord
 {

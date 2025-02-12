@@ -76,7 +76,7 @@
     </div>
     <h2 class="flash">New Blog Post Published!</h2>
     <div class="header">
-        <img src="{{ $post->featurePhoto }}" alt="Feature Image">
+        <img src="{{ $post->featureImage }}" alt="Feature Image">
     </div>
     <div class="content">
         <h2>{{ $post->title }}</h2>

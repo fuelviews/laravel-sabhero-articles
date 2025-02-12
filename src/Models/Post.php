@@ -99,7 +99,6 @@ class Post extends Model implements hasMedia
             ->withTimestamps();
     }
 
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(config('sabhero-blog.user.model'), config('sabhero-blog.user.foreign_key'));
@@ -186,6 +185,7 @@ class Post extends Model implements hasMedia
                                 ->maxLength(255),
 
                             TextInput::make('slug')
+                                ->required()
                                 ->maxLength(255),
 
                             Textarea::make('sub_title')
@@ -275,9 +275,14 @@ class Post extends Model implements hasMedia
                                     return "{$slug}_{$randomSuffix}.{$file->getClientOriginalExtension()}";
                                 })
                                 ->responsiveImages()
+                                ->image()
                                 ->collection('post_feature_image')
-                                ->label('Feature Image'),
+                                ->label('Feature Image')
+                                ->required(),
+
                             TextInput::make('feature_image_alt_text')
+                                ->label('Alt Text')
+                                ->required(),
                         ])->collapsible(),
 
                     Fieldset::make('Status')

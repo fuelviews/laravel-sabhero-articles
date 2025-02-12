@@ -5,7 +5,6 @@ namespace Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 use Fuelviews\SabHeroBlog\Events\BlogPublished;
-use Fuelviews\SabHeroBlog\Models\Post;
 use Fuelviews\SabHeroBlog\Filament\Resources\PostResource;
 use Illuminate\Contracts\Support\Htmlable;
 

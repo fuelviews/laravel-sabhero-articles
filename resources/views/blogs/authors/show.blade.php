@@ -4,11 +4,7 @@
             <div class="flex flex-col md:flex-row md:items-center gap-8">
                 <div class="flex-shrink-0">
                     <a href="{{ route('sabhero-blog.author.show', $author->slug) }}">
-                        @if ($author->hasMedia('avatar'))
-                            {{ $author->getFirstMedia('avatar')('author')->attributes(['class' => 'sm:h-48 sm:w-48 md:h-52 md:w-52 rounded-2xl drop-shadow-lg']) }}
-                        @elseif($author->avatar)
-                            <img src="{{ $author->avatar }}" class="h-48 w-48 rounded-full shadow-lg" alt="{{ $author->name }}">
-                        @endif
+                        <img src="{{ $author->avatar }}" class="h-48 w-48 rounded-full shadow-lg" alt="{{ $author->name }}">
                     </a>
                 </div>
                 <div class="flex-grow">

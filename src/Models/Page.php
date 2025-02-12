@@ -56,7 +56,7 @@ class Page extends Model implements HasMedia
     public static function getForm(): array
     {
         return [
-            Section::make('SEO Meta Data')
+            Section::make('SEO Metadata')
                 ->columns(2)
                 ->schema([
                     TextInput::make('title')
@@ -76,7 +76,7 @@ class Page extends Model implements HasMedia
                         ->responsiveImages()
                         ->collection('page_feature_image')
                         ->columnSpanFull(),
-            ])->collapsible(),
+            ]),
         ];
     }
 }

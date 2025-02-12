@@ -5,7 +5,7 @@ namespace Fuelviews\SabHeroBlog\Factories;
 use Carbon\Carbon;
 use Fuelviews\SabHeroBlog\Enums\PostStatus;
 use Fuelviews\SabHeroBlog\Models\Post;
-use Fuelviews\SabHeroBlog\Models\User;
+use Fuelviews\SabHeroBlog\Models\UserBak;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -32,7 +32,7 @@ class PostFactory extends Factory
             'published_at' => $this->faker->dateTime(),
             'scheduled_for' => $this->faker->dateTime(),
             'feature_image_alt_text' => $this->faker->word,
-            'user_id' => User::factory(),
+            'user_id' => UserBak::factory(),
         ];
     }
 

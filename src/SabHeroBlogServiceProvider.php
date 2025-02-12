@@ -28,14 +28,11 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
             ])
             ->hasMigrations([
                 'create_blog_tables',
-                'create_breezy_sessions_table',
                 'create_media_table',
-                'create_permission_tables',
                 'update_users_table',
                 'create_imports_table',
                 'create_exports_table',
                 'create_failed_import_rows_table',
-                'create_personal_access_tokens_table'
             ])
             ->hasViewComponents(
                 'blog',

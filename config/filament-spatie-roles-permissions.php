@@ -3,7 +3,6 @@
 use Althinect\FilamentSpatieRolesPermissions\Resources\PermissionResource;
 use Althinect\FilamentSpatieRolesPermissions\Resources\RoleResource;
 use Fuelviews\SabHeroBlog\Models\Team;
-use Fuelviews\SabHeroBlog\Models\User;
 
 return [
 

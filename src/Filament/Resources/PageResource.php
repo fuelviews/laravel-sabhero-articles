@@ -2,6 +2,7 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
+use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\CreatePage;
 use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\EditPage;
 use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\ListPages;
 use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\ViewPage;
@@ -43,7 +44,7 @@ class PageResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('Featured Image')
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('feature_image')
                     ->collection('page_feature_image')
                     ->circular(),
 
@@ -68,8 +69,8 @@ class PageResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -113,6 +114,7 @@ class PageResource extends Resource
     {
         return [
             'index' => ListPages::route('/'),
+            'create' => CreatePage::route('/create'),
             'edit' => EditPage::route('/{record}/edit'),
             'view' => ViewPage::route('/{record}'),
         ];

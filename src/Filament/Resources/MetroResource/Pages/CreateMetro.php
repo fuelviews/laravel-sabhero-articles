@@ -2,8 +2,8 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages;
 
-use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource;
 use Filament\Resources\Pages\CreateRecord;
+use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource;
 
 class CreateMetro extends CreateRecord
 {

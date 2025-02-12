@@ -2,13 +2,13 @@
 
 namespace Fuelviews\SabHeroBlog\Factories;
 
-use Fuelviews\SabHeroBlog\Models\User;
+use Fuelviews\SabHeroBlog\Models\UserBak;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends Factory<User>
+ * @extends Factory<UserBak>
  */
 class UserFactory extends Factory
 {

@@ -35,7 +35,6 @@ class Category extends Model
             TextInput::make('name')
                 ->live(true)
                 ->afterStateUpdated(function (Get $get, Set $set, ?string $operation, ?string $old, ?string $state) {
-
                     $set('slug', Str::slug($state));
                 })
                 ->unique(config('sabhero-blog.tables.prefix').'categories', 'name', null, 'id')

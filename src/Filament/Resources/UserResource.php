@@ -2,16 +2,18 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
-use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages;
-use Fuelviews\SabHeroBlog\Filament\Tables\Columns\UserPhotoName;
-use Fuelviews\SabHeroBlog\Models\User;
+use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\CreateUser;
+use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\EditUser;
+use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\ListUsers;
+use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\ViewUser;
+use Fuelviews\SabHeroBlog\Filament\Tables\Columns\UserAvatar;
 use Illuminate\Support\Str;
 
 class UserResource extends Resource
@@ -50,26 +52,55 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('email')
                             ->required()
                             ->email()
-                            ->columnSpan(2),
+                            ->columnSpan(1),
 
-                        Forms\Components\Grid::make(2) // Define a 2-column grid
-                        ->schema([
-                            Forms\Components\Select::make('roles')
-                                ->multiple()
-                                ->preload()
-                                ->relationship('roles', 'name'),
+                        Forms\Components\Group::make([
+                            Forms\Components\Toggle::make('is_author')
+                                ->label('Author')
+                                ->inline(false),
+                        ])->extraAttributes(['class' => 'flex items-center justify-center h-full']),
 
-                            Forms\Components\Group::make([
-                                Forms\Components\Toggle::make('is_author')
-                                    ->label('Author')
-                                    ->inline(false),
-                            ])->extraAttributes(['class' => 'flex items-center justify-center h-full']),
-                        ]),
-                        SpatieMediaLibraryFileUpload::make('user.avatar')
+
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('user.avatar')
+                            ->responsiveImages()
                             ->label('Avatar')
                             ->collection('avatar')
                             ->columnSpanFull(),
-                    ]),
+
+                        Forms\Components\Grid::make(1)
+                            ->schema([
+                                Forms\Components\Textarea::make('bio')
+                                    ->rows(5)
+                                    ->label('Bio')
+                                    ->columnSpan(1),
+
+                                Forms\Components\Repeater::make('links')
+                                    ->schema([
+                                        Forms\Components\Select::make('site')
+                                            ->label('Site')
+                                            ->options([
+                                                'x' => 'X',
+                                                'facebook' => 'Facebook',
+                                                'linkedin' => 'Linkedin',
+                                                'youtube' => 'Youtube',
+                                                'github' => 'Github',
+                                                'instagram' => 'Instagram',
+                                                'threads' => 'Threads',
+                                                'personal' => 'Personal',
+                                                'business' => 'Business',
+                                            ])
+                                            ->required()
+                                            ->columnSpanFull(),
+
+                                        Forms\Components\TextInput::make('link')
+                                            ->label('Link')
+                                            ->url()
+                                            ->required(),
+                                    ])
+                                    ->label('')
+                                    ->addActionLabel('Add your links'),
+                            ]),
+                        ]),
             ]);
     }
 
@@ -85,16 +116,16 @@ class UserResource extends Resource
                     ->onColor('primary')
                     ->offColor('gray')
                     ->afterStateUpdated(fn ($record, $state) => $record->update(['is_author' => $state])),
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('Avatar')
-                    ->collection('avatar')
-                    ->defaultImageUrl(url('https://ui-avatars.com/api/?background=gray&name='))
-                    ->circular(),
+                UserAvatar::make('user')
+                    ->label('Avatar')
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -113,9 +144,10 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            //'edit' => EditUser::route('/{record}/edit'),
+            'view' => ViewUser::route('/{record}'),
         ];
     }
 }

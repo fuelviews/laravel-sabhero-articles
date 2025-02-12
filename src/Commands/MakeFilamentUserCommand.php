@@ -16,6 +16,7 @@ class MakeFilamentUserCommand extends MakeUserCommand
         $name = $this->ask('Name');
         $email = $this->ask('Email address');
         $password = $this->secret('Password');
+        $is_author = $this->confirm('Is author?', false);
 
         $userModel = config('auth.providers.users.model');
 
@@ -25,7 +26,7 @@ class MakeFilamentUserCommand extends MakeUserCommand
         $user->email = $email;
         $user->password = Hash::make($password);
         $user->slug = Str::slug($name);
-        $user->is_author = true;
+        $user->is_author = $is_author;
         $user->save();
 
         $this->info("Filament user {$email} created successfully!");

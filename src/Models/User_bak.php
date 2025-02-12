@@ -11,17 +11,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Permission\Traits\HasRoles;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
+class UserBak extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
-    use HasFactory, Notifiable, HasRoles, InteractsWithMedia, TwoFactorAuthenticatable, HasBlog;
+    use HasFactory, Notifiable, InteractsWithMedia, HasBlog;
 
     protected $fillable = [
         'name',
@@ -36,8 +33,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
     protected $hidden = [
         'password',
         'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
     ];
 
     protected function casts(): array
@@ -46,7 +41,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'links' => 'array',
-            'is_author' => 'boolean'
         ];
     }
 
@@ -63,7 +57,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        $this->addMediaConversion('author')
+        $this->addMediaConversion('avatar')
             ->withResponsiveImages()
             ->width(208)
             ->height(208)

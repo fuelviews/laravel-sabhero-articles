@@ -2,7 +2,7 @@
 
 namespace Fuelviews\SabHeroBlog\Http\Controllers;
 
-use Fuelviews\SabHeroBlog\Models\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller

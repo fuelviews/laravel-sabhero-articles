@@ -4,8 +4,8 @@ namespace Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages;
 
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
-use Fuelviews\SabHeroBlog\Models\Category;
 use Fuelviews\SabHeroBlog\Filament\Resources\PageResource;
+use Fuelviews\SabHeroBlog\Models\Page;
 
 class ViewPage extends ViewRecord
 {
@@ -15,8 +15,7 @@ class ViewPage extends ViewRecord
     {
         return [
             EditAction::make()
-                ->slideOver()
-                ->form(Category::getForm()),
+                ->form(Page::getForm()),
         ];
     }
 }

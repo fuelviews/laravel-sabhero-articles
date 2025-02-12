@@ -2,11 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
-use Fuelviews\SabHeroBlog\Enums\MetroType;
-use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages\EditMetro;
-use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages\ListMetro;
-use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages\ViewMetro;
-use Fuelviews\SabHeroBlog\Models\Metro;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -14,7 +9,12 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Fuelviews\SabHeroBlog\Enums\MetroType;
+use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages\ListMetros;
+use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages\ViewMetro;
 use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\RelationManagers\MetroRelationManager;
+use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages\EditMetro;
+use Fuelviews\SabHeroBlog\Models\Metro;
 use Illuminate\Support\Str;
 
 class MetroResource extends Resource
@@ -68,8 +68,8 @@ class MetroResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -111,8 +111,8 @@ class MetroResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListMetro::route('/'),
-            'edit' => EditMetro::route('/{record}/edit'),
+            'index' => ListMetros::route('/'),
+            //'edit' => EditMetro::route('/{record}/edit'),
             'view' => ViewMetro::route('/{record}'),
         ];
     }

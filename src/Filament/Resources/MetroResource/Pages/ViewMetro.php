@@ -2,10 +2,10 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources\MetroResource\Pages;
 
-use Fuelviews\SabHeroBlog\Models\Metro;
-use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Fuelviews\SabHeroBlog\Filament\Resources\MetroResource;
+use Fuelviews\SabHeroBlog\Models\Metro;
 
 class ViewMetro extends ViewRecord
 {
@@ -15,7 +15,6 @@ class ViewMetro extends ViewRecord
     {
         return [
             EditAction::make()
-                ->slideOver()
                 ->form(Metro::getForm()),
         ];
     }

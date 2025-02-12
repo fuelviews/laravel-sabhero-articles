@@ -32,7 +32,7 @@ Route::middleware(config('sabhero-blog.route.middleware'))
         Route::get('/{state:slug}/{city:slug}', [PostController::class, 'indexMetroStateCity'])
             ->where([
                 'state' => '[a-zA-Z\-]+',
-                'city' => '[a-zA-Z\-]+'
+                'city' => '[a-zA-Z\-]+',
             ])
             ->name('sabhero-blog.post.metro.state.city.index');
         Route::get('{state:slug}/{city:slug}/{post:slug}', [PostController::class, 'showMetro'])

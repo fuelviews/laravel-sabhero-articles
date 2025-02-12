@@ -26,7 +26,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_blog_tables',
                 'create_media_table',
-                //'update_users_table',
+                // 'update_users_table',
                 'create_authors_table',
                 'create_imports_table',
                 'create_exports_table',
@@ -64,7 +64,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
 
                     });
             });
-        //$this->loadTestingMigration();
+        // $this->loadTestingMigration();
     }
 
     public function register()

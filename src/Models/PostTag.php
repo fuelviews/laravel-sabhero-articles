@@ -24,6 +24,6 @@ class PostTag extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix') . 'post_' . config('sabhero-blog.tables.prefix') . 'tag';
+        return config('sabhero-blog.tables.prefix').'post_'.config('sabhero-blog.tables.prefix').'tag';
     }
 }

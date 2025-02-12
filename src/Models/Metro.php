@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 
 class Metro extends Model
 {
-
     protected $fillable = [
         'parent_id',
         'name',
@@ -60,7 +59,7 @@ class Metro extends Model
     {
         return $this->belongsToMany(
             Post::class,
-            config('sabhero-blog.tables.prefix') . 'metro_' . config('sabhero-blog.tables.prefix') . 'post',
+            config('sabhero-blog.tables.prefix').'metro_'.config('sabhero-blog.tables.prefix').'post',
             'metro_id',
             'post_id'
         )->withPivot('type')
@@ -94,7 +93,7 @@ class Metro extends Model
             TextInput::make('name')
                 ->required()
                 ->maxLength(255)
-                ->live(debounce:500)
+                ->live(debounce: 500)
                 ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state)))
                 ->formatStateUsing(fn ($state) => Str::title($state)),
 
@@ -124,6 +123,6 @@ class Metro extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix') . 'metros';
+        return config('sabhero-blog.tables.prefix').'metros';
     }
 }

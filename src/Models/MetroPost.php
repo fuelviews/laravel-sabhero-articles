@@ -12,6 +12,7 @@ class MetroPost extends Pivot
         'parent_id',
         'type',
     ];
+
     protected $casts = [
         'id' => 'integer',
         'post_id' => 'integer',
@@ -21,6 +22,6 @@ class MetroPost extends Pivot
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix') . 'metro_' . config('sabhero-blog.tables.prefix') . 'post';
+        return config('sabhero-blog.tables.prefix').'metro_'.config('sabhero-blog.tables.prefix').'post';
     }
 }

@@ -34,7 +34,7 @@ class Page extends Model implements HasMedia
 
     protected static function newFactory(): PageFactory
     {
-        return new PageFactory();
+        return new PageFactory;
     }
 
     public function getSeoDataAttribute(): SEOData
@@ -46,7 +46,7 @@ class Page extends Model implements HasMedia
         );
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('feature_image')
             ->withResponsiveImages()

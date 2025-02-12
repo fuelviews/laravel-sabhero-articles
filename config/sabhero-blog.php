@@ -26,7 +26,7 @@ return [
         'foreign_key' => 'user_id',
         'columns' => [
             'name' => 'name',
-            'slug' => 'slug'
+            'slug' => 'slug',
         ],
     ],
     'heading_permalink' => [
@@ -38,5 +38,5 @@ return [
     'crm' => [
         'name' => 'CRM',
         'link' => '#',
-    ]
+    ],
 ];

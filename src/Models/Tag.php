@@ -58,6 +58,6 @@ class Tag extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix') . 'tags';
+        return config('sabhero-blog.tables.prefix').'tags';
     }
 }

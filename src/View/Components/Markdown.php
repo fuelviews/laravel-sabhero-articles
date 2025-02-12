@@ -62,7 +62,7 @@ class Markdown extends Component
                 ],
             ],
             'embed' => [
-                'adapter' => new OscaroteroEmbedAdapter(),
+                'adapter' => new OscaroteroEmbedAdapter,
                 'allowed_domains' => ['youtube.com', 'twitter.com', 'github.com'],
                 'fallback' => 'link',
             ],
@@ -80,29 +80,29 @@ class Markdown extends Component
 
         $environment = new Environment($config);
 
-        $environment->addExtension(new CommonMarkCoreExtension());
+        $environment->addExtension(new CommonMarkCoreExtension);
 
-        $environment->addExtension(new GithubFlavoredMarkdownExtension());
+        $environment->addExtension(new GithubFlavoredMarkdownExtension);
 
-        $environment->addExtension(new TableOfContentsExtension());
+        $environment->addExtension(new TableOfContentsExtension);
 
-        $environment->addRenderer(TableOfContents::class, new TableOfContentsRenderer());
+        $environment->addRenderer(TableOfContents::class, new TableOfContentsRenderer);
 
-        $environment->addExtension(new HeadingPermalinkExtension());
+        $environment->addExtension(new HeadingPermalinkExtension);
 
-        $environment->addExtension(new AutolinkExtension());
+        $environment->addExtension(new AutolinkExtension);
 
-        $environment->addExtension(new ExternalLinkExtension());
+        $environment->addExtension(new ExternalLinkExtension);
 
-        $environment->addExtension(new TaskListExtension());
+        $environment->addExtension(new TaskListExtension);
 
-        $environment->addExtension(new EmbedExtension());
+        $environment->addExtension(new EmbedExtension);
 
-        $environment->addExtension(new FootnoteExtension());
+        $environment->addExtension(new FootnoteExtension);
 
-        $environment->addExtension(new DescriptionListExtension());
+        $environment->addExtension(new DescriptionListExtension);
 
-        $environment->addExtension(new TableExtension());
+        $environment->addExtension(new TableExtension);
 
         $converter = new MarkdownConverter($environment);
 

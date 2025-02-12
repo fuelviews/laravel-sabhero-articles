@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -58,10 +58,10 @@ return new class () extends Migration
 
         Schema::create(config('sabhero-blog.tables.prefix').'category_'.config('sabhero-blog.tables.prefix').'post', function (Blueprint $table) {
             $table->id();
-            $table->foreignId( "post_id")
+            $table->foreignId('post_id')
                 ->constrained(table: config('sabhero-blog.tables.prefix').'posts')
                 ->cascadeOnDelete();
-            $table->foreignId("category_id")
+            $table->foreignId('category_id')
                 ->constrained(table: config('sabhero-blog.tables.prefix').'categories')
                 ->cascadeOnDelete();
             $table->timestamps();
@@ -69,12 +69,12 @@ return new class () extends Migration
 
         Schema::create(config('sabhero-blog.tables.prefix').'metro_'.config('sabhero-blog.tables.prefix').'post', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("post_id")
+            $table->foreignId('post_id')
                 ->constrained(table: config('sabhero-blog.tables.prefix').'posts')
                 ->cascadeOnDelete();
-            $table->foreignId("metro_id")
-            ->constrained(table: config('sabhero-blog.tables.prefix').'metros')
-            ->cascadeOnDelete();
+            $table->foreignId('metro_id')
+                ->constrained(table: config('sabhero-blog.tables.prefix').'metros')
+                ->cascadeOnDelete();
             $table->enum('type', ['state', 'city'])->nullable();
             $table->timestamps();
         });
@@ -88,16 +88,16 @@ return new class () extends Migration
 
         Schema::create(config('sabhero-blog.tables.prefix').'post_'.config('sabhero-blog.tables.prefix').'tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("post_id")
+            $table->foreignId('post_id')
                 ->constrained(table: config('sabhero-blog.tables.prefix').'posts')
                 ->cascadeOnDelete();
-            $table->foreignId("tag_id")
+            $table->foreignId('tag_id')
                 ->constrained(table: config('sabhero-blog.tables.prefix').'tags')
                 ->cascadeOnDelete();
             $table->timestamps();
         });
 
-        if (!Schema::hasColumn($tableName, $columnName)) {
+        if (! Schema::hasColumn($tableName, $columnName)) {
             Schema::table($tableName, function (Blueprint $table) use ($columnName) {
                 $table->string($columnName)->nullable();
             });

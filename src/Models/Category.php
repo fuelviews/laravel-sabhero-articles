@@ -56,6 +56,6 @@ class Category extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix') . 'categories';
+        return config('sabhero-blog.tables.prefix').'categories';
     }
 }

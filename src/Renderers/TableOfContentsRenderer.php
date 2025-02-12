@@ -13,7 +13,7 @@ class TableOfContentsRenderer implements NodeRendererInterface
     public function render($node, ChildNodeRendererInterface $childRenderer): string
     {
         if (! ($node instanceof TableOfContents)) {
-            throw new InvalidArgumentException('Incompatible node type: ' . get_class($node));
+            throw new InvalidArgumentException('Incompatible node type: '.get_class($node));
         }
 
         $title = new HtmlElement(

@@ -28,8 +28,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Post extends Model implements hasMedia
 {
-    use InteractsWithMedia;
     use HasSEO;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'title',
@@ -86,7 +86,7 @@ class Post extends Model implements hasMedia
     {
         return $this->belongsToMany(
             Metro::class,
-            config('sabhero-blog.tables.prefix') . 'metro_' . config('sabhero-blog.tables.prefix') . 'post',
+            config('sabhero-blog.tables.prefix').'metro_'.config('sabhero-blog.tables.prefix').'post',
             'post_id',
             'metro_id'
         )->withPivot('type')
@@ -324,7 +324,7 @@ class Post extends Model implements hasMedia
         return $this->belongsTo(Metro::class, 'city_id')->where('type', MetroType::CITY->value);
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('post_feature_image')
             ->withResponsiveImages()
@@ -372,6 +372,6 @@ class Post extends Model implements hasMedia
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix') . 'posts';
+        return config('sabhero-blog.tables.prefix').'posts';
     }
 }

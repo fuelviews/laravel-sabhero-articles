@@ -94,7 +94,7 @@ class TagResource extends Resource
     {
         return [
             'index' => ListTags::route('/'),
-            //'edit' => EditTag::route('/{record}/edit'),
+            // 'edit' => EditTag::route('/{record}/edit'),
             'view' => ViewTag::route('/{record}'),
         ];
     }

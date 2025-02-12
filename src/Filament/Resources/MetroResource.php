@@ -112,7 +112,7 @@ class MetroResource extends Resource
     {
         return [
             'index' => ListMetros::route('/'),
-            //'edit' => EditMetro::route('/{record}/edit'),
+            // 'edit' => EditMetro::route('/{record}/edit'),
             'view' => ViewMetro::route('/{record}'),
         ];
     }

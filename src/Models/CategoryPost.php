@@ -19,6 +19,6 @@ class CategoryPost extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix') . 'category_' . config('sabhero-blog.tables.prefix') . 'post';
+        return config('sabhero-blog.tables.prefix').'category_'.config('sabhero-blog.tables.prefix').'post';
     }
 }

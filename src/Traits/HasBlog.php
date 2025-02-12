@@ -19,10 +19,10 @@ trait HasBlog
         }
 
         if (! empty($this->{config('sabhero-blog.user.columns.avatar')})) {
-            return asset('storage/' . $this->{config('sabhero-blog.user.columns.avatar')});
+            return asset('storage/'.$this->{config('sabhero-blog.user.columns.avatar')});
         }
 
-        return 'https://ui-avatars.com/api/?background=random&name=' . urlencode($this->{config('sabhero-blog.user.columns.name')});
+        return 'https://ui-avatars.com/api/?background=random&name='.urlencode($this->{config('sabhero-blog.user.columns.name')});
     }
 
     public function posts(): HasMany

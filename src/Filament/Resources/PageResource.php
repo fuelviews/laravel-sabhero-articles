@@ -88,7 +88,7 @@ class PageResource extends Resource
                         ->formatStateUsing(function ($state) {
                             return ucfirst($state);
                         })
-                    ->columnSpanFull(),
+                        ->columnSpanFull(),
 
                     SpatieMediaLibraryImageEntry::make('Featured Image')
                         ->label('Featured Image')

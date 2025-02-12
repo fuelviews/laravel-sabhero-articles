@@ -32,9 +32,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
 use League\Csv\Writer;
-use function parse_url;
 use RuntimeException;
 use ZipArchive;
+
+use function parse_url;
 
 class PostResource extends Resource
 {
@@ -52,7 +53,7 @@ class PostResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return (string)Post::count();
+        return (string) Post::count();
     }
 
     public static function form(Form $form): Form
@@ -80,7 +81,7 @@ class PostResource extends Resource
 
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('page_feature_image')
                     ->collection('post_feature_image')
-                ->label('Featured Image'),
+                    ->label('Featured Image'),
 
                 UserAvatar::make('user')
                     ->label('Author'),
@@ -221,8 +222,8 @@ class PostResource extends Resource
             }
         }
 
-        $zipFilePath = $storagePath . '/posts_export.zip';
-        $csvFilePath = $storagePath . '/posts.csv';
+        $zipFilePath = $storagePath.'/posts_export.zip';
+        $csvFilePath = $storagePath.'/posts.csv';
 
         $csv = Writer::createFromPath($csvFilePath, 'w+');
         $csv->insertOne([
@@ -245,7 +246,7 @@ class PostResource extends Resource
             'Updated At',
         ]);
 
-        $zip = new ZipArchive();
+        $zip = new ZipArchive;
         if ($zip->open($zipFilePath, ZipArchive::CREATE) !== true) {
             return back()->withErrors('Failed to create ZIP file.');
         }
@@ -255,7 +256,7 @@ class PostResource extends Resource
             foreach ($post->getMedia('post_feature_image') as $media) {
                 $filePath = $media->getPath();
                 if (file_exists($filePath)) {
-                    $zip->addFile($filePath, 'images/' . $media->file_name);
+                    $zip->addFile($filePath, 'images/'.$media->file_name);
                     $mediaUrls[] = asset($media->getUrl());
                 }
             }
@@ -293,11 +294,11 @@ class PostResource extends Resource
 
         $zipFilePath = Storage::disk($diskName)->path($zipFile);
 
-        $extractFolder = 'unzipped_' . time();
+        $extractFolder = 'unzipped_'.time();
         Storage::disk($diskName)->makeDirectory($extractFolder);
         $extractPath = Storage::disk($diskName)->path($extractFolder);
 
-        $zip = new ZipArchive();
+        $zip = new ZipArchive;
         $openResult = $zip->open($zipFilePath);
         if ($openResult === true) {
             $zip->extractTo($extractPath);
@@ -311,7 +312,7 @@ class PostResource extends Resource
         $csvFilePath = null;
         foreach (scandir($extractPath) as $file) {
             if (\Str::endsWith($file, '.csv')) {
-                $csvFilePath = $extractPath . '/' . $file;
+                $csvFilePath = $extractPath.'/'.$file;
 
                 break;
             }
@@ -341,7 +342,6 @@ class PostResource extends Resource
                     'updated_at' => $record['Updated At'] ?? '',
                 ]
             );
-
 
             if (! empty($record['State'])) {
                 $stateName = trim($record['State']);
@@ -413,7 +413,7 @@ class PostResource extends Resource
             $imageUrls = explode(', ', $record['Additional Media']);
             foreach ($imageUrls as $imageUrl) {
                 $imageName = basename(parse_url($imageUrl, PHP_URL_PATH));
-                $imagePath = $extractPath . '/images/' . $imageName;
+                $imagePath = $extractPath.'/images/'.$imageName;
 
                 if (file_exists($imagePath)) {
                     $post->clearMediaCollection('post_feature_image');

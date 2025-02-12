@@ -2,6 +2,7 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
+use Fuelviews\SabHeroBlog\Models\Author;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -68,7 +69,7 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->description(function (Post $record) {
-                        return Str::limit($record->sub_title, 40);
+                        return Str::limit($record->sub_title, 60);
                     })
                     ->searchable()->limit(20),
 
@@ -224,7 +225,6 @@ class PostResource extends Resource
         $zipFilePath = $storagePath . '/posts_export.zip';
         $csvFilePath = $storagePath . '/posts.csv';
 
-        // Open CSV Writer
         $csv = Writer::createFromPath($csvFilePath, 'w+');
         $csv->insertOne([
             'ID',
@@ -274,7 +274,7 @@ class PostResource extends Resource
                 $post->tags->pluck('name')->implode(',') ?? '',
                 $post->feature_image_alt_text ?? '',
                 implode(', ', $mediaUrls) ?? '',
-                $post->user?->name ?? '',
+                $post->author?->name ?? '',
                 $post->published_at ? $post->published_at->format('Y-m-d H:i:s') : '',
                 $post->scheduled_for ? $post->scheduled_for->format('Y-m-d H:i:s') : '',
                 $post->created_at ? $post->created_at->format('Y-m-d H:i:s') : '',
@@ -333,7 +333,7 @@ class PostResource extends Resource
                     'sub_title'  => $record['Subtitle'] ?? '',
                     'body'       => $record['Content'] ?? '',
                     'status'     => $record['Status'] ?? '',
-                    'user_id'    => optional(User::where('name', $record['Author'])->first())->id ?? '',
+                    'user_id'    => optional(User::where('name', $record['Author'])->first())->id ?? '1',
                     'feature_image_alt_text' => $record['Photo Alt Text'] ?? '',
                     'published_at' => $record['Published At'] ?? '',
                     'scheduled_for' => $record['Scheduled For'] ?? '',

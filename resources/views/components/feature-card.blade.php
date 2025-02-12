@@ -57,12 +57,12 @@
             @endforeach
         </div>
         <div class="flex items-center gap-4">
-            <a href="{{ route('sabhero-blog.author.show', $post->user->slug) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
+            <a href="{{ route('sabhero-blog.author.show', $post->user->author->slug) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
                 <img class="h-14 w-14 overflow-hidden rounded-full bg-zinc-300 object-cover md:object-fill text-[0]"
                      src="{{ $post->user->avatar }}" alt="{{ $post->user->name() }}">
             </a>
             <div>
-                <a href="{{ route('sabhero-blog.author.show', $post->user->slug) }}" title="{{ $post->user->name() }}"
+                <a href="{{--{{ route('sabhero-blog.author.show', $post->user->author->slug) }}--}}" title="{{ $post->user->name() }}"
                       class="block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap font-semibold hover:text-prime">{{ $post->user->name() }}</a>
                 <span class="block whitespace-nowrap text-sm font-medium text-zinc-600">
                     {{ $post->formattedPublishedDate() }}</span>

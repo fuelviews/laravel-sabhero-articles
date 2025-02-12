@@ -1,15 +1,14 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages;
+namespace Fuelviews\SabHeroBlog\Filament\Resources\AuthorResource\Pages;
 
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
-use App\Models\User;
-use Fuelviews\SabHeroBlog\Filament\Resources\UserResource;
+use Fuelviews\SabHeroBlog\Filament\Resources\AuthorResource;
 
 class ViewUser extends ViewRecord
 {
-    protected static string $resource = UserResource::class;
+    protected static string $resource = AuthorResource::class;
 
     public function getHeaderActions(): array
     {

@@ -24,7 +24,6 @@ class Tag extends Model
 
     public function posts(): BelongsToMany
     {
-
         return $this->belongsToMany(Post::class, config('sabhero-blog.tables.prefix').'post_'.config('sabhero-blog.tables.prefix').'tag');
     }
 

@@ -26,7 +26,8 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_blog_tables',
                 'create_media_table',
-                'update_users_table',
+                //'update_users_table',
+                'create_authors_table',
                 'create_imports_table',
                 'create_exports_table',
                 'create_failed_import_rows_table',

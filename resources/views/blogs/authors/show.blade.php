@@ -4,7 +4,7 @@
             <div class="flex flex-col md:flex-row md:items-center gap-8">
                 <div class="flex-shrink-0">
                     <a href="{{ route('sabhero-blog.author.show', $author->slug) }}">
-                        <img src="{{ $author->avatar }}" class="h-48 w-48 rounded-full shadow-lg" alt="{{ $author->name }}">
+                        <img src="{{ $author->user->avatar }}" class="h-48 w-48 rounded-full shadow-lg" alt="{{ $author->name }}">
                     </a>
                 </div>
                 <div class="flex-grow">

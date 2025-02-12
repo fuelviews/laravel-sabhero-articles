@@ -14,8 +14,8 @@ trait HasBlog
 
     public function getAvatarAttribute(): string
     {
-        if ($this->hasMedia('avatar')) {
-            return $this->getFirstMediaUrl('avatar');
+        if ($this->author?->hasMedia('avatar')) {
+            return $this->author?->getFirstMediaUrl('avatar');
         }
 
         if (!empty($this->{config('sabhero-blog.user.columns.avatar')})) {
@@ -24,6 +24,7 @@ trait HasBlog
 
         return 'https://ui-avatars.com/api/?background=random&name=' . urlencode($this->{config('sabhero-blog.user.columns.name')});
     }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class, config('sabhero-blog.user.foreign_key'));

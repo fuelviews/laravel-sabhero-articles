@@ -32,7 +32,7 @@ class TagController extends Controller
             ->get();
 
         return view('sabhero-blog::blogs.tags.index', [
-            'posts'=> $posts,
+            'posts' => $posts,
             'tags' => $tags,
         ]);
     }

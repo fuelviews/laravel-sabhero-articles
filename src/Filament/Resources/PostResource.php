@@ -2,7 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
-use Fuelviews\SabHeroBlog\Models\Author;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -22,9 +21,9 @@ use Fuelviews\SabHeroBlog\Enums\PostStatus;
 use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\CreatePost;
 use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\EditPost;
 use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ListPosts;
+use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ViewPost;
 use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Widgets\BlogPostPublishedChart;
 use Fuelviews\SabHeroBlog\Filament\Tables\Columns\UserAvatar;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ViewPost;
 use Fuelviews\SabHeroBlog\Models\Category;
 use Fuelviews\SabHeroBlog\Models\Metro;
 use Fuelviews\SabHeroBlog\Models\Post;
@@ -33,9 +32,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
 use League\Csv\Writer;
+use function parse_url;
 use RuntimeException;
 use ZipArchive;
-use function parse_url;
 
 class PostResource extends Resource
 {
@@ -217,7 +216,7 @@ class PostResource extends Resource
     {
         $storagePath = storage_path('app/public/exports');
         if (! file_exists($storagePath)) {
-            if (!mkdir($storagePath, 0777, true) && !is_dir($storagePath)) {
+            if (! mkdir($storagePath, 0777, true) && ! is_dir($storagePath)) {
                 throw new RuntimeException(sprintf('Directory "%s" was not created', $storagePath));
             }
         }
@@ -313,11 +312,12 @@ class PostResource extends Resource
         foreach (scandir($extractPath) as $file) {
             if (\Str::endsWith($file, '.csv')) {
                 $csvFilePath = $extractPath . '/' . $file;
+
                 break;
             }
         }
 
-        if (!$csvFilePath || !file_exists($csvFilePath)) {
+        if (! $csvFilePath || ! file_exists($csvFilePath)) {
             return back()->withErrors(['zip_file' => 'No CSV file found in the extracted ZIP.']);
         }
 
@@ -329,11 +329,11 @@ class PostResource extends Resource
             $post = Post::updateOrCreate(
                 ['slug' => $record['Slug']],
                 [
-                    'title'      => $record['Title'] ?? '',
-                    'sub_title'  => $record['Subtitle'] ?? '',
-                    'body'       => $record['Content'] ?? '',
-                    'status'     => $record['Status'] ?? '',
-                    'user_id'    => optional(User::where('name', $record['Author'])->first())->id ?? '1',
+                    'title' => $record['Title'] ?? '',
+                    'sub_title' => $record['Subtitle'] ?? '',
+                    'body' => $record['Content'] ?? '',
+                    'status' => $record['Status'] ?? '',
+                    'user_id' => optional(User::where('name', $record['Author'])->first())->id ?? '1',
                     'feature_image_alt_text' => $record['Photo Alt Text'] ?? '',
                     'published_at' => $record['Published At'] ?? '',
                     'scheduled_for' => $record['Scheduled For'] ?? '',
@@ -343,7 +343,7 @@ class PostResource extends Resource
             );
 
 
-            if (!empty($record['State'])) {
+            if (! empty($record['State'])) {
                 $stateName = trim($record['State']);
                 $state = Metro::firstOrCreate(
                     [
@@ -359,7 +359,7 @@ class PostResource extends Resource
                 $post->save();
             }
 
-            if (!empty($record['City'])) {
+            if (! empty($record['City'])) {
                 $cityName = trim($record['City']);
                 $city = Metro::firstOrCreate(
                     [
@@ -376,9 +376,9 @@ class PostResource extends Resource
                 $post->save();
             }
 
-            if (!empty($record['Categories'])) {
+            if (! empty($record['Categories'])) {
                 $categoryNames = explode(',', $record['Categories']);
-                $categoryIds   = [];
+                $categoryIds = [];
                 foreach ($categoryNames as $catName) {
                     $catName = trim($catName);
                     if (! $catName) {
@@ -393,9 +393,9 @@ class PostResource extends Resource
                 $post->categories()->sync($categoryIds, false);
             }
 
-            if (!empty($record['Tags'])) {
+            if (! empty($record['Tags'])) {
                 $tagNames = explode(',', $record['Tags']);
-                $tagIds   = [];
+                $tagIds = [];
                 foreach ($tagNames as $tagName) {
                     $tagName = trim($tagName);
                     if (! $tagName) {

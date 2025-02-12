@@ -2,7 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog\Models;
 
-use Fuelviews\SabHeroBlog\Enums\MetroType;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Section;
@@ -12,6 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Set;
+use Fuelviews\SabHeroBlog\Enums\MetroType;
 use Fuelviews\SabHeroBlog\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -22,13 +22,14 @@ use Illuminate\Support\Str;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Spatie\FilamentMarkdownEditor\MarkdownEditor;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Post extends Model implements hasMedia
 {
-    use InteractsWithMedia, HasSEO;
+    use InteractsWithMedia;
+    use HasSEO;
 
     protected $fillable = [
         'title',
@@ -78,7 +79,7 @@ class Post extends Model implements hasMedia
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class,config('sabhero-blog.tables.prefix').'post_'.config('sabhero-blog.tables.prefix').'tag');
+        return $this->belongsToMany(Tag::class, config('sabhero-blog.tables.prefix').'post_'.config('sabhero-blog.tables.prefix').'tag');
     }
 
     public function metros(): BelongsToMany
@@ -214,6 +215,7 @@ class Post extends Model implements hasMedia
                                     if (! $stateId) {
                                         return [];
                                     }
+
                                     return Metro::where('parent_id', $stateId)
                                         ->where('type', MetroType::CITY->value)
                                         ->pluck('name', 'id');
@@ -223,9 +225,9 @@ class Post extends Model implements hasMedia
                                     $stateId = $get('state_id');
 
                                     $metro = Metro::create([
-                                        'name'      => $data['name'],
-                                        'slug'      => Str::slug($data['name']),
-                                        'type'      => MetroType::CITY->value,
+                                        'name' => $data['name'],
+                                        'slug' => Str::slug($data['name']),
+                                        'type' => MetroType::CITY->value,
                                         'parent_id' => $stateId,
                                     ]);
 
@@ -265,6 +267,7 @@ class Post extends Model implements hasMedia
                                     $baseName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                                     $slug = Str::slug(strtolower($baseName), '_');
                                     $randomSuffix = Str::random(6);
+
                                     return "{$slug}_{$randomSuffix}.{$file->getClientOriginalExtension()}";
                                 })
                                 ->responsiveImages()

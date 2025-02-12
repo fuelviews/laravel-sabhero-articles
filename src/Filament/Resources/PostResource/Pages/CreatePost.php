@@ -5,8 +5,8 @@ namespace Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages;
 use Carbon\Carbon;
 use Filament\Resources\Pages\CreateRecord;
 use Fuelviews\SabHeroBlog\Events\BlogPublished;
-use Fuelviews\SabHeroBlog\Jobs\PostScheduleJob;
 use Fuelviews\SabHeroBlog\Filament\Resources\PostResource;
+use Fuelviews\SabHeroBlog\Jobs\PostScheduleJob;
 
 class CreatePost extends CreateRecord
 {
@@ -27,5 +27,4 @@ class CreatePost extends CreateRecord
             event(new BlogPublished($this->record));
         }
     }
-
 }

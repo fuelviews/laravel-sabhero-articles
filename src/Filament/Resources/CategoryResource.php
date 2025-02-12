@@ -2,9 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
-use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\EditCategory;
-use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\ListCategories;
-use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\ViewCategory;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -12,8 +9,11 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Fuelviews\SabHeroBlog\Models\Category;
+use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\EditCategory;
+use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\ListCategories;
+use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\ViewCategory;
 use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\RelationManagers\PostsRelationManager;
+use Fuelviews\SabHeroBlog\Models\Category;
 
 class CategoryResource extends Resource
 {

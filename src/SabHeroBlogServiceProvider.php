@@ -11,8 +11,8 @@ use Fuelviews\SabHeroBlog\Components\Layout;
 use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Models\Post;
 use Fuelviews\SabHeroBlog\View\Components\Markdown;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -45,7 +45,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
             ->hasViews('sabhero-blog')
             ->hasRoutes([
                 'web',
-                'breadcrumbs'
+                'breadcrumbs',
             ])
             ->hasCommand(MakeFilamentUserCommand::class)
             ->hasInstallCommand(function (InstallCommand $installCommand) {
@@ -83,7 +83,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
             if (request()->route() &&
                 in_array(request()->route()->getName(), [
                     'sabhero-blog.post.show',
-                    'sabhero-blog.post.metro.show'
+                    'sabhero-blog.post.metro.show',
                 ])) {
                 $seoPost = request()->route('post');
 

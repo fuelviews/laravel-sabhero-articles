@@ -4,7 +4,6 @@ namespace Fuelviews\SabHeroBlog\Http\Controllers;
 
 use App\Models\User;
 use Fuelviews\SabHeroBlog\Models\Author;
-use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {

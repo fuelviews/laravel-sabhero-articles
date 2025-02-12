@@ -2,8 +2,8 @@
 
 namespace Fuelviews\SabHeroBlog\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
 use Fuelviews\SabHeroBlog\Enums\MetroType;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class MetroPost extends Pivot
 {

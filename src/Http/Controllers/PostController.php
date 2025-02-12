@@ -53,7 +53,6 @@ class PostController extends Controller
         ]);
     }
 
-
     public function search(Request $request)
     {
         $request->validate([

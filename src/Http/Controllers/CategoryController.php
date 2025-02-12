@@ -33,8 +33,8 @@ class CategoryController extends Controller
             ->get();
 
         return view('sabhero-blog::blogs.categories.index', [
-            'posts'  => $posts,
-            'categories'   => $categories,
+            'posts' => $posts,
+            'categories' => $categories,
         ]);
     }
 }

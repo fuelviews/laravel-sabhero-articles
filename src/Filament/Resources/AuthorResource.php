@@ -2,15 +2,11 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
-use Filament\Infolists\Components\Fieldset;
+use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
-use Fuelviews\SabHeroBlog\Models\Author;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -19,7 +15,7 @@ use Fuelviews\SabHeroBlog\Filament\Resources\AuthorResource\Pages\EditUser;
 use Fuelviews\SabHeroBlog\Filament\Resources\AuthorResource\Pages\ListUsers;
 use Fuelviews\SabHeroBlog\Filament\Resources\AuthorResource\Pages\ViewUser;
 use Fuelviews\SabHeroBlog\Filament\Tables\Columns\UserAvatar;
-use Illuminate\Support\Str;
+use Fuelviews\SabHeroBlog\Models\Author;
 
 class AuthorResource extends Resource
 {
@@ -52,7 +48,7 @@ class AuthorResource extends Resource
                     ->offColor('gray')
                     ->afterStateUpdated(fn ($record, $state) => $record->update(['is_author' => $state])),
                 UserAvatar::make('user')
-                    ->label('Avatar')
+                    ->label('Avatar'),
             ])
             ->filters([
                 //

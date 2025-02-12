@@ -2,13 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\CreatePage;
-use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\EditPage;
-use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\ListPages;
-use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\ViewPage;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
@@ -17,8 +10,11 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\CreatePage;
+use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\EditPage;
+use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\ListPages;
+use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\ViewPage;
 use Fuelviews\SabHeroBlog\Models\Page;
-use Illuminate\Support\Str;
 
 class PageResource extends Resource
 {

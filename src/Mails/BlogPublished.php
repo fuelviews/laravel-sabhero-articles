@@ -12,7 +12,8 @@ use Illuminate\Queue\SerializesModels;
 
 class BlogPublished extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public function __construct(private Post $post, private string $toEamil = '')
     {
@@ -36,6 +37,7 @@ class BlogPublished extends Mailable
     {
         return new Content(
             view: 'filament-blog::mails.blog-published',
-            with: ['post' => $this->post]);
+            with: ['post' => $this->post]
+        );
     }
 }

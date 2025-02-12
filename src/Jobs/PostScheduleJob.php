@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Log;
 
 class PostScheduleJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public function __construct(private Post $post)
     {

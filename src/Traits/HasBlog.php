@@ -18,7 +18,7 @@ trait HasBlog
             return $this->author?->getFirstMediaUrl('avatar');
         }
 
-        if (!empty($this->{config('sabhero-blog.user.columns.avatar')})) {
+        if (! empty($this->{config('sabhero-blog.user.columns.avatar')})) {
             return asset('storage/' . $this->{config('sabhero-blog.user.columns.avatar')});
         }
 

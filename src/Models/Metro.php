@@ -4,12 +4,12 @@ namespace Fuelviews\SabHeroBlog\Models;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Fuelviews\SabHeroBlog\Enums\MetroType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
-use Fuelviews\SabHeroBlog\Enums\MetroType;
 
 class Metro extends Model
 {
@@ -18,7 +18,7 @@ class Metro extends Model
         'parent_id',
         'name',
         'slug',
-        'type'
+        'type',
     ];
 
     protected $casts = [

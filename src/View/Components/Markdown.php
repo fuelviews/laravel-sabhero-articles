@@ -7,21 +7,20 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\View\Component;
 use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\DescriptionList\DescriptionListExtension;
 use League\CommonMark\Extension\Embed\Bridge\OscaroteroEmbedAdapter;
+use League\CommonMark\Extension\Embed\EmbedExtension;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
-use League\CommonMark\Extension\Table\TableExtension;
-use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
-use League\CommonMark\MarkdownConverter;
-use League\CommonMark\Exception\CommonMarkException;
-use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\Footnote\FootnoteExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
+use League\CommonMark\Extension\Table\TableExtension;
+use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
 use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
-use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\TaskList\TaskListExtension;
-use League\CommonMark\Extension\Embed\EmbedExtension;
-use League\CommonMark\Extension\Footnote\FootnoteExtension;
+use League\CommonMark\MarkdownConverter;
 
 class Markdown extends Component
 {
@@ -68,13 +67,13 @@ class Markdown extends Component
                 'fallback' => 'link',
             ],
             'footnote' => [
-                'backref_class'      => 'footnote-backref',
-                'backref_symbol'     => '↩',
-                'container_add_hr'   => true,
-                'container_class'    => 'footnotes',
-                'ref_class'          => 'footnote-ref',
-                'ref_id_prefix'      => 'fnref:',
-                'footnote_class'     => 'footnote',
+                'backref_class' => 'footnote-backref',
+                'backref_symbol' => '↩',
+                'container_add_hr' => true,
+                'container_class' => 'footnotes',
+                'ref_class' => 'footnote-ref',
+                'ref_id_prefix' => 'fnref:',
+                'footnote_class' => 'footnote',
                 'footnote_id_prefix' => 'fn:',
             ],
         ];

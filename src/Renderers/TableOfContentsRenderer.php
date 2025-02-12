@@ -4,15 +4,15 @@ namespace Fuelviews\SabHeroBlog\Renderers;
 
 use InvalidArgumentException;
 use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;
-use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
 
 class TableOfContentsRenderer implements NodeRendererInterface
 {
     public function render($node, ChildNodeRendererInterface $childRenderer): string
     {
-        if (!($node instanceof TableOfContents)) {
+        if (! ($node instanceof TableOfContents)) {
             throw new InvalidArgumentException('Incompatible node type: ' . get_class($node));
         }
 

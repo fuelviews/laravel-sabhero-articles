@@ -4,8 +4,8 @@ namespace Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages;
 
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
-use Fuelviews\SabHeroBlog\Models\Category;
 use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource;
+use Fuelviews\SabHeroBlog\Models\Category;
 
 class ViewCategory extends ViewRecord
 {

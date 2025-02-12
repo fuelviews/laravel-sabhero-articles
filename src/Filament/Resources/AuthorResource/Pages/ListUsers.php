@@ -2,9 +2,9 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources\AuthorResource\Pages;
 
-use Fuelviews\SabHeroBlog\Filament\Resources\AuthorResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Fuelviews\SabHeroBlog\Filament\Resources\AuthorResource;
 
 class ListUsers extends ListRecords
 {

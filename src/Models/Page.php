@@ -65,7 +65,7 @@ class Page extends Model implements HasMedia
                     TextInput::make('slug')
                         ->required()
                         ->unique(Page::class, ignoreRecord: true)
-                        ->formatStateUsing(fn($state) => Str::slug($state)),
+                        ->formatStateUsing(fn ($state) => Str::slug($state)),
 
                     Textarea::make('description')
                         ->label('Meta Description')
@@ -82,5 +82,3 @@ class Page extends Model implements HasMedia
         ];
     }
 }
-
-

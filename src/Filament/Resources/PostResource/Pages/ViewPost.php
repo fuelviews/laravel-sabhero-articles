@@ -41,7 +41,7 @@ class ViewPost extends ViewRecord
                 ->icon('heroicon-o-eye')
                 ->url(fn () => $this->generateLocationPreviewUrl(), true)
                 ->disabled(fn () => $this->record->isNotPublished())
-                ->visible(fn () => !is_null($this->record->state) && !is_null($this->record->city)),
+                ->visible(fn () => ! is_null($this->record->state) && ! is_null($this->record->city)),
         ];
     }
 

@@ -20,16 +20,12 @@ return [
     'route' => [
         'prefix' => 'blog',
         'middleware' => ['web'],
-        'login' => [
-            'name' => 'filament.admin.auth.login',
-        ],
     ],
     'user' => [
         'model' => User::class,
         'foreign_key' => 'user_id',
         'columns' => [
             'name' => 'name',
-            'avatar' => 'profile_photo_path',
             'slug' => 'slug'
         ],
     ],

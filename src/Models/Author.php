@@ -68,6 +68,11 @@ class Author extends Model implements HasMedia
             Section::make()
                 ->columns(2)
                 ->schema([
+                    Toggle::make('is_author')
+                        ->label('Author')
+                        ->inline(false)
+                        ->columnSpanFull(),
+
                     Select::make('user_id')
                         ->label('User Name')
                         ->relationship('user', 'name'),
@@ -75,12 +80,6 @@ class Author extends Model implements HasMedia
                     TextInput::make('slug')
                         ->maxLength(255)
                         ->columnSpan(1),
-
-                    Group::make([
-                        Toggle::make('is_author')
-                            ->label('Author')
-                            ->inline(false),
-                    ])->extraAttributes(['class' => 'flex items-center justify-center h-full']),
 
                     SpatieMediaLibraryFileUpload::make('avatar')
                         ->responsiveImages()

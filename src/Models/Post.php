@@ -297,6 +297,7 @@ class Post extends Model implements hasMedia
                         ]),
 
                     Select::make(config('sabhero-blog.user.foreign_key'))
+                        ->label('Author')
                         ->relationship('user', config('sabhero-blog.user.columns.name'))
                         ->nullable(false)
                         ->default(auth()->id()),

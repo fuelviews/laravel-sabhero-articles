@@ -5,7 +5,6 @@ namespace Fuelviews\SabHeroBlog\Models;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,8 +12,6 @@ use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'name',
         'slug',
@@ -56,11 +53,6 @@ class Category extends Model
     public function setNameAttribute($value): void
     {
         $this->attributes['name'] = Str::lower($value);
-    }
-
-    protected static function newFactory(): CategoryFactory
-    {
-        return new CategoryFactory();
     }
 
     public function getTable(): string

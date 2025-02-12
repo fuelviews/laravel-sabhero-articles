@@ -2,7 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog\Models;
 
-use Database\Factories\PostTagFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,11 +21,6 @@ class PostTag extends Model
         'post_id' => 'integer',
         'tag_id' => 'integer',
     ];
-
-    protected static function newFactory(): PostTagFactory
-    {
-        return new PostTagFactory();
-    }
 
     public function getTable(): string
     {

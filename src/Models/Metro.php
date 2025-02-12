@@ -4,7 +4,6 @@ namespace Fuelviews\SabHeroBlog\Models;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,7 +13,6 @@ use Fuelviews\SabHeroBlog\Enums\MetroType;
 
 class Metro extends Model
 {
-    use HasFactory;
 
     protected $fillable = [
         'parent_id',

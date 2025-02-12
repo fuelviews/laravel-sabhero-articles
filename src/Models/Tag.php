@@ -2,7 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog\Models;
 
-use Database\Factories\TagFactory;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Set;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -56,11 +55,6 @@ class Tag extends Model
     public function setNameAttribute($value): void
     {
         $this->attributes['name'] = Str::lower($value);
-    }
-
-    protected static function newFactory(): TagFactory
-    {
-        return new TagFactory();
     }
 
     public function getTable(): string

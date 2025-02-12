@@ -13,9 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Set;
 use Fuelviews\SabHeroBlog\Enums\PostStatus;
-use Fuelviews\SabHeroBlog\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -30,7 +28,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Post extends Model implements hasMedia
 {
-    use HasFactory, InteractsWithMedia, HasSEO;
+    use InteractsWithMedia, HasSEO;
 
     protected $fillable = [
         'title',
@@ -71,11 +69,6 @@ class Post extends Model implements hasMedia
                 $post->metros()->attach($post->city_id, ['type' => MetroType::CITY->value]);
             }
         });
-    }
-
-    protected static function newFactory(): PostFactory
-    {
-        return new PostFactory();
     }
 
     public function categories(): BelongsToMany

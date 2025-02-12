@@ -22,10 +22,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package->name('sabhero-blog')
-            ->hasConfigFile([
-                'sabhero-blog',
-                'filament-spatie-roles-permissions'
-            ])
+            ->hasConfigFile('sabhero-blog')
             ->hasMigrations([
                 'create_blog_tables',
                 'create_media_table',

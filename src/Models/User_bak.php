@@ -6,8 +6,6 @@ use Fuelviews\SabHeroBlog\Traits\HasBlog;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -18,7 +16,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class UserBak extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
-    use HasFactory, Notifiable, InteractsWithMedia, HasBlog;
+    use Notifiable, InteractsWithMedia, HasBlog;
 
     protected $fillable = [
         'name',

@@ -32,9 +32,6 @@ class Markdown extends Component
         $this->content = $content;
     }
 
-    /**
-     * @throws CommonMarkException
-     */
     public function render(): View
     {
         $headingConfig = Config::get('sabhero-blog.heading_permalink', []);

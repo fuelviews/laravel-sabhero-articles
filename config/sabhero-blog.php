@@ -24,18 +24,23 @@ return [
             'name' => 'filament.admin.auth.login',
         ],
     ],
-    'dropdown' => [
-        'name' => 'Posts',
-    ],
     'user' => [
         'model' => User::class,
         'foreign_key' => 'user_id',
         'columns' => [
             'name' => 'name',
+            'avatar' => 'profile_photo_path',
             'slug' => 'slug'
         ],
     ],
     'heading_permalink' => [
         'html_class' => 'scroll-mt-40',
     ],
+    'dropdown' => [
+        'name' => 'Posts',
+    ],
+    'crm' => [
+        'name' => 'CRM',
+        'link' => '#',
+    ]
 ];

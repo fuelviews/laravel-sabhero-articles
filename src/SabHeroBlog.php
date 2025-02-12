@@ -9,7 +9,7 @@ use Filament\Support\Colors\Color;
 
 class SabHeroBlog implements Plugin
 {
-    public static function make()
+    public static function make(): static
     {
         return new static();
     }
@@ -35,8 +35,9 @@ class SabHeroBlog implements Plugin
         ]);
 
         $panel->navigationItems([
-            NavigationItem::make('Fuelviews CRM')
-                ->url('https://app.gohighlevel.com', shouldOpenInNewTab: true)
+            NavigationItem::make('CRM')
+                ->label(config('sabhero-blog.crm.name'))
+                ->url(config('sabhero-blog.crm.link'), shouldOpenInNewTab: true)
                 ->icon('heroicon-o-presentation-chart-line')
                 ->sort(1),
         ]);

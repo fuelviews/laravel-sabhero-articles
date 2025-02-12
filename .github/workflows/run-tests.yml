@@ -2,7 +2,6 @@ name: Run Tests
 
 on:
   workflow_dispatch:
-
   pull_request:
     branches:
       - main
@@ -20,11 +19,13 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.3, 8.2]
-        laravel: [10.*]
+        laravel: [10.*, 11.*] # Add Laravel 11
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 10.*
             testbench: 8.*
+          - laravel: 11.*  # Define Laravel 11 with the correct Testbench version
+            testbench: 9.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -53,12 +54,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --dev --no-interaction --no-update
+          if [[ "${{ matrix.laravel }}" == "10.*" ]]; then
+            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "pestphp/pest-plugin-laravel:^2.0" --dev --no-interaction --no-update
+          else
+            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "pestphp/pest-plugin-laravel:^3.0" --dev --no-interaction --no-update
+          fi
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
 
       - name: List Installed Dependencies
         run: composer show -D
 
       - name: Execute tests
         run: vendor/bin/pest --ci
-

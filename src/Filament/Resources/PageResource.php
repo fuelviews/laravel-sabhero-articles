@@ -2,6 +2,9 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\CreatePage;
 use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\EditPage;
 use Fuelviews\SabHeroBlog\Filament\Resources\PageResource\Pages\ListPages;
@@ -15,6 +18,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Fuelviews\SabHeroBlog\Models\Page;
+use Illuminate\Support\Str;
 
 class PageResource extends Resource
 {
@@ -37,6 +41,7 @@ class PageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->limit(50)
                     ->sortable()
                     ->searchable(),
 
@@ -44,26 +49,19 @@ class PageResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('feature_image')
-                    ->collection('page_feature_image')
-                    ->circular(),
-
-                Tables\Columns\TextColumn::make('meta_description')
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Meta Description')
+                    ->limit(50)
                     ->formatStateUsing(function ($state) {
                         return ucfirst($state);
                     })
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('feature_image')
+                    ->label('Feature Image')
+                    ->collection('page_feature_image')
+                    ->circular(),
             ])
             ->filters([
                 //
@@ -89,13 +87,15 @@ class PageResource extends Resource
 
                     TextEntry::make('slug'),
 
-                    TextEntry::make('meta_description')
+                    TextEntry::make('description')
+                        ->label('Meta Description')
                         ->formatStateUsing(function ($state) {
                             return ucfirst($state);
                         })
                     ->columnSpanFull(),
 
                     SpatieMediaLibraryImageEntry::make('Featured Image')
+                        ->label('Featured Image')
                         ->collection('page_feature_image')
                         ->columnSpanFull(),
                 ])->columns(2)

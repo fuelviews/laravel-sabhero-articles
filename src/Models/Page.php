@@ -9,6 +9,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Spatie\MediaLibrary\HasMedia;
@@ -21,11 +22,10 @@ class Page extends Model implements HasMedia
     use HasSEO;
     use InteractsWithMedia;
 
-    protected $guarded = [
+    protected $fillable = [
         'title',
         'slug',
         'description',
-        'image'
     ];
 
     protected $casts = [
@@ -41,7 +41,7 @@ class Page extends Model implements HasMedia
     {
         return new SEOData(
             title: ucfirst($this->title ?? ''),
-            description: ucfirst($this->meta_description ?? ''),
+            description: ucfirst($this->description ?? ''),
             image: $this->getFirstMediaUrl('page_feature_image'),
         );
     }
@@ -60,23 +60,25 @@ class Page extends Model implements HasMedia
                 ->columns(2)
                 ->schema([
                     TextInput::make('title')
-                        ->live(debounce: 500)
-                        ->formatStateUsing(function ($state) {
-                            return ucfirst($state);
-                        }),
+                        ->required(),
 
                     TextInput::make('slug')
-                        ->unique('pages', 'slug', ignoreRecord: true),
+                        ->required()
+                        ->unique(Page::class, ignoreRecord: true)
+                        ->formatStateUsing(fn($state) => Str::slug($state)),
 
-                    Textarea::make('meta_description')
+                    Textarea::make('description')
+                        ->label('Meta Description')
+                        ->required()
                         ->columnSpanFull(),
 
                     SpatieMediaLibraryFileUpload::make('feature_image')
-                        ->conversion('feature_image')
-                        ->responsiveImages()
+                        ->label('Feature Image')
                         ->collection('page_feature_image')
+                        ->responsiveImages()
+                        ->required()
                         ->columnSpanFull(),
-            ]),
+                ]),
         ];
     }
 }

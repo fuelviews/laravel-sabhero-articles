@@ -270,8 +270,7 @@ class Post extends Model implements hasMedia
                                 ->responsiveImages()
                                 ->image()
                                 ->collection('post_feature_image')
-                                ->label('Feature Image')
-                                ->required(),
+                                ->label('Feature Image'),
 
                             TextInput::make('feature_image_alt_text')
                                 ->label('Alt Text')

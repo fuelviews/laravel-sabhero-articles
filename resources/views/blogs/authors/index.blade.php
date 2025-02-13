@@ -16,6 +16,13 @@
             <div class="mt-8">
                 {{ $authors->links() }}
             </div>
+            @if ($authors->isEmpty())
+                <div class="container mx-auto">
+                    <div class="flex justify-center">
+                        <p class="text-2xl font-semibold text-gray-300">No authors found</p>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 </x-sabhero-blog-layout>

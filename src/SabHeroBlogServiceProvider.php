@@ -14,6 +14,7 @@ use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Models\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -95,14 +96,24 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
         });
 
         $this->app->singleton('sabhero-blog.patterns', function () {
-            $stateSlugs = DB::table('blog_metros')
+            $prefix = config('sabhero-blog.tables.prefix');
+
+            // Check if the required tables exist
+            if (!Schema::hasTable($prefix . 'metros') || !Schema::hasTable($prefix . 'blog_metros')) {
+                return [
+                    'state' => '',
+                    'city' => '',
+                ]; // Return empty patterns or handle accordingly
+            }
+
+            $stateSlugs = DB::table($prefix . 'metros')
                 ->where('type', 'state')
                 ->pluck('slug')
                 ->toArray();
             $escapedStateSlugs = array_map('preg_quote', $stateSlugs);
             $statePattern = implode('|', $escapedStateSlugs);
 
-            $citySlugs = DB::table('blog_metros')
+            $citySlugs = DB::table($prefix . 'blog_metros')
                 ->where('type', 'city')
                 ->pluck('slug')
                 ->toArray();

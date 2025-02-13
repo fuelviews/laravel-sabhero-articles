@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\View\Components;
+namespace Fuelviews\SabHeroBlog\Components;
 
 use Fuelviews\SabHeroBlog\Renderers\TableOfContentsRenderer;
 use Illuminate\Contracts\View\View;
@@ -106,8 +106,10 @@ class Markdown extends Component
 
         $converter = new MarkdownConverter($environment);
 
-        $html = $converter->convert($this->content);
+        $html = $converter->convert($this->content)->getContent();
 
-        return view('sabhero-blog::components.markdown', ['html' => $html]);
+        return view('sabhero-blog::components.markdown', [
+            'html' => $html
+        ]);
     }
 }

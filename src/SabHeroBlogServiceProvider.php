@@ -3,14 +3,15 @@
 namespace Fuelviews\SabHeroBlog;
 
 use Fuelviews\SabHeroBlog\Commands\MakeFilamentUserCommand;
+use Fuelviews\SabHeroBlog\Components\Layout;
+use Fuelviews\SabHeroBlog\Components\Breadcrumb;
 use Fuelviews\SabHeroBlog\Components\Card;
 use Fuelviews\SabHeroBlog\Components\FeatureCard;
 use Fuelviews\SabHeroBlog\Components\HeaderCategory;
 use Fuelviews\SabHeroBlog\Components\HeaderMetro;
-use Fuelviews\SabHeroBlog\Components\Layout;
+use Fuelviews\SabHeroBlog\Components\Markdown;
 use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Models\Post;
-use Fuelviews\SabHeroBlog\View\Components\Markdown;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -26,21 +27,25 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_blog_tables',
                 'create_media_table',
-                // 'update_users_table',
                 'create_authors_table',
                 'create_imports_table',
                 'create_exports_table',
                 'create_failed_import_rows_table',
             ])
+            /*->hasViewComponent(
+                'sabhero-blog',
+                Layout::class,
+            )*/
             ->hasViewComponents(
-                'blog',
+                'sabhero-blog',
                 Layout::class,
                 RecentPost::class,
                 HeaderCategory::class,
                 HeaderMetro::class,
                 FeatureCard::class,
                 Card::class,
-                Markdown::class
+                Markdown::class,
+                Breadcrumb::class,
             )
             ->hasViews('sabhero-blog')
             ->hasRoutes([

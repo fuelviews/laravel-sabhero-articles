@@ -1,4 +1,4 @@
-<x-blog-layout>
+<x-sabhero-blog-layout>
     <section class="py-8">
         <div class="container mx-auto">
             <h1 class="text-3xl font-semibold mb-8">Our Authors</h1>
@@ -18,4 +18,4 @@
             </div>
         </div>
     </section>
-</x-blog-layout>
+</x-sabhero-blog-layout>

@@ -9,6 +9,6 @@ class Layout extends Component
 {
     public function render(): View
     {
-        return view('sabhero-blog::layouts.blog-app');
+        return view('sabhero-blog::layouts.app');
     }
 }

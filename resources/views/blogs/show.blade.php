@@ -1,4 +1,4 @@
-<x-blog-layout>
+<x-sabhero-blog-layout>
     <section class="py-8">
         <div class="container mx-auto">
             <div class="mx-auto mb-12 space-y-10">
@@ -28,7 +28,7 @@
                                 <hr class="my-12 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">
                                 <div>
                                     <article class="w-full mx-auto">
-                                        <x-blog-markdown :content="$post->body" />
+                                        <x-sabhero-blog::markdown :html="$post->body" />
                                     </article>
                                 </div>
                                 <hr class="my-12 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">
@@ -86,7 +86,7 @@
                     </div>
                     <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-x-12 gap-y-10">
                         @forelse($post->relatedPosts() as $post)
-                            <x-blog-card :post="$post" />
+                            <x-sabhero-blog::card :post="$post" />
                         @empty
                         <div class="col-span-3">
                             <p class="text-center text-xl font-semibold text-gray-300">No related posts found.</p>
@@ -98,4 +98,4 @@
             </div>
         </div>
     </section>
-</x-blog-layout>
+</x-sabhero-blog-layout>

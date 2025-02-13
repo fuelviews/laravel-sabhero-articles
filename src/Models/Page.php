@@ -75,6 +75,7 @@ class Page extends Model implements HasMedia
                     SpatieMediaLibraryFileUpload::make('feature_image')
                         ->label('Feature Image')
                         ->collection('page_feature_image')
+                        ->image()
                         ->responsiveImages()
                         ->required()
                         ->columnSpanFull(),

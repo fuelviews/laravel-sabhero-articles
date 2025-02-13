@@ -82,6 +82,7 @@ class Author extends Model implements HasMedia
 
                     SpatieMediaLibraryFileUpload::make('avatar')
                         ->responsiveImages()
+                        ->image()
                         ->label('Avatar')
                         ->collection('avatar')
                         ->columnSpanFull(),

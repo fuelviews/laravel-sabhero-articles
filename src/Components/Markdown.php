@@ -109,7 +109,7 @@ class Markdown extends Component
         $html = $converter->convert($this->content)->getContent();
 
         return view('sabhero-blog::components.markdown', [
-            'html' => $html
+            'html' => $html,
         ]);
     }
 }

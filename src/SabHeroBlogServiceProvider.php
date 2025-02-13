@@ -3,15 +3,16 @@
 namespace Fuelviews\SabHeroBlog;
 
 use Fuelviews\SabHeroBlog\Commands\MakeFilamentUserCommand;
-use Fuelviews\SabHeroBlog\Components\Layout;
 use Fuelviews\SabHeroBlog\Components\Breadcrumb;
 use Fuelviews\SabHeroBlog\Components\Card;
 use Fuelviews\SabHeroBlog\Components\FeatureCard;
 use Fuelviews\SabHeroBlog\Components\HeaderCategory;
 use Fuelviews\SabHeroBlog\Components\HeaderMetro;
+use Fuelviews\SabHeroBlog\Components\Layout;
 use Fuelviews\SabHeroBlog\Components\Markdown;
 use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Models\Post;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -31,10 +32,6 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 'create_exports_table',
                 'create_failed_import_rows_table',
             ])
-            /*->hasViewComponent(
-                'sabhero-blog',
-                Layout::class,
-            )*/
             ->hasViewComponents(
                 'sabhero-blog',
                 Layout::class,
@@ -95,6 +92,27 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                     'seoPost' => $seoPost,
                 ]);
             }
+        });
+
+        $this->app->singleton('sabhero-blog.patterns', function () {
+            $stateSlugs = DB::table('blog_metros')
+                ->where('type', 'state')
+                ->pluck('slug')
+                ->toArray();
+            $escapedStateSlugs = array_map('preg_quote', $stateSlugs);
+            $statePattern = implode('|', $escapedStateSlugs);
+
+            $citySlugs = DB::table('blog_metros')
+                ->where('type', 'city')
+                ->pluck('slug')
+                ->toArray();
+            $escapedCitySlugs = array_map('preg_quote', $citySlugs);
+            $cityPattern = implode('|', $escapedCitySlugs);
+
+            return [
+                'state' => $statePattern,
+                'city' => $cityPattern,
+            ];
         });
 
         $this->app->register(SabHeroBlogEventServiceProvider::class);

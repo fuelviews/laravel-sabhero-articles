@@ -79,12 +79,12 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
         });
 
         View::composer([
-            '*',
+            'vendor.laravel-sabhero-wrapper::layouts.app',
             'vendor.fuelviews.laravel-sabhero-wrapper::layouts.app',
         ], function ($view) {
             if (request()->route() &&
                 in_array(request()->route()->getName(), [
-                    'sabhero-blog.post.show',
+                    //'sabhero-blog.post.show',
                     'sabhero-blog.post.metro.show',
                 ])) {
                 $seoPost = request()->route('post');

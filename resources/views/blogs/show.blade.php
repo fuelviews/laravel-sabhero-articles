@@ -28,7 +28,7 @@
                                 <hr class="my-12 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">
                                 <div>
                                     <article class="w-full mx-auto">
-                                        <x-sabhero-blog::markdown :html="$post->body" />
+                                        <x-sabhero-blog-markdown :content="$post->body" />
                                     </article>
                                 </div>
                                 <hr class="my-12 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">

@@ -2,6 +2,7 @@ name: Run Tests
 
 on:
   workflow_dispatch:
+
   pull_request:
     branches:
       - main
@@ -18,13 +19,11 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.3, 8.2]
-        laravel: [10.*, 11.*] # Add Laravel 11
+        php: [8.4, 8.3, 8.2]
+        laravel: [11.*]
         stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 10.*
-            testbench: 8.*
-          - laravel: 11.*  # Define Laravel 11 with the correct Testbench version
+          - laravel: 11.*
             testbench: 9.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
@@ -54,21 +53,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if [[ "${{ matrix.laravel }}" == "10.*" ]]; then
-            composer require "laravel/framework:${{ matrix.laravel }}" \
-                            "orchestra/testbench:${{ matrix.testbench }}" \
-                            "pestphp/pest:^2.0" \
-                            "pestphp/pest-plugin-laravel:^2.0" \
-                            "pestphp/pest-plugin-arch:^2.0" \
-                            "nunomaduro/collision:^6.0" --dev --no-interaction --no-update
-          else
-            composer require "laravel/framework:${{ matrix.laravel }}" \
-                            "orchestra/testbench:${{ matrix.testbench }}" \
-                            "pestphp/pest:^3.0" \
-                            "pestphp/pest-plugin-laravel:^3.0" \
-                            "pestphp/pest-plugin-arch:^3.0" \
-                            "nunomaduro/collision:^8.1.1" --dev --no-interaction --no-update
-          fi
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --dev --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: List Installed Dependencies

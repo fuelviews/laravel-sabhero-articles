@@ -55,9 +55,17 @@ jobs:
       - name: Install dependencies
         run: |
           if [[ "${{ matrix.laravel }}" == "10.*" ]]; then
-            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "pestphp/pest-plugin-laravel:^2.0" "pestphp/pest-plugin-arch:^2.0" --dev --no-interaction --no-update
+            composer require "laravel/framework:${{ matrix.laravel }}" \
+                            "orchestra/testbench:${{ matrix.testbench }}" \
+                            "pestphp/pest-plugin-laravel:^2.0" \
+                            "pestphp/pest-plugin-arch:^2.0" \
+                            "nunomaduro/collision:^6.0" --dev --no-interaction --no-update
           else
-            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "pestphp/pest-plugin-laravel:^3.0" "pestphp/pest-plugin-arch:^3.0" --dev --no-interaction --no-update
+            composer require "laravel/framework:${{ matrix.laravel }}" \
+                            "orchestra/testbench:${{ matrix.testbench }}" \
+                            "pestphp/pest-plugin-laravel:^3.0" \
+                            "pestphp/pest-plugin-arch:^3.0" \
+                            "nunomaduro/collision:^7.0" --dev --no-interaction --no-update
           fi
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 

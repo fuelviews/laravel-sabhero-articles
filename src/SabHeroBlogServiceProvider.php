@@ -98,12 +98,11 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
         $this->app->singleton('sabhero-blog.patterns', function () {
             $prefix = config('sabhero-blog.tables.prefix');
 
-            // Check if the required tables exist
             if (!Schema::hasTable($prefix . 'metros') || !Schema::hasTable($prefix . 'blog_metros')) {
                 return [
-                    'state' => '',
-                    'city' => '',
-                ]; // Return empty patterns or handle accordingly
+                    'state' => 'null',
+                    'city' => 'null',
+                    ];
             }
 
             $stateSlugs = DB::table($prefix . 'metros')

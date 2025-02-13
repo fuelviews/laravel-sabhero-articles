@@ -143,4 +143,9 @@ class Author extends Model implements HasMedia
     {
         return 'slug';
     }
+
+    public function getTable(): string
+    {
+        return config('sabhero-blog.tables.prefix').'authors';
+    }
 }

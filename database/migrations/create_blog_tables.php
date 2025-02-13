@@ -32,6 +32,16 @@ return new class extends Migration
                 ->cascadeOnDelete();
         });
 
+        Schema::create(config('sabhero-blog.tables.prefix').'authors', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->nullable();
+            $table->string('slug')->unique();
+            $table->text('bio')->nullable();
+            $table->json('links')->nullable();
+            $table->boolean('is_author')->default(false);
+            $table->timestamps();
+        });
+
         Schema::create(config('sabhero-blog.tables.prefix').'posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -116,6 +126,7 @@ return new class extends Migration
         Schema::dropIfExists(config('sabhero-blog.tables.prefix').'category_'.config('sabhero-blog.tables.prefix').'post');
         Schema::dropIfExists(config('sabhero-blog.tables.prefix').'metros');
         Schema::dropIfExists(config('sabhero-blog.tables.prefix').'categories');
+        Schema::dropIfExists(config('sabhero-blog.tables.prefix').'authors');
         Schema::dropIfExists(config('sabhero-blog.tables.prefix').'posts');
         Schema::dropIfExists(config('sabhero-blog.tables.prefix').'tags');
         Schema::dropIfExists(config('sabhero-blog.tables.prefix').'post_'.config('sabhero-blog.tables.prefix').'tag');

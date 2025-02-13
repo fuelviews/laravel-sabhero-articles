@@ -95,7 +95,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
             }
         });
 
-        $this->app->singleton('sabhero-blog.patterns', function () {
+        /*$this->app->singleton('sabhero-blog.patterns', function () {
             $prefix = config('sabhero-blog.tables.prefix');
 
             if (!Schema::hasTable($prefix . 'metros') || !Schema::hasTable($prefix . 'blog_metros')) {
@@ -123,7 +123,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 'state' => $statePattern,
                 'city' => $cityPattern,
             ];
-        });
+        });*/
 
         $this->app->register(SabHeroBlogEventServiceProvider::class);
 

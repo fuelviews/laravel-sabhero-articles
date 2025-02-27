@@ -8,9 +8,6 @@ return new class extends Migration
 {
     public function up()
     {
-        $tableName = resolve(config('sabhero-blog.user.model'))->getTable();
-        $columnName = config('sabhero-blog.user.columns.avatar');
-
         Schema::create(config('sabhero-blog.tables.prefix').'categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 155)->unique();
@@ -106,12 +103,6 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->timestamps();
         });
-
-        if (! Schema::hasColumn($tableName, $columnName)) {
-            Schema::table($tableName, function (Blueprint $table) use ($columnName) {
-                $table->string($columnName)->nullable();
-            });
-        }
     }
 
     /**

@@ -36,14 +36,13 @@
         @if($componentPath && View::exists($componentPath))
             @include($componentPath)
         @endif
-
         <section class="max-w-standard mx-auto px-2 xl:px-4 my-12">
+            <a id="{{ $dynamicAnchorLink }}" class="{{ config('sabhero-blog.heading_permalink.html_class') }}"></a>
             @if(!empty(Breadcrumbs::exists()))
                 <section>
                     <x-sabhero-blog::breadcrumb />
                 </section>
             @endif
-            <a id="{{ $dynamicAnchorLink }}" class="{{ config('sabhero-blog.heading_permalink.html_class') }}"></a>
             {{ $slot }}
         </section>
     </main>

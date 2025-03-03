@@ -41,27 +41,3 @@ Route::middleware(config('sabhero-blog.route.middleware'))
         Route::get('/{state:slug}/{city:slug}/{post:slug}', [PostController::class, 'showMetro'])
             ->name('sabhero-blog.post.metro.show');
     });
-
-/*$patterns = app('sabhero-blog.patterns');
-
-Route::middleware(config('sabhero-blog.route.middleware'))
-    ->group(function () use ($patterns) {
-        Route::get('/{state:slug}', [PostController::class, 'indexMetroState'])
-            ->where('state', $patterns['state'])
-            ->name('sabhero-blog.post.metro.state.index');
-
-        Route::get('/{state:slug}/{city:slug}', [PostController::class, 'indexMetroStateCity'])
-            ->where([
-                'state' => $patterns['state'],
-                'city' => $patterns['city'],
-            ])
-            ->name('sabhero-blog.post.metro.state.city.index');
-
-        Route::get('/{state:slug}/{city:slug}/{post:slug}', [PostController::class, 'showMetro'])
-            ->where([
-                'state' => $patterns['state'],
-                'city' => $patterns['city'],
-                'post' => '[a-zA-Z0-9\-]+',
-            ])
-            ->name('sabhero-blog.post.metro.show');
-    });*/

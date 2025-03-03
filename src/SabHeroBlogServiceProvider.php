@@ -12,9 +12,7 @@ use Fuelviews\SabHeroBlog\Components\Layout;
 use Fuelviews\SabHeroBlog\Components\Markdown;
 use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Models\Post;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -93,36 +91,6 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 ]);
             }
         });
-
-        /*$this->app->singleton('sabhero-blog.patterns', function () {
-            $prefix = config('sabhero-blog.tables.prefix');
-
-            if (!Schema::hasTable($prefix . 'metros') || !Schema::hasTable($prefix . 'blog_metros')) {
-                return [
-                    'state' => 'null',
-                    'city' => 'null',
-                    ];
-            }
-
-            $stateSlugs = DB::table($prefix . 'metros')
-                ->where('type', 'state')
-                ->pluck('slug')
-                ->toArray();
-            $escapedStateSlugs = array_map('preg_quote', $stateSlugs);
-            $statePattern = implode('|', $escapedStateSlugs);
-
-            $citySlugs = DB::table($prefix . 'blog_metros')
-                ->where('type', 'city')
-                ->pluck('slug')
-                ->toArray();
-            $escapedCitySlugs = array_map('preg_quote', $citySlugs);
-            $cityPattern = implode('|', $escapedCitySlugs);
-
-            return [
-                'state' => $statePattern,
-                'city' => $cityPattern,
-            ];
-        });*/
 
         $this->app->register(SabHeroBlogEventServiceProvider::class);
 

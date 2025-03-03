@@ -28,7 +28,7 @@ class PostController extends Controller
             ->where('state_id', $state->id)
             ->paginate(10);
 
-        $posts->where('state_id', $state->id);
+        //$posts->where('state_id', $state->id);
 
         return view('sabhero-blog::blogs.index', [
             'posts' => $posts,
@@ -39,7 +39,6 @@ class PostController extends Controller
 
     public function indexMetroStateCity(Metro $state, Metro $city)
     {
-
         $posts = Post::query()
             ->with(['categories', 'user', 'tags', 'state', 'city'])
             ->published()

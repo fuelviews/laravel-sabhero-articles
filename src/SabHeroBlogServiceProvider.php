@@ -77,7 +77,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
         });
 
         View::composer([
-            '*'
+            '*',
         ], function ($view) {
             if (request()->route() &&
                 in_array(request()->route()->getName(), [

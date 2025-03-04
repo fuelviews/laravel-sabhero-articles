@@ -4,14 +4,15 @@ namespace Fuelviews\SabHeroBlog\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Layout extends Component
 {
     public $dynamicAnchorLink;
+
     public $componentPath;
+
     public $isPostView;
 
     public function __construct()
@@ -33,11 +34,10 @@ class Layout extends Component
             $this->isPostView = true;
         }
 
-        if (!$this->isPostView) {
+        if (! $this->isPostView) {
             if ($stateSlug && $citySlug) {
                 $this->componentPath = "livewire.locations.{$citySlug}";
-            }
-            elseif ($stateSlug) {
+            } elseif ($stateSlug) {
                 $this->componentPath = "livewire.locations.{$stateSlug}";
             }
         }

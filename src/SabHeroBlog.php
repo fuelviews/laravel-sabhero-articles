@@ -37,7 +37,13 @@ class SabHeroBlog implements Plugin
         $panel->navigationItems([
             NavigationItem::make('CRM')
                 ->label(config('sabhero-blog.crm.name'))
-                ->url(config('sabhero-blog.crm.link'), shouldOpenInNewTab: true)
+                ->url(function() {
+                    $link = config('sabhero-blog.crm.link');
+                    if (!str_starts_with($link, 'http://') && !str_starts_with($link, 'https://')) {
+                        $link = 'https://' . $link;
+                    }
+                    return $link;
+                }, shouldOpenInNewTab: true)
                 ->icon('heroicon-o-presentation-chart-line')
                 ->sort(1),
         ]);

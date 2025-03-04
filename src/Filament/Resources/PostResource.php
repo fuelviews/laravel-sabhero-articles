@@ -335,11 +335,11 @@ class PostResource extends Resource
                     'body' => $record['Content'] ?? '',
                     'status' => $record['Status'] ?? '',
                     'user_id' => optional(User::where('name', $record['Author'])->first())->id ?? '1',
-                    'feature_image_alt_text' => $record['Photo Alt Text'] ?? '',
-                    'published_at' => $record['Published At'] ?? '',
-                    'scheduled_for' => $record['Scheduled For'] ?? '',
-                    'created_at' => $record['Created At'] ?? '',
-                    'updated_at' => $record['Updated At'] ?? '',
+                    'feature_image_alt_text' => $record['Feature Image Alt Text'] ?? '',
+                    'published_at' => !empty($record['Published At']) ? $record['Published At'] : null,
+                    'scheduled_for' => !empty($record['Scheduled For']) ? $record['Scheduled For'] : null,
+                    'created_at' => !empty($record['Created At']) ? $record['Created At'] : null,
+                    'updated_at' => !empty($record['Updated At']) ? $record['Updated At'] : null,
                 ]
             );
 

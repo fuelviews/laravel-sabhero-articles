@@ -1,9 +1,11 @@
 {
     "name": "fuelviews/laravel-sabhero-blog",
-    "description": "This is my package laravel-sabhero-blog",
+    "description": "SabHero Blog package",
     "keywords": [
         "fuelviews",
         "laravel",
+        "service area business",
+        "sabhero-blog",
         "laravel-sabhero-blog"
     ],
     "homepage": "https://github.com/fuelviews/laravel-sabhero-blog",
@@ -18,15 +20,13 @@
     "require": {
         "php": ">=8.2",
         "ext-zip": "*",
-        "althinect/filament-spatie-roles-permissions": "^2.2",
         "diglactic/laravel-breadcrumbs": "^9.0",
         "embed/embed": "^4.4",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "filament/support": "^3.2",
-        "fuelviews/laravel-sabhero-wrapper": ">=0.0.13",
+        "fuelviews/laravel-sabhero-wrapper": ">=0.0",
         "spatie/filament-markdown-editor": "^2.0",
-        "spatie/laravel-package-tools": "^1.19",
-        "spatie/laravel-permission": "^6.13"
+        "spatie/laravel-package-tools": "^1.19"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
@@ -51,7 +51,6 @@
         }
     },
     "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"

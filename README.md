@@ -1,4 +1,4 @@
-# Sab Hero Blog Package
+# SabHero Blog Package
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fuelviews/laravel-sabhero-blog.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-blog)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/fuelviews/laravel-sabhero-blog/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/fuelviews/laravel-sabhero-blog/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -13,13 +13,13 @@ composer require filament/filament:"^3.2" -W
 ```bash
 php artisan filament:install --panels
 ```
-Install the Sab Hero Blog Plugin by running the following command:
+Install the SabHero Blog Plugin by running the following command:
  ```bash
-composer require fuelviews/sabhero-blog
+composer require fuelviews/sabhero-blog -W
 ```
 
 ## Usage
-After composer require, you can start using the Sab Hero Blog Plugin by running the following command:
+After composer require, you can start using the SabHero Blog Plugin by running the following command:
 
 ```bash
 php artisan sabhero-blog:install
@@ -80,8 +80,8 @@ After modifying the `sabhero-blog.php` config file, you can run the migration by
 php artisan migrate
 ```
 
-## Attach Sab Hero Blog panel to the dashboard
-You can attach the Sab Hero Blog panel to the dashboard by adding the following code to your panel provider:
+## Attach SabHero Blog panel to the dashboard
+You can attach the SabHero Blog panel to the dashboard by adding the following code to your panel provider:
 Add `SabHeroBlog::make()` to your panel passing the class to your `plugins()` method.
 
 ```php
@@ -96,14 +96,14 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-## Manage user relationship
-If you want to manage the user relationship, you can modify the `User` model to have a relationship with the `Post` model.
+## Authorizing access to the panel
+By default, all App\Models\Users can access Filament locally. To allow them to access Filament in production, you must take a few extra steps to ensure that only the correct users have access to the app.
+
 ```php
 <?php
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Panel;
 use Fuelviews\SabHeroBlog\Traits\HasAuthor;
 use Fuelviews\SabHeroBlog\Traits\HasBlog;
@@ -151,6 +151,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## Credits
 
 - [Thejmitchener](https://github.com/thejmitchener)
+- [Sweatybreeze](https://github.com/sweatybreeze)
 - [Fuelviews](https://github.com/fuelviews)
 - [Firefly](https://github.com/thefireflytech)
 - [Asmit Nepali](https://github.com/AsmitNepali)

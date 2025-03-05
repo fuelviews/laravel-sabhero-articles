@@ -22,6 +22,7 @@ class SabHeroBlog implements Plugin
     public function register(Panel $panel): void
     {
         $panel->resources([
+            Filament\Resources\PortfolioResource::class,
             Filament\Resources\CategoryResource::class,
             Filament\Resources\PostResource::class,
             Filament\Resources\TagResource::class,

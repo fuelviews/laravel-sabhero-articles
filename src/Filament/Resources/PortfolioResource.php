@@ -21,7 +21,7 @@ class PortfolioResource extends Resource
 
     protected static ?string $navigationGroup = 'Content';
 
-    protected static ?string $navigationLabel = 'Portfolio & Before/Afters';
+    protected static ?string $navigationLabel = 'Portfolio';
 
     public static function form(Form $form): Form
     {
@@ -44,7 +44,7 @@ class PortfolioResource extends Resource
 
                 Tables\Columns\TextColumn::make('order')
                     ->sortable(),
-                    
+
                 Tables\Columns\TextColumn::make('type')
                     ->sortable()
                     ->badge(),

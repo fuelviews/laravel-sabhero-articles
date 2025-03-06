@@ -6,6 +6,7 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables\Table;
 use Filament\Forms;
 use Filament\Tables;
+use Fuelviews\SabHeroBlog\Enums\PortfolioType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -22,10 +23,12 @@ class Portfolio extends Model implements HasMedia
         'spacing',
         'order',
         'is_published',
+        'type',
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
+        'type' => PortfolioType::class,
     ];
 
     public static function getForm(): array
@@ -51,6 +54,11 @@ class Portfolio extends Model implements HasMedia
                             'bottom' => 'Bottom Only',
                         ])
                         ->default('yes')
+                        ->required(),
+
+                    Forms\Components\Select::make('type')
+                        ->options(PortfolioType::class)
+                        ->default(PortfolioType::ALL)
                         ->required(),
 
                     Forms\Components\TextInput::make('order')
@@ -118,5 +126,17 @@ class Portfolio extends Model implements HasMedia
     public function getAfterImageAttribute()
     {
         return $this->getFirstMediaUrl('after_image');
+    }
+    
+    // Title attribute - convert to title case on get
+    public function getTitleAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+    
+    // Title attribute - convert to lowercase on set
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = strtolower($value);
     }
 }

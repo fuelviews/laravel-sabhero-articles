@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('spacing', ['yes', 'no', 'top', 'bottom'])->default('yes');
             $table->integer('order')->default(0);
             $table->boolean('is_published')->default(true);
+            $table->string('type')->default('all');
             $table->timestamps();
         });
     }

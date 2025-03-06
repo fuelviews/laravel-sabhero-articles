@@ -2,6 +2,7 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
+use Fuelviews\SabHeroBlog\Enums\PortfolioType;
 use Fuelviews\SabHeroBlog\Filament\Resources\PortfolioResource\Pages;
 use Fuelviews\SabHeroBlog\Models\Portfolio;
 use Filament\Forms;
@@ -43,6 +44,10 @@ class PortfolioResource extends Resource
 
                 Tables\Columns\TextColumn::make('order')
                     ->sortable(),
+                    
+                Tables\Columns\TextColumn::make('type')
+                    ->sortable()
+                    ->badge(),
 
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('before_image')
                     ->collection('before_image')
@@ -76,6 +81,8 @@ class PortfolioResource extends Resource
                         'top' => 'Top Only',
                         'bottom' => 'Bottom Only',
                     ]),
+                Tables\Filters\SelectFilter::make('type')
+                    ->options(PortfolioType::class),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

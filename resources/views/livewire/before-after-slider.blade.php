@@ -1,18 +1,19 @@
 <section class="bg-background">
     <div class="grid grid-cols-1 pb-12">
-        @foreach ($portfolioItems as $item)
-            <div class="mx-auto max-w-5xl px-6
-                @if($item->spacing === 'yes')
-                    py-12
-                @elseif($item->spacing === 'top')
-                    pt-12
-                @elseif($item->spacing === 'bottom')
-                    pb-12
-                @endif">
+        @if(count($portfolioItems) > 0)
+            @foreach ($portfolioItems as $item)
+                <div class="mx-auto max-w-5xl px-6
+                    @if($item->spacing === 'yes')
+                        py-12
+                    @elseif($item->spacing === 'top')
+                        pt-12
+                    @elseif($item->spacing === 'bottom')
+                        pb-12
+                    @endif">
 
                 <!-- Title is already above the slider -->
-                <h3 class="pb-4 text-xl font-extrabold text-center text-gray-800 lg:text-2xl">{!! $item->title !!}</h3>
-                
+                <p class="pb-4 text-xl font-extrabold text-center text-gray-800 lg:text-2xl">{!! $item->title !!}</p>
+
                 <div x-data="{ sliderPos: 50, isDragging: false }" class="md:flex">
                     <div class="relative rounded-md shadow-md md:w-1/2" x-ref="sliderContainer">
                         <!-- Before Image -->
@@ -126,6 +127,11 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+            @endforeach
+        @else
+            <div class="mx-auto max-w-5xl px-6 py-12 text-center">
+                <p class="text-gray-600">No portfolio items found for this type.</p>
+            </div>
+        @endif
     </div>
 </section>

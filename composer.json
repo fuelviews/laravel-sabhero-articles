@@ -20,7 +20,7 @@
     "require": {
         "php": ">=8.2",
         "ext-zip": "*",
-        "diglactic/laravel-breadcrumbs": "^9.0",
+        "diglactic/laravel-breadcrumbs": "^10.0",
         "embed/embed": "^4.4",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "filament/support": "^3.2",

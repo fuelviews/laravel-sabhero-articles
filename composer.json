@@ -26,6 +26,7 @@
         "filament/support": "^3.2",
         "fuelviews/laravel-sabhero-wrapper": ">=0.0",
         "spatie/filament-markdown-editor": "^2.0",
+        "spatie/laravel-feed": "^4.4",
         "spatie/laravel-package-tools": "^1.19"
     },
     "require-dev": {

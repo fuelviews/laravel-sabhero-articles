@@ -2,9 +2,9 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources\PortfolioResource\Pages;
 
-use Fuelviews\SabHeroBlog\Filament\Resources\PortfolioResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Fuelviews\SabHeroBlog\Filament\Resources\PortfolioResource;
 
 class ListPortfolios extends ListRecords
 {

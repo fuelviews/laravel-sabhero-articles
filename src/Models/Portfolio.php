@@ -2,10 +2,8 @@
 
 namespace Fuelviews\SabHeroBlog\Models;
 
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Table;
 use Filament\Forms;
-use Filament\Tables;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Fuelviews\SabHeroBlog\Enums\PortfolioType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,65 +33,65 @@ class Portfolio extends Model implements HasMedia
     {
         return [
             Forms\Components\Grid::make()
-            ->schema([
-            Forms\Components\Section::make('Portfolio Item')
                 ->schema([
-                    Forms\Components\TextInput::make('title')
-                        ->required()
-                        ->maxLength(255),
+                    Forms\Components\Section::make('Portfolio Item')
+                        ->schema([
+                            Forms\Components\TextInput::make('title')
+                                ->required()
+                                ->maxLength(255),
 
-                    Forms\Components\MarkdownEditor::make('description')
-                        ->required()
-                        ->columnSpanFull(),
+                            Forms\Components\MarkdownEditor::make('description')
+                                ->required()
+                                ->columnSpanFull(),
 
-                    Forms\Components\Select::make('spacing')
-                        ->options([
-                            'yes' => 'Top and Bottom',
-                            'no' => 'No Spacing',
-                            'top' => 'Top Only',
-                            'bottom' => 'Bottom Only',
+                            Forms\Components\Select::make('spacing')
+                                ->options([
+                                    'yes' => 'Top and Bottom',
+                                    'no' => 'No Spacing',
+                                    'top' => 'Top Only',
+                                    'bottom' => 'Bottom Only',
+                                ])
+                                ->default('yes')
+                                ->required(),
+
+                            Forms\Components\Select::make('type')
+                                ->options(PortfolioType::class)
+                                ->default(PortfolioType::ALL)
+                                ->required(),
+
+                            Forms\Components\TextInput::make('order')
+                                ->numeric()
+                                ->default(0),
+
+                            Forms\Components\Toggle::make('is_published')
+                                ->label('Published')
+                                ->inline(false)
+                                ->default(true),
                         ])
-                        ->default('yes')
-                        ->required(),
+                        ->columnSpan(['lg' => 2]),
 
-                    Forms\Components\Select::make('type')
-                        ->options(PortfolioType::class)
-                        ->default(PortfolioType::ALL)
-                        ->required(),
+                    Forms\Components\Section::make('Images')
+                        ->schema([
+                            SpatieMediaLibraryFileUpload::make('before_image')
+                                ->collection('before_image')
+                                ->label('Before Image')
+                                ->required()
+                                ->image()
+                                ->imageEditor()
+                                ->imageResizeMode('cover')
+                                ->preserveFilenames(),
 
-                    Forms\Components\TextInput::make('order')
-                        ->numeric()
-                        ->default(0),
-
-                    Forms\Components\Toggle::make('is_published')
-                        ->label('Published')
-                        ->inline(false)
-                        ->default(true),
-                ])
-                ->columnSpan(['lg' => 2]),
-
-            Forms\Components\Section::make('Images')
-                ->schema([
-                    SpatieMediaLibraryFileUpload::make('before_image')
-                        ->collection('before_image')
-                        ->label('Before Image')
-                        ->required()
-                        ->image()
-                        ->imageEditor()
-                        ->imageResizeMode('cover')
-                        ->preserveFilenames(),
-
-                    SpatieMediaLibraryFileUpload::make('after_image')
-                        ->collection('after_image')
-                        ->label('After Image')
-                        ->required()
-                        ->image()
-                        ->imageEditor()
-                        ->imageResizeMode('cover')
-                        ->preserveFilenames(),
-                ])
-                ->columnSpan(['lg' => 2]),
-            ])->columns(4)
+                            SpatieMediaLibraryFileUpload::make('after_image')
+                                ->collection('after_image')
+                                ->label('After Image')
+                                ->required()
+                                ->image()
+                                ->imageEditor()
+                                ->imageResizeMode('cover')
+                                ->preserveFilenames(),
+                        ])
+                        ->columnSpan(['lg' => 2]),
+                ])->columns(4),
         ];
     }
 
@@ -106,7 +104,7 @@ class Portfolio extends Model implements HasMedia
             ->singleFile();
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
             ->width(300)
@@ -127,13 +125,13 @@ class Portfolio extends Model implements HasMedia
     {
         return $this->getFirstMediaUrl('after_image');
     }
-    
+
     // Title attribute - convert to title case on get
     public function getTitleAttribute($value)
     {
         return ucwords(strtolower($value));
     }
-    
+
     // Title attribute - convert to lowercase on set
     public function setTitleAttribute($value)
     {

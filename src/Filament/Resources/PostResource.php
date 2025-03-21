@@ -32,10 +32,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
 use League\Csv\Writer;
-use function parse_url;
 use RuntimeException;
-
 use ZipArchive;
+
+use function parse_url;
 
 class PostResource extends Resource
 {
@@ -336,10 +336,10 @@ class PostResource extends Resource
                     'status' => $record['Status'] ?? '',
                     'user_id' => optional(User::where('name', $record['Author'])->first())->id ?? '1',
                     'feature_image_alt_text' => $record['Feature Image Alt Text'] ?? '',
-                    'published_at' => !empty($record['Published At']) ? $record['Published At'] : null,
-                    'scheduled_for' => !empty($record['Scheduled For']) ? $record['Scheduled For'] : null,
-                    'created_at' => !empty($record['Created At']) ? $record['Created At'] : null,
-                    'updated_at' => !empty($record['Updated At']) ? $record['Updated At'] : null,
+                    'published_at' => ! empty($record['Published At']) ? $record['Published At'] : null,
+                    'scheduled_for' => ! empty($record['Scheduled For']) ? $record['Scheduled For'] : null,
+                    'created_at' => ! empty($record['Created At']) ? $record['Created At'] : null,
+                    'updated_at' => ! empty($record['Updated At']) ? $record['Updated At'] : null,
                 ]
             );
 

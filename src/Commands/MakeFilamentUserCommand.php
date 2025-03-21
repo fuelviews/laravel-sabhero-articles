@@ -5,7 +5,6 @@ namespace Fuelviews\SabHeroBlog\Commands;
 use Filament\Commands\MakeUserCommand;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class MakeFilamentUserCommand extends MakeUserCommand
 {

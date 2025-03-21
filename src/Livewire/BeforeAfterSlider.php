@@ -10,21 +10,22 @@ use Livewire\Component;
 class BeforeAfterSlider extends Component
 {
     public $portfolioItems = [];
+
     public $portfolioType = null;
 
     public function mount($type = null)
     {
         $this->portfolioType = $type;
-        
+
         $query = Portfolio::where('is_published', true);
-        
+
         if ($this->portfolioType) {
             $query->where(function (Builder $query) {
                 $query->where('type', $this->portfolioType)
-                      ->orWhere('type', PortfolioType::ALL->value);
+                    ->orWhere('type', PortfolioType::ALL->value);
             });
         }
-        
+
         $this->portfolioItems = $query->orderBy('order')->get();
     }
 

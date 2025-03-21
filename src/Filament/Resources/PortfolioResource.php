@@ -2,16 +2,13 @@
 
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
-use Fuelviews\SabHeroBlog\Enums\PortfolioType;
-use Fuelviews\SabHeroBlog\Filament\Resources\PortfolioResource\Pages;
-use Fuelviews\SabHeroBlog\Models\Portfolio;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Fuelviews\SabHeroBlog\Enums\PortfolioType;
+use Fuelviews\SabHeroBlog\Filament\Resources\PortfolioResource\Pages;
+use Fuelviews\SabHeroBlog\Models\Portfolio;
 
 class PortfolioResource extends Resource
 {

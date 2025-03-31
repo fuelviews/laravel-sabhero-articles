@@ -21,12 +21,14 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 use Spatie\FilamentMarkdownEditor\MarkdownEditor;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Post extends Model implements hasMedia
+class Post extends Model implements Feedable, HasMedia
 {
     use HasSEO;
     use InteractsWithMedia;
@@ -373,5 +375,53 @@ class Post extends Model implements hasMedia
     public function getTable(): string
     {
         return config('sabhero-blog.tables.prefix').'posts';
+    }
+
+    public static function getFeedItems()
+    {
+        return static::published()
+            ->with(['user', 'categories', 'state', 'city', 'media'])
+            ->latest('published_at')
+            ->limit(50)
+            ->get();
+    }
+
+    public function toFeedItem(): FeedItem
+    {
+        $siteUrl = config('app.url');
+        $blogUrl = $siteUrl.'/'.config('sabhero-blog.route.prefix');
+
+        // Determine the correct route based on whether the post is associated with a metro area
+        $link = null;
+        if ($this->state_id && $this->city_id && $this->state && $this->city) {
+            // It's a metro post with both state and city
+            $link = route('sabhero-blog.post.metro.show', [
+                'state' => $this->state,
+                'city' => $this->city,
+                'post' => $this,
+            ]);
+        } elseif ($this->state_id && $this->state) {
+            // It's a state-only metro post
+            $link = route('sabhero-blog.post.metro.state.index', [
+                'state' => $this->state,
+            ]).'/'.$this->slug;
+        } else {
+            // Regular post
+            $link = route('sabhero-blog.post.show', $this);
+        }
+
+        return FeedItem::create()
+            ->id($link)
+            ->title($this->title)
+            ->summary($this->sub_title ?? $this->excerptHtml())
+            ->updated($this->published_at)
+            ->link($link)
+            ->enclosure('test.jpg')
+            ->authorName($this->user->name)
+            ->authorEmail($this->user->email ?? '')
+            ->category($this->categories->isNotEmpty() ? $this->categories->first()->name : '')
+            ->enclosure($this->getFirstMediaUrl('post_feature_image'))
+            ->enclosureLength($this->getFirstMedia('post_feature_image')->size)
+            ->enclosureType($this->getFirstMedia('post_feature_image')->mime_type);
     }
 }

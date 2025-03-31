@@ -23,6 +23,7 @@ Route::middleware(config('sabhero-blog.route.middleware'))
             ->name('sabhero-blog.author.all');
         Route::get('/authors/{author:slug}', [AuthorController::class, 'posts'])
             ->name('sabhero-blog.author.show');
+        Route::feeds();
         Route::get('/{post:slug}', [PostController::class, 'show'])
             ->name('sabhero-blog.post.show');
         Route::get('/categories/{category:slug}', [CategoryController::class, 'posts'])

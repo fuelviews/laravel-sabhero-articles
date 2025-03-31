@@ -2,7 +2,6 @@
 
 namespace Fuelviews\SabHeroBlog;
 
-use Fuelviews\SabHeroBlog\Commands\MakeFilamentUserCommand;
 use Fuelviews\SabHeroBlog\Components\Breadcrumb;
 use Fuelviews\SabHeroBlog\Components\Card;
 use Fuelviews\SabHeroBlog\Components\FeatureCard;
@@ -14,6 +13,7 @@ use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Spatie\Feed\FeedServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -23,8 +23,12 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package->name('sabhero-blog')
-            ->hasConfigFile('sabhero-blog')
+            ->hasConfigFile([
+                'sabhero-blog',
+                'feed',
+            ])
             ->hasMigrations([
+                'create_authors_table.php',
                 'create_blog_tables',
                 'create_media_table',
                 'create_imports_table',
@@ -47,7 +51,6 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 'web',
                 'breadcrumbs',
             ])
-            ->hasCommand(MakeFilamentUserCommand::class)
             ->hasInstallCommand(function (InstallCommand $installCommand) {
                 $installCommand
                     ->startWith(function (InstallCommand $command) {
@@ -91,6 +94,9 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 ]);
             }
         });
+
+        // Register Spatie Feed Service Provider
+        $this->app->register(FeedServiceProvider::class);
 
         $this->app->register(SabHeroBlogEventServiceProvider::class);
 

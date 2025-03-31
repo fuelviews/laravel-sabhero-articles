@@ -15,7 +15,9 @@ class BlogPublished extends Mailable
     use Queueable;
     use SerializesModels;
 
-    public function __construct(private Post $post, private string $toEamil = '') {}
+    public function __construct(private Post $post, private string $toEamil = '')
+    {
+    }
 
     public function envelope(): Envelope
     {

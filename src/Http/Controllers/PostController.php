@@ -82,4 +82,10 @@ class PostController extends Controller
             'post' => $post,
         ]);
     }
+
+    public function feed()
+    {
+        // The feed is automatically generated using the configuration in config/feed.php
+        // This controller method is just a placeholder for the route
+    }
 }

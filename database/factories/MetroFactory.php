@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Factories;
+namespace Fuelviews\SabHeroBlog\Database\Factories;
 
 use Fuelviews\SabHeroBlog\Models\Metro;
 use Illuminate\Database\Eloquent\Factories\Factory;

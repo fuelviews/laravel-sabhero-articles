@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Factories;
+namespace Fuelviews\SabHeroBlog\Database\Factories;
 
 use Carbon\Carbon;
 use Fuelviews\SabHeroBlog\Enums\PostStatus;

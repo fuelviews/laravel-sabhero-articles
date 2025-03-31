@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-blog` will be documented in this file.
 
+## v0.0.3 - 2025-03-31
+
+### What's Changed
+
+* Refactor: Remove portfolio (to it's own package) by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-blog/pull/5
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-blog/commits/v0.0.3
+
 ## v0.0.2 - 2025-03-15
 
 ### What's Changed

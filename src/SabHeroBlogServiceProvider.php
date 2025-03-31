@@ -13,6 +13,7 @@ use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Spatie\Feed\FeedServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -93,6 +94,9 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 ]);
             }
         });
+
+        // Register Spatie Feed Service Provider
+        $this->app->register(FeedServiceProvider::class);
 
         $this->app->register(SabHeroBlogEventServiceProvider::class);
 

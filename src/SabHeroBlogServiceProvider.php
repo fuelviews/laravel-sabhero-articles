@@ -24,7 +24,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
         $package->name('sabhero-blog')
             ->hasConfigFile([
                 'sabhero-blog',
-                'feed'
+                'feed',
             ])
             ->hasMigrations([
                 'create_authors_table.php',

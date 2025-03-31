@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create(config('sabhero-blog.tables.prefix').'categories', function (Blueprint $table) {
             $table->id();
@@ -110,7 +110,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists(config('sabhero-blog.tables.prefix').'metro_'.config('sabhero-blog.tables.prefix').'post');

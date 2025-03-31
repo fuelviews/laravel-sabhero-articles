@@ -1,9 +1,19 @@
 # SabHero Blog Package
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fuelviews/laravel-sabhero-blog.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-blog)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/fuelviews/laravel-sabhero-blog/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/fuelviews/laravel-sabhero-blog/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/fuelviews/laravel-sabhero-blog/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/fuelviews/laravel-sabhero-blog/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/fuelviews/laravel-sabhero-blog.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-blog)
+
+A full-featured blog management solution for Laravel applications with Filament admin panel integration, featuring posts, categories, tags, authors, and RSS feed support.
+
+## Features
+
+- Blog Post Management with scheduling
+- Category and Tag organization
+- Author management
+- RSS feed support
+- Markdown rendering with table of contents
+- SEO optimization
+- Filament admin panel integration
 
 ## Installation
 If your project is not already using Filament, you can install it by running the following commands:
@@ -24,41 +34,7 @@ After composer require, you can start using the SabHero Blog Plugin by running t
 ```bash
 php artisan sabhero-blog:install
 ```
-This command will publish `sabhero-blog.php` config file and migration files.
-````php
-<?php
 
-use App\Models\User;
-
-return [
-    'tables' => [
-        'prefix' => 'blog_',
-    ],
-    'route' => [
-        'prefix' => 'blog',
-        'middleware' => ['web'],
-    ],
-    'user' => [
-        'model' => User::class,
-        'foreign_key' => 'user_id',
-        'columns' => [
-            'name' => 'name',
-            'slug' => 'slug',
-        ],
-    ],
-    'heading_permalink' => [
-        'html_class' => 'scroll-mt-40',
-    ],
-    'dropdown' => [
-        'name' => 'Posts',
-    ],
-    'crm' => [
-        'name' => 'CRM',
-        'link' => '#',
-    ],
-];
-
-````
 Before running the migration, you can modify the `sabhero-blog.php` config file to suit your needs.
 
 You can publish the config file with:
@@ -80,6 +56,19 @@ After modifying the `sabhero-blog.php` config file, you can run the migration by
 php artisan migrate
 ```
 
+## RSS Feed
+The package includes built-in RSS feed support for your blog posts. The feed will be available at:
+
+```
+/blog/rss
+```
+
+You can customize the feed settings in the `config/feed.php` file. Publish this configuration if you want to modify it:
+
+```bash
+php artisan vendor:publish --tag="sabhero-blog-feed-config"
+```
+
 ## Attach SabHero Blog panel to the dashboard
 You can attach the SabHero Blog panel to the dashboard by adding the following code to your panel provider:
 Add `SabHeroBlog::make()` to your panel passing the class to your `plugins()` method.
@@ -96,7 +85,7 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-## Authorizing access to the panel
+## Authorizing access to filamentphp panel
 By default, all App\Models\Users can access Filament locally. To allow them to access Filament in production, you must take a few extra steps to ensure that only the correct users have access to the app.
 
 ```php
@@ -150,8 +139,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Thejmitchener](https://github.com/thejmitchener)
-- [Sweatybreeze](https://github.com/sweatybreeze)
+- [Joshua Mitchener](https://github.com/thejmitchener)
+- [Daniel Clark](https://github.com/sweatybreeze)
 - [Fuelviews](https://github.com/fuelviews)
 - [Firefly](https://github.com/thefireflytech)
 - [Asmit Nepali](https://github.com/AsmitNepali)

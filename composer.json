@@ -4,7 +4,8 @@
     "keywords": [
         "fuelviews",
         "laravel",
-        "service area business",
+        "service area business hero",
+        "sabhero",
         "sabhero-blog",
         "laravel-sabhero-blog"
     ],
@@ -13,12 +14,11 @@
     "authors": [
         {
             "name": "Joshua Mitchener",
-            "email": "support@fuelviews.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": ">=8.2",
+        "php": "^8.3",
         "ext-zip": "*",
         "diglactic/laravel-breadcrumbs": "^9.0",
         "embed/embed": "^4.4",

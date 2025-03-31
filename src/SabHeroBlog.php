@@ -28,7 +28,6 @@ class SabHeroBlog implements Plugin
             Filament\Resources\MetroResource::class,
             Filament\Resources\PageResource::class,
             Filament\Resources\AuthorResource::class,
-            Filament\Resources\PortfolioResource::class,
         ]);
 
         $panel->colors([

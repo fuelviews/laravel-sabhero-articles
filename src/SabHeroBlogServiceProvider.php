@@ -94,8 +94,10 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 ]);
             }
         });
+      
+        // Register just the feed view
+        View::addNamespace('sabhero-blog', __DIR__.'/../resources/views');
 
-        // Register Spatie Feed Service Provider
         $this->app->register(FeedServiceProvider::class);
 
         $this->app->register(SabHeroBlogEventServiceProvider::class);

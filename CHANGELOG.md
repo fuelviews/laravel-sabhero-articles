@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-blog` will be documented in this file.
 
+## v0.0.5 - 2025-04-26
+
+### What's Changed
+
+* Refactor image handling to utilize responsive images for avatars and feature images across various views, enhancing performance and user experience. Removed unnecessary comments and cleaned up code for better readability. (#8) by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-blog/pull/9
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-blog/commits/v0.0.5
+
 ## v0.0.4 - 2025-04-01
 
 ### What's Changed

@@ -12,7 +12,8 @@
                     : route('sabhero-blog.post.show', ['post' => $post->slug]) }}"
                     class="hover:opacity-65">
                 <img
-                    src="{{ $post->getFirstMediaUrl('post_feature_image') }}"
+                    srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
+                    src="{{ $post->getFirstMedia('post_feature_image')->getUrl() }}"
                     alt="{{ $post->feature_image_alt_text }}"
                     class="md:h-[400px] w-full object-cover"
                     loading="eager">
@@ -58,8 +59,11 @@
         </div>
         <div class="flex items-center gap-4">
             <a href="{{ route('sabhero-blog.author.show', $post->user->author->slug) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
-                <img class="h-14 w-14 overflow-hidden rounded-full bg-zinc-300 object-cover md:object-fill text-[0]"
-                     src="{{ $post->user->avatar }}" alt="{{ $post->user->name() }}">
+                <img
+                    srcset="{{ $post->user->author->getFirstMedia('avatar')->getSrcset() }}"
+                    src="{{ $post->user->author->getFirstMedia('avatar')->getUrl() }}"
+                    alt="{{ $post->user->name() }}"
+                    class="h-14 w-14 overflow-hidden rounded-full object-cover md:object-fill text-[0]">
             </a>
             <div>
                 <a href="{{--{{ route('sabhero-blog.author.show', $post->user->author->slug) }}--}}" title="{{ $post->user->name() }}"

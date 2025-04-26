@@ -76,7 +76,10 @@
     </div>
     <h2 class="flash">New Blog Post Published!</h2>
     <div class="header">
-        <img src="{{ $post->featureImage }}" alt="Feature Image">
+        <img
+            srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
+            src="{{ $post->getFirstMedia('post_feature_image')->getUrl() }}"
+            alt="{{ $post->feature_image_alt_text }}">
     </div>
     <div class="content">
         <h2>{{ $post->title }}</h2>

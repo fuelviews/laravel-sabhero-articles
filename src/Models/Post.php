@@ -326,12 +326,23 @@ class Post extends Model implements Feedable, HasMedia
         return $this->belongsTo(Metro::class, 'city_id')->where('type', MetroType::CITY->value);
     }
 
+    /*public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('post_feature_image')
+            ->withResponsiveImages();
+    }*/
+
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('post_feature_image')
             ->withResponsiveImages()
             ->performOnCollections('post_feature_image');
     }
+
+    /*public function getPostFeatureImageAttribute(): ?string
+    {
+        return $this->getFirstMediaUrl('post_feature_image');
+    }*/
 
     public function stripMarkdown($content): string
     {

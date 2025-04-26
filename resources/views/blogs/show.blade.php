@@ -10,7 +10,8 @@
 
                                     @if ($post->hasMedia('post_feature_image'))
                                         <img
-                                            src="{{ $post->getFirstMediaUrl('post_feature_image') }}"
+                                            srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
+                                            src="{{ $post->getFirstMedia('post_feature_image')->getUrl() }}"
                                             alt="{{ $post->feature_image_alt_text }}"
                                             class="flex h-full min-h-[400px] items-center justify-center object-cover object-top"
                                             loading="eager"
@@ -35,8 +36,10 @@
                                 <div class="flex flex-wrap items-center justify-between gap-4">
                                     <div class="flex items-center gap-4">
                                         <a href="{{ route('sabhero-blog.author.show', $post->user->author->slug) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
-                                            <img class="h-24 w-24 overflow-hidden rounded-full border-4 border-white bg-zinc-300 object-cover text-[0] ring-1 ring-slate-300"
-                                                 src="{{ $post->user->avatar }}"
+                                            <img
+                                                 srcset="{{ $post->user->author->getFirstMedia('avatar')->getSrcset() }}"
+                                                 src="{{ $post->user->author->getFirstMedia('avatar')->geturl() }}"
+                                                 class="h-24 w-24 overflow-hidden rounded-full border-4 border-white object-cover text-[0] ring-1 ring-slate-300"
                                                  alt="{{ $post->user->name() }}">
                                         </a>
                                         <div>

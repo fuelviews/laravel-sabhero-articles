@@ -43,7 +43,7 @@ class Author extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('avatar')
-            ->singleFile();
+            ->withResponsiveImages();
     }
 
     public function registerMediaConversions(?Media $media = null): void

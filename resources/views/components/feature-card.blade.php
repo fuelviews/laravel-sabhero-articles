@@ -60,10 +60,11 @@
         <div class="flex items-center gap-4">
             <a href="{{ route('sabhero-blog.author.show', $post->user->author->slug) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
                 <img
-                    srcset="{{ $post->user->author->getFirstMedia('avatar')->getSrcset() }}"
-                    src="{{ $post->user->author->getFirstMedia('avatar')->getUrl() }}"
+                    class="h-14 w-14 overflow-hidden rounded-full object-cover md:object-fill text-[0]"
+                    srcset="{{ $post->user->author->getAuthorMediaSrcSet() }}"
+                    src="{{ $post->user->author->getAuthorAvatarUrl() }}"
                     alt="{{ $post->user->name() }}"
-                    class="h-14 w-14 overflow-hidden rounded-full object-cover md:object-fill text-[0]">
+                >
             </a>
             <div>
                 <a href="{{--{{ route('sabhero-blog.author.show', $post->user->author->slug) }}--}}" title="{{ $post->user->name() }}"

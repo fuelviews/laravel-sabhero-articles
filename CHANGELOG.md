@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-blog` will be documented in this file.
 
+## v0.0.6 - 2025-04-29
+
+### What's Changed
+
+* Refactor breadcrumb and route names to use 'index' instead of 'all' for consistency and clarity in the sabhero-blog application. This change improves the semantic meaning of the routes and breadcrumbs. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-blog/pull/10
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-blog/commits/v0.0.6
+
 ## v0.0.5 - 2025-04-26
 
 ### What's Changed

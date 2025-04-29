@@ -14,11 +14,11 @@ Route::middleware(config('sabhero-blog.route.middleware'))
         Route::get('/search', [PostController::class, 'search'])
             ->name('sabhero-blog.post.search');
         Route::get('/tags', [TagController::class, 'allTags'])
-            ->name('sabhero-blog.tag.all');
+            ->name('sabhero-blog.tag.index');
         Route::get('/categories', [CategoryController::class, 'allCategories'])
-            ->name('sabhero-blog.category.all');
+            ->name('sabhero-blog.category.index');
         Route::get('/authors', [AuthorController::class, 'allAuthors'])
-            ->name('sabhero-blog.author.all');
+            ->name('sabhero-blog.author.index');
         Route::get('/authors/{author:slug}', [AuthorController::class, 'posts'])
             ->name('sabhero-blog.author.show');
         Route::feeds();

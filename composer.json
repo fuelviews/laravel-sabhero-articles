@@ -36,7 +36,7 @@
         "pestphp/pest": "^3.0||^2.3",
         "pestphp/pest-plugin-arch": "^3.0",
         "pestphp/pest-plugin-laravel": "^3.0||^2.3",
-        "orchestra/testbench": "^9.0.0",
+        "orchestra/testbench": "^10.2.2",
         "rector/rector": "^2.0",
         "driftingly/rector-laravel": "^2.0"
     },

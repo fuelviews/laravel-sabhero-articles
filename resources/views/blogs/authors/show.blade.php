@@ -5,9 +5,11 @@
                 <div class="flex-shrink-0">
                     <a href="{{ route('sabhero-blog.author.show', $author->slug) }}">
                         <img
-                            srcset="{{ $author->getFirstMedia('avatar')->getSrcset() }}"
-                            src="{{ $author->getFirstMedia('avatar')->getUrl() }}"
-                            class="h-48 w-48 rounded-full shadow-lg" alt="{{ $author->name }}">
+                            class="h-48 w-48 rounded-full shadow-lg"
+                            srcset="{{ $author->getAuthorMediaSrcSet() }}"
+                            src="{{ $author->getAuthorAvatarUrl() }}"
+                            alt="{{ $author->name }}"
+                        >
                     </a>
                 </div>
                 <div class="flex-grow">

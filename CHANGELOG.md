@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-blog` will be documented in this file.
 
+## v0.0.7 - 2025-05-07
+
+### What's Changed
+
+* Refactor author avatar handling by introducing dedicated methods for retrieving avatar URLs and srcsets, improving code readability and maintainability. This change standardizes how author avatars are displayed across various views. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-blog/pull/11
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-blog/commits/v0.0.7
+
 ## v0.0.6 - 2025-04-29
 
 ### What's Changed

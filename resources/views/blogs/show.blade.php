@@ -37,10 +37,11 @@
                                     <div class="flex items-center gap-4">
                                         <a href="{{ route('sabhero-blog.author.show', $post->user->author->slug) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
                                             <img
-                                                 srcset="{{ $post->user->author->getFirstMedia('avatar')->getSrcset() }}"
-                                                 src="{{ $post->user->author->getFirstMedia('avatar')->geturl() }}"
-                                                 class="h-24 w-24 overflow-hidden rounded-full border-4 border-white object-cover text-[0] ring-1 ring-slate-300"
-                                                 alt="{{ $post->user->name() }}">
+                                                class="h-24 w-24 overflow-hidden rounded-full border-4 border-white object-cover text-[0] ring-1 ring-slate-300"
+                                                srcset="{{ $post->user->author->getAuthorMediaSrcSet() }}"
+                                                src="{{ $post->user->author->getAuthorAvatarUrl() }}"
+                                                alt="{{ $post->user->name() }}"
+                                            >
                                         </a>
                                         <div>
                                             <a href="{{ route('sabhero-blog.author.show', $post->user->author->slug) }}" title="{{ $post->user->name() }} "class="block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap font-semibold hover:text-prime">

@@ -61,6 +61,24 @@ class Author extends Model implements HasMedia
         return $this->user->getFirstMediaUrl('avatar') ?: $this->avatar_url ?? null;
     }
 
+    public function getAuthorMediaSrcSet(): ?string
+    {
+        $media = $this->user->author->getFirstMedia('avatar');
+
+        return $media ? $media->getSrcset() : ($this->avatar_url ?? null);
+    }
+
+    public function getAuthorAvatarUrl(): string
+    {
+        $media = $this->user->author->getFirstMedia('avatar');
+
+        if ($media && $media->getUrl()) {
+            return $media->getUrl();
+        }
+
+        return 'https://ui-avatars.com/api/?name='.urlencode($this->user->name).'&color=7F9CF5&background=EBF4FF&rounded=true';
+    }
+
     public static function getForm(): array
     {
         return [

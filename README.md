@@ -3,103 +3,93 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fuelviews/laravel-sabhero-blog.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-blog)
 [![Total Downloads](https://img.shields.io/packagist/dt/fuelviews/laravel-sabhero-blog.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-blog)
 
-A full-featured blog management solution for Laravel applications with Filament admin panel integration, featuring posts, categories, tags, authors, and RSS feed support.
+A full-featured blog management solution for Laravel applications with Filament admin panel integration. This package provides a complete blogging platform with advanced features and an intuitive admin interface.
 
 ## Features
 
-- Blog Post Management with scheduling
-- Category and Tag organization
-- Author management
-- RSS feed support
-- Markdown rendering with table of contents
-- SEO optimization
-- Filament admin panel integration
+- **Complete Blog Management**: Posts, categories, tags, and authors
+- **Scheduled Publishing**: Schedule posts to be published automatically
+- **Blade Components**: Ready-to-use UI components including cards, feature cards, and breadcrumbs
+- **Advanced Content**: Markdown rendering with automatic table of contents
+- **Media Management**: Image uploads with responsive images support
+- **SEO Optimization**: Built-in SEO meta data for better search rankings
+- **RSS Feed**: Automatic feed generation with customizable settings
+- **Tailwind Pagination**: Custom pagination views for Tailwind CSS
+- **Filament Integration**: Full admin panel for managing all blog content
 
 ## Installation
-If your project is not already using Filament, you can install it by running the following commands:
+
+### Prerequisites
+
+This package requires Filament. If your project doesn't have Filament yet:
+
 ```bash
 composer require filament/filament:"^3.2" -W
-```
-```bash
 php artisan filament:install --panels
 ```
-Install the SabHero Blog Plugin by running the following command:
- ```bash
-composer require fuelviews/sabhero-blog -W
+
+### Create a Filament User
+```bash
+php artisan make:filament-user
 ```
 
-## Usage
-After composer require, you can start using the SabHero Blog Plugin by running the following command:
+### Install the SabHero Blog Package
 
 ```bash
-php artisan sabhero-blog:install
+composer require fuelviews/laravel-sabhero-blog
 ```
 
-Before running the migration, you can modify the `sabhero-blog.php` config file to suit your needs.
+## Configuration
 
-You can publish the config file with:
+### 1. Publish Configuration Files
 
 ```bash
 php artisan vendor:publish --tag="sabhero-blog-config"
 ```
 
-Optionally, you can publish the views using
+### 2. Publish Migrations
 
 ```bash
-php artisan vendor:publish --tag="sabhero-blog-views"
+php artisan vendor:publish --tag="sabhero-blog-migrations"
 ```
 
-## Migrate the database
-After modifying the `sabhero-blog.php` config file, you can run the migration by running the following command:
+### 3. Run Migrations
 
 ```bash
 php artisan migrate
 ```
 
-## RSS Feed
-The package includes built-in RSS feed support for your blog posts. The feed will be available at:
+## Integration
 
-```
-/blog/rss
-```
+### 1. Attach to Filament Panel
 
-You can customize the feed settings in the `config/feed.php` file. Publish this configuration if you want to modify it:
-
-```bash
-php artisan vendor:publish --tag="sabhero-blog-feed-config"
-```
-
-## Attach SabHero Blog panel to the dashboard
-You can attach the SabHero Blog panel to the dashboard by adding the following code to your panel provider:
-Add `SabHeroBlog::make()` to your panel passing the class to your `plugins()` method.
+Add the SabHero Blog plugin to your Filament panel provider:
 
 ```php
-use Fuelviews\SabHeroBlog\SabHeroBlog;
+use Fuelviews\SabHeroBlog\Facades\SabHeroBlog;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
             SabHeroBlog::make()
-        ])
+        ]);
 }
 ```
 
-## Authorizing access to filamentphp panel
-By default, all App\Models\Users can access Filament locally. To allow them to access Filament in production, you must take a few extra steps to ensure that only the correct users have access to the app.
+### 2. Add Traits and CanAccessPanel to User Model
+
+Your user model needs to bet setup to use `HasBlog` and `HasAuthor` traits, don't forget setting `CanAccessPanel`:
 
 ```php
-<?php
-
-namespace App\Models;
-
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Fuelviews\SabHeroBlog\Traits\HasAuthor;
 use Fuelviews\SabHeroBlog\Traits\HasBlog;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasAvatar;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
@@ -107,17 +97,39 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     
     public function canAccessPanel(Panel $panel): bool
     {
-        return str_ends_with($this->email, '@your-domain-here.com');
+        $allowedDomains = ['@fuelviews.com', 'admin.com'];
+
+        foreach ($allowedDomains as $domain) {
+            if (str_ends_with($this->email, $domain)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 ```
 
-You can publish and run the migrations with:
+## RSS Feed
+
+The package automatically generates an RSS feed available at `/blog/rss`. To customize feed settings:
 
 ```bash
-php artisan vendor:publish --tag="sabhero-blog-migrations"
-php artisan migrate
+php artisan vendor:publish --tag="sabhero-blog-feed-config"
 ```
+
+## Available Components
+
+SabHero Blog comes with several Blade components for easy UI implementation:
+
+- `<x-sabhero-blog::layout>` - Main blog layout
+- `<x-sabhero-blog::card>` - Blog post card
+- `<x-sabhero-blog::feature-card>` - Featured post card
+- `<x-sabhero-blog::breadcrumb>` - Breadcrumb navigation
+- `<x-sabhero-blog::header-category>` - Category header
+- `<x-sabhero-blog::header-metro>` - Metro-style header
+- `<x-sabhero-blog::markdown>` - Markdown content renderer
+- `<x-sabhero-blog::recent-post>` - Recent posts display
 
 ## Testing
 
@@ -127,11 +139,11 @@ composer test
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information on recent changes.
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](CONTRIBUTING.md) for contribution guidelines.
 
 ## Security Vulnerabilities
 

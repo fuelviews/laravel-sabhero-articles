@@ -11,12 +11,12 @@ use Fuelviews\SabHeroBlog\Components\Layout;
 use Fuelviews\SabHeroBlog\Components\Markdown;
 use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Models\Post;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Spatie\Feed\FeedServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Illuminate\Pagination\Paginator;
 
 class SabHeroBlogServiceProvider extends PackageServiceProvider
 {

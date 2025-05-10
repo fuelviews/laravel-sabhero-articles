@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-blog` will be documented in this file.
 
+## v0.0.8 - 2025-05-10
+
+### What's Changed
+
+* Update GitHub Actions workflow to restrict permissions for pull requests and contents, and expand Laravel version support in the testing matrix. Enhance README for clarity and detail, and add a new Tailwind pagination view for improved UI. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-blog/pull/13
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-blog/commits/v0.0.8
+
 ## v0.0.7 - 2025-05-07
 
 ### What's Changed

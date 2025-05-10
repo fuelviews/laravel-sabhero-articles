@@ -14,9 +14,9 @@ use Fuelviews\SabHeroBlog\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Spatie\Feed\FeedServiceProvider;
-use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class SabHeroBlogServiceProvider extends PackageServiceProvider
 {
@@ -28,7 +28,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 'feed',
             ])
             ->hasMigrations([
-                'create_authors_table.php',
+                'create_authors_table',
                 'create_blog_tables',
                 'create_media_table',
                 'create_imports_table',
@@ -50,28 +50,14 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
             ->hasRoutes([
                 'web',
                 'breadcrumbs',
-            ])
-            ->hasInstallCommand(function (InstallCommand $installCommand) {
-                $installCommand
-                    ->startWith(function (InstallCommand $command) {
-                        $command->info('Hello, and welcome to my great new package!');
-                        $command->newLine(1);
-                    })
-                    ->publishConfigFile()
-                    ->publishMigrations()
-                    ->endWith(function (InstallCommand $installCommand) {
-                        $installCommand->newLine(1);
-                        $installCommand->info('========================================================================================================');
-                        $installCommand->info("Get ready to breathe easy! Our package has just saved you from a day's worth of headaches and hassle.");
-                        $installCommand->info('========================================================================================================');
-
-                    });
-            });
+            ]);
         // $this->loadTestingMigration();
     }
 
     public function register()
     {
+        Paginator::defaultView('sabhero-blog::pagination.tailwind');
+
         Route::bind('post', function ($value) {
             return Post::where('slug', $value)
                 ->published()
@@ -81,7 +67,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
 
         View::composer([
             '*',
-        ], function ($view) {
+        ], static function ($view) {
             if (request()->route() &&
                 in_array(request()->route()->getName(), [
                     'sabhero-blog.post.show',

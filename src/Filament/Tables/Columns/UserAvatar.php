@@ -8,7 +8,7 @@ class UserAvatar extends Column
 {
     protected string $view = 'sabhero-blog::filament.tables.columns.user-avatar';
 
-    protected function getViewData(): array
+    public function getViewData(): array
     {
         return [
             'record' => $this->getRecord(),

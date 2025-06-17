@@ -33,44 +33,15 @@
                                     </article>
                                 </div>
                                 <hr class="my-12 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">
-                                <div class="flex flex-wrap items-center justify-between gap-4">
-                                    <div class="flex items-center gap-4">
-                                        <a href="{{ route('sabhero-blog.author.show', $post->user->author->slug) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
-                                            <img
-                                                class="h-24 w-24 overflow-hidden rounded-full border-4 border-white object-cover text-[0] ring-1 ring-slate-300"
-                                                srcset="{{ $post->user->author->getAuthorMediaSrcSet() }}"
-                                                src="{{ $post->user->author->getAuthorAvatarUrl() }}"
-                                                alt="{{ $post->user->name() }}"
-                                            >
-                                        </a>
-                                        <div>
-                                            <a href="{{ route('sabhero-blog.author.show', $post->user->author->slug) }}" title="{{ $post->user->name() }} "class="block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap font-semibold hover:text-prime">
-                                                {{ $post->user->name() }}
-                                            </a>
-                                            <span class="block whitespace-nowrap text-sm font-semibold text-zinc-600">
-                                                {{ $post->formattedPublishedDate() }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-wrap gap-4 sm:basis-full md:basis-auto">
+                                <div class="flex flex-wrap items-center gap-4">
+                                    <x-sabhero-blog::author-profile :user="$post->user" :post="$post" size="large" />
+                                    <div class="flex flex-wrap gap-2 min-w-0 flex-1 justify-end">
                                         @foreach ($post->categories as $category)
-                                            <a href="{{ route('sabhero-blog.category.post', ['category' => $category->slug]) }}">
-                                                <span class="bg-prime/20 hover:bg-prime/10 inline-flex rounded-full px-3 py-2 text-sm font-semibold">
-                                                    <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime-600" />
-                                                    {{ $category->name }}
-                                                </span>
-                                            </a>
+                                            <x-sabhero-blog::category-button :category="$category" size="medium" />
                                         @endforeach
-                                        @if($post->tags->count())
-                                            @foreach ($post->tags as $tag)
-                                                <a href="{{ route('sabhero-blog.tag.post', ['tag' => $tag->slug]) }}">
-                                                    <span class="rounded-full inline-flex border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100">
-                                                        <x-heroicon-m-hashtag class="mr-1.5 inline-flex h-5 w-5 text-prime-600" />
-                                                        {{ $tag->name }}
-                                                    </span>
-                                                </a>
-                                            @endforeach
-                                        @endif
+                                        @foreach ($post->tags as $tag)
+                                            <x-sabhero-blog::tag-button :tag="$tag" size="medium" />
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

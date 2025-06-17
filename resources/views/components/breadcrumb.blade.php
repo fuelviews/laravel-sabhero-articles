@@ -12,17 +12,17 @@
             @foreach ($breadcrumbs as $crumb)
                 <li class="inline-flex items-center">
                     @if (property_exists($crumb, 'icon'))
-                        <a href="{{ $crumb->url }}" class="inline-block w-5 h-5 mr-1 text-gray-500 hover:text-prime-600">
+                        <a href="{{ $crumb->url }}" class="inline-block w-5 h-5 mr-1 text-gray-500 hover:text-prime-700">
                             {!! $crumb->icon !!}
                          </a>
                     @endif
 
                     @if($crumb->url && !$loop->last)
-                        <a href="{{ $crumb->url }}" class="text-gray-600 hover:text-prime-600" >
+                        <a href="{{ $crumb->url }}" class="text-gray-600 hover:text-prime-700" >
                             {{ $crumb->title }}
                         </a>
                     @else
-                        <a href="{{ $crumb->url }}" class="text-gray-500 hover:text-prime-600">
+                        <a href="{{ $crumb->url }}" class="text-gray-500 hover:text-prime-700">
                             {{ $crumb->title }}
                         </a>
                     @endif

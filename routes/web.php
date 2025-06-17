@@ -11,6 +11,9 @@ Route::middleware(config('sabhero-blog.route.middleware'))
     ->group(function () {
         Route::get('/', [PostController::class, 'index'])
             ->name('sabhero-blog.post.index');
+        Route::get('/page/{page}', [PostController::class, 'index'])
+            ->where('page', '[0-9]+')
+            ->name('sabhero-blog.post.page');
         Route::get('/search', [PostController::class, 'search'])
             ->name('sabhero-blog.post.search');
         Route::get('/tags', [TagController::class, 'allTags'])
@@ -19,7 +22,7 @@ Route::middleware(config('sabhero-blog.route.middleware'))
             ->name('sabhero-blog.category.index');
         Route::get('/authors', [AuthorController::class, 'allAuthors'])
             ->name('sabhero-blog.author.index');
-        Route::get('/authors/{author:slug}', [AuthorController::class, 'posts'])
+        Route::get('/authors/{user:slug}', [AuthorController::class, 'posts'])
             ->name('sabhero-blog.author.show');
         Route::feeds();
         Route::get('/{post:slug}', [PostController::class, 'show'])
@@ -30,7 +33,7 @@ Route::middleware(config('sabhero-blog.route.middleware'))
             ->name('sabhero-blog.tag.post');
     });
 
-Route::middleware(config('sabhero-blog.route.middleware'))
+/*Route::middleware(config('sabhero-blog.route.middleware'))
     ->prefix('locations')
     ->group(function () {
         Route::get('/{state:slug}', [PostController::class, 'indexMetroState'])
@@ -39,4 +42,4 @@ Route::middleware(config('sabhero-blog.route.middleware'))
             ->name('sabhero-blog.post.metro.state.city.index');
         Route::get('/{state:slug}/{city:slug}/{post:slug}', [PostController::class, 'showMetro'])
             ->name('sabhero-blog.post.metro.show');
-    });
+    });*/

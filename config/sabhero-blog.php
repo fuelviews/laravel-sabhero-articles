@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use Fuelviews\SabHeroBlog\Models\User;
 
 return [
     'tables' => [
@@ -16,6 +16,9 @@ return [
         'columns' => [
             'name' => 'name',
             'slug' => 'slug',
+        ],
+        'allowed_domains' => [
+            '@fuelviews.com',
         ],
     ],
     'heading_permalink' => [

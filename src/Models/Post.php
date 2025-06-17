@@ -11,7 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Set;
-use Fuelviews\SabHeroBlog\Enums\MetroType;
+//use Fuelviews\SabHeroBlog\Enums\MetroType;
 use Fuelviews\SabHeroBlog\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -188,7 +188,7 @@ class Post extends Model implements Feedable, HasMedia
                                 ->maxLength(255)
                                 ->columnSpanFull(),
 
-                            Select::make('state_id')
+/*                            Select::make('state_id')
                                 ->label('State')
                                 ->options(Metro::where('type', MetroType::STATE->value)->pluck('name', 'id'))
                                 ->searchable()
@@ -237,7 +237,7 @@ class Post extends Model implements Feedable, HasMedia
                                 })
                                 ->searchable()
                                 ->nullable()
-                                ->placeholder('Select a City'),
+                                ->placeholder('Select a City'),*/
 
                             Select::make('category_id')
                                 ->multiple()
@@ -316,15 +316,15 @@ class Post extends Model implements Feedable, HasMedia
         return 'slug';
     }
 
-    public function state(): BelongsTo
-    {
-        return $this->belongsTo(Metro::class, 'state_id')->where('type', MetroType::STATE->value);
-    }
+    /*    public function state(): BelongsTo
+        {
+            return $this->belongsTo(Metro::class, 'state_id')->where('type', MetroType::STATE->value);
+        }*/
 
-    public function city(): BelongsTo
-    {
-        return $this->belongsTo(Metro::class, 'city_id')->where('type', MetroType::CITY->value);
-    }
+    /*    public function city(): BelongsTo
+        {
+            return $this->belongsTo(Metro::class, 'city_id')->where('type', MetroType::CITY->value);
+        }*/
 
     /*public function registerMediaCollections(): void
     {
@@ -402,24 +402,7 @@ class Post extends Model implements Feedable, HasMedia
         $siteUrl = config('app.url');
         $blogUrl = $siteUrl.'/'.config('sabhero-blog.route.prefix');
 
-        // Determine the correct route based on whether the post is associated with a metro area
-        $link = null;
-        if ($this->state_id && $this->city_id && $this->state && $this->city) {
-            // It's a metro post with both state and city
-            $link = route('sabhero-blog.post.metro.show', [
-                'state' => $this->state,
-                'city' => $this->city,
-                'post' => $this,
-            ]);
-        } elseif ($this->state_id && $this->state) {
-            // It's a state-only metro post
-            $link = route('sabhero-blog.post.metro.state.index', [
-                'state' => $this->state,
-            ]).'/'.$this->slug;
-        } else {
-            // Regular post
-            $link = route('sabhero-blog.post.show', $this);
-        }
+        $link = route('sabhero-blog.post.show', $this);
 
         return FeedItem::create()
             ->id($link)

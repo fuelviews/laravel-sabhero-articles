@@ -49,7 +49,7 @@ class SearchAutocomplete extends Component
 
     public function performSearch()
     {
-        if (!empty($this->search)) {
+        if (! empty($this->search)) {
             return redirect()->route('sabhero-blog.post.index', ['search' => $this->search]);
         }
     }
@@ -62,7 +62,7 @@ class SearchAutocomplete extends Component
 
     public function showSuggestionsAgain()
     {
-        if (!empty($this->suggestions)) {
+        if (! empty($this->suggestions)) {
             $this->showSuggestions = true;
         }
     }

@@ -316,15 +316,15 @@ class Post extends Model implements Feedable, HasMedia
         return 'slug';
     }
 
-/*    public function state(): BelongsTo
-    {
-        return $this->belongsTo(Metro::class, 'state_id')->where('type', MetroType::STATE->value);
-    }*/
+    /*    public function state(): BelongsTo
+        {
+            return $this->belongsTo(Metro::class, 'state_id')->where('type', MetroType::STATE->value);
+        }*/
 
-/*    public function city(): BelongsTo
-    {
-        return $this->belongsTo(Metro::class, 'city_id')->where('type', MetroType::CITY->value);
-    }*/
+    /*    public function city(): BelongsTo
+        {
+            return $this->belongsTo(Metro::class, 'city_id')->where('type', MetroType::CITY->value);
+        }*/
 
     /*public function registerMediaCollections(): void
     {

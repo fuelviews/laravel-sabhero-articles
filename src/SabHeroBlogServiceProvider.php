@@ -11,10 +11,10 @@ use Fuelviews\SabHeroBlog\Components\Markdown;
 use Fuelviews\SabHeroBlog\Components\RecentPost;
 use Fuelviews\SabHeroBlog\Http\Livewire\SearchAutocomplete;
 use Fuelviews\SabHeroBlog\Models\Post;
-use Livewire\Livewire;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Livewire\Livewire;
 use Spatie\Feed\FeedServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -67,6 +67,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
 
         Route::bind('user', function ($value) {
             $userModel = config('sabhero-blog.user.model');
+
             return $userModel::where('slug', $value)->firstOrFail();
         });
 

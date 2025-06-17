@@ -7,7 +7,6 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Pages\SubNavigationPosition;
@@ -19,7 +18,6 @@ use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\CreateUser;
 use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\EditUser;
 use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\ListUsers;
 use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\ViewUser;
-use Fuelviews\SabHeroBlog\Filament\Tables\Columns\UserAvatar;
 use Illuminate\Support\Str;
 
 class UserResource extends Resource
@@ -42,6 +40,7 @@ class UserResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         $userModel = static::getModel();
+
         return (string) $userModel::authors()->count();
     }
 

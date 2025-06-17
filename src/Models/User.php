@@ -5,7 +5,6 @@ namespace Fuelviews\SabHeroBlog\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
-use Fuelviews\SabHeroBlog\Models\Post;
 use Fuelviews\SabHeroBlog\Traits\HasBlog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -19,7 +18,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
-    use HasBlog, HasFactory, Notifiable, InteractsWithMedia;
+    use HasBlog;
+    use HasFactory;
+    use Notifiable;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -108,6 +110,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
     public function getAuthorMediaSrcSet(): ?string
     {
         $media = $this->getFirstMedia('avatar');
+
         return $media ? $media->getSrcset() : null;
     }
 
@@ -123,7 +126,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
         }
 
         // Try avatar_url attribute
-        if (!empty($this->avatar_url)) {
+        if (! empty($this->avatar_url)) {
             return $this->avatar_url;
         }
 

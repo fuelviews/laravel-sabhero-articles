@@ -77,35 +77,35 @@ class PostController extends Controller
     }
 
 
-/*    public function indexMetroState(Metro $state)
-    {
-        $posts = Post::query()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
-            ->published()
-            ->where('state_id', $state->id)
-            ->paginate(10);
+    /*    public function indexMetroState(Metro $state)
+        {
+            $posts = Post::query()
+                ->with(['categories', 'user', 'tags', 'state', 'city'])
+                ->published()
+                ->where('state_id', $state->id)
+                ->paginate(10);
 
-        return view('sabhero-blog::blogs.index', [
-            'posts' => $posts,
-            'state' => $state,
-            'city' => null,
-        ]);
-    }
+            return view('sabhero-blog::blogs.index', [
+                'posts' => $posts,
+                'state' => $state,
+                'city' => null,
+            ]);
+        }
 
-    public function indexMetroStateCity(Metro $state, Metro $city)
-    {
-        $posts = Post::query()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
-            ->published()
-            ->where(['state_id' => $state->id, 'city_id' => $city->id])
-            ->paginate(10);
+        public function indexMetroStateCity(Metro $state, Metro $city)
+        {
+            $posts = Post::query()
+                ->with(['categories', 'user', 'tags', 'state', 'city'])
+                ->published()
+                ->where(['state_id' => $state->id, 'city_id' => $city->id])
+                ->paginate(10);
 
-        return view('sabhero-blog::blogs.index', [
-            'posts' => $posts,
-            'state' => $state,
-            'city' => $city ?? null,
-        ]);
-    }*/
+            return view('sabhero-blog::blogs.index', [
+                'posts' => $posts,
+                'state' => $state,
+                'city' => $city ?? null,
+            ]);
+        }*/
 
     public function search(Request $request)
     {

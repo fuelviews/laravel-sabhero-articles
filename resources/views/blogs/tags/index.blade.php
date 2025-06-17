@@ -6,7 +6,7 @@
                 @foreach($tags as $tag)
                     <a href="{{ route('sabhero-blog.tag.post', ['tag' => $tag->slug]) }}">
                         <span class="rounded-full inline-flex border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100">
-                            <x-heroicon-m-hashtag class="mr-1.5 inline-flex h-5 w-5 text-prime-600" />
+                            <x-heroicon-m-hashtag class="mr-1.5 inline-flex h-5 w-5 text-prime-700" />
                             {{ $tag->name }}
                         </span>
                     </a>

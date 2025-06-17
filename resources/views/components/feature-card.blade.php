@@ -32,12 +32,12 @@
         </div>
         <div>
             @foreach ($post->categories as $category)
-                {{--<a href="{{ route('sabhero-blog.category.post', ['category' => $category->slug]) }}">--}}
-                    <span class="bg-prime/20 hover:bg-prime/10 inline-flex rounded-full px-3 py-2 text-sm font-semibold">
-                        <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime-600" />
+                <a href="{{ route('sabhero-blog.post.index', ['category' => $category->slug]) }}">
+                    <span class="bg-prime/10 hover:bg-prime/15 inline-flex rounded-full px-3 py-2 text-sm font-semibold cursor-pointer transition-colors">
+                        <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime" />
                         {{ $category->name }}
                     </span>
-                {{--</a>--}}
+                </a>
             @endforeach
         </div>
         <div class="flex items-center gap-4">

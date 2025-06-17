@@ -15,13 +15,33 @@
 
 <div class="mb-8 bg-gray-50 border border-gray-200 rounded-lg">
     <div class="p-4 sm:p-5 lg:p-6">
-        <h2 class="text-lg font-medium text-gray-900 mb-4">Search & Filter</h2>
+        <h2 class="hidden lg:block text-lg font-medium text-gray-900 mb-4">Search & Filter</h2>
 
         <form method="GET" action="{{ route('sabhero-blog.post.index') }}" class="space-y-4">
-            <!-- Filters and Search -->
-            <div class="flex flex-col lg:flex-row lg:items-start">
+            <!-- Mobile Search Only -->
+            <div class="lg:hidden">
+                <div>
+                    <label for="search-mobile" class="block text-sm font-medium text-gray-700 mb-2">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        <input type="text"
+                               name="search"
+                               id="search-mobile"
+                               value="{{ $searchTerm }}"
+                               placeholder="Search articles..."
+                               class="w-full pl-10 rounded-md border-gray-300 bg-white shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop Filters and Search -->
+            <div class="hidden lg:flex lg:flex-row lg:items-start">
                 <!-- Search Box -->
-                <div class="w-full sm:w-auto lg:w-64 lg:pr-6 mb-4 lg:mb-0 self-start">
+                <div class="w-auto lg:w-64 lg:pr-6 self-start">
                     <label for="search" class="block text-sm font-medium text-gray-700 mb-2">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -39,7 +59,7 @@
                 </div>
 
                 <!-- Separator -->
-                <div class="hidden lg:block w-px bg-gray-300 self-stretch"></div>
+                <div class="w-px bg-gray-300 self-stretch"></div>
 
                 <!-- Filter Dropdowns Group -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1 lg:pl-6">

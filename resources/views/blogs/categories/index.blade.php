@@ -5,8 +5,8 @@
             <div class="flex flex-wrap gap-x-2">
                 @foreach($categories as $category)
                     <a href="{{ route('sabhero-blog.category.post', ['category' => $category->slug]) }}">
-                        <span class="bg-prime/20 hover:bg-prime/10 inline-flex rounded-full px-3 py-2 text-sm font-semibold">
-                            <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime-600" />
+                        <span class="bg-prime/10 hover:bg-prime/15 inline-flex rounded-full px-3 py-2 text-sm font-semibold">
+                            <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime-700" />
                             {{ $category->name }}
                         </span>
                     </a>

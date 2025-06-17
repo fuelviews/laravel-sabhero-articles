@@ -54,21 +54,21 @@
                                     </div>
                                     <div class="flex flex-wrap gap-4 sm:basis-full md:basis-auto">
                                         @foreach ($post->categories as $category)
-                                            {{--<a href="{{ route('sabhero-blog.category.post', ['category' => $category->slug]) }}">--}}
-                                                <span class="bg-prime/20 hover:bg-prime/10 inline-flex rounded-full px-3 py-2 text-sm font-semibold">
-                                                    <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime-600" />
+                                            <a href="{{ route('sabhero-blog.post.index', ['category' => $category->slug]) }}">
+                                                <span class="bg-prime/10 hover:bg-prime/15 inline-flex rounded-full px-3 py-2 text-sm font-semibold cursor-pointer transition-colors">
+                                                    <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime-700" />
                                                     {{ $category->name }}
                                                 </span>
-                                            {{--</a>--}}
+                                            </a>
                                         @endforeach
                                         @if($post->tags->count())
                                             @foreach ($post->tags as $tag)
-                                                {{--<a href="{{ route('sabhero-blog.tag.post', ['tag' => $tag->slug]) }}">--}}
-                                                    <span class="rounded-full inline-flex border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100">
-                                                        <x-heroicon-m-hashtag class="mr-1.5 inline-flex h-5 w-5 text-prime-600" />
+                                                <a href="{{ route('sabhero-blog.post.index', ['tag' => $tag->slug]) }}">
+                                                    <span class="rounded-full inline-flex border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer transition-colors">
+                                                        <x-heroicon-m-hashtag class="mr-1.5 inline-flex h-5 w-5 text-prime-700" />
                                                         {{ $tag->name }}
                                                     </span>
-                                                {{--</a>--}}
+                                                </a>
                                             @endforeach
                                         @endif
                                     </div>

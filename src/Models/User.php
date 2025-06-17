@@ -200,7 +200,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 
     public function canAccessPanel(Panel $panel): bool
     {
-        $allowedDomains = ['@fuelviews.com', '@innovationpaintingremodeling.com', '@theinnco.com'];
+        $allowedDomains = config('sabhero-blog.user.allowed_domains', []);
 
         foreach ($allowedDomains as $domain) {
             if (str_ends_with($this->email, $domain)) {

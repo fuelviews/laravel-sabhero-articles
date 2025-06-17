@@ -17,6 +17,9 @@ return [
             'name' => 'name',
             'slug' => 'slug',
         ],
+        'allowed_domains' => [
+            '@fuelviews.com',
+        ],
     ],
     'heading_permalink' => [
         'html_class' => 'scroll-mt-40',

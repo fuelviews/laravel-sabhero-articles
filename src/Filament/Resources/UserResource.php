@@ -122,6 +122,7 @@ class UserResource extends Resource
 
                 Tables\Columns\ImageColumn::make('avatar')
                     ->label('Avatar')
+                    ->getStateUsing(fn ($record) => $record->getAuthorAvatarUrl())
                     ->circular(),
 
                 Tables\Columns\IconColumn::make('is_author')
@@ -190,17 +191,6 @@ class UserResource extends Resource
                                 ->label('Bio')
                                 ->columnSpanFull(),
 
-                            TextEntry::make('links')
-                                ->label('Links')
-                                ->formatStateUsing(function ($state) {
-                                    if (!$state || !is_array($state)) {
-                                        return 'None';
-                                    }
-                                    return collect($state)
-                                        ->map(fn ($link) => $link['label'] . ': ' . $link['url'])
-                                        ->join(', ');
-                                })
-                                ->columnSpanFull(),
                         ]),
 
                     Fieldset::make('Statistics')
@@ -224,9 +214,11 @@ class UserResource extends Resource
 
                     Fieldset::make('Avatar')
                         ->schema([
-                            SpatieMediaLibraryImageEntry::make('avatar')
-                                ->collection('avatar')
-                                ->label('Avatar Image'),
+                            \Filament\Infolists\Components\ImageEntry::make('avatar')
+                                ->getStateUsing(fn ($record) => $record->getAuthorAvatarUrl())
+                                ->label('')
+                                ->height(150)
+                                ->width(150),
                         ]),
                 ]),
         ]);

@@ -30,14 +30,12 @@
                 {{ $post->excerpt() }}
             </p>
         </div>
-        <div>
-            @foreach ($post->categories as $category)
-                <a href="{{ route('sabhero-blog.post.index', ['category' => $category->slug]) }}">
-                    <span class="bg-prime/10 hover:bg-prime/15 inline-flex rounded-full px-3 py-2 text-sm font-semibold cursor-pointer transition-colors">
-                        <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime" />
-                        {{ $category->name }}
-                    </span>
-                </a>
+        <div class="flex flex-wrap gap-2">
+            @foreach ($post->categories->take(1) as $category)
+                <x-sabhero-blog::category-button :category="$category" size="medium" />
+            @endforeach
+            @foreach ($post->tags->take(1) as $tag)
+                <x-sabhero-blog::tag-button :tag="$tag" size="medium" />
             @endforeach
         </div>
         <div class="flex items-center gap-4">

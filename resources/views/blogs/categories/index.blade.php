@@ -4,12 +4,7 @@
             <h1 class="inherits-color text-balance leading-tighter text-3xl font-semibold tracking-tight pb-8">Browse by Category</h1>
             <div class="flex flex-wrap gap-x-2">
                 @foreach($categories as $category)
-                    <a href="{{ route('sabhero-blog.category.post', ['category' => $category->slug]) }}">
-                        <span class="bg-prime/10 hover:bg-prime/15 inline-flex rounded-full px-3 py-2 text-sm font-semibold">
-                            <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime-700" />
-                            {{ $category->name }}
-                        </span>
-                    </a>
+                    <x-sabhero-blog::category-button :category="$category" size="medium" route="sabhero-blog.category.post" />
                 @endforeach
             </div>
         </div>

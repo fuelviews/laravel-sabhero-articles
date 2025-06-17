@@ -1,6 +1,6 @@
 @props(['post'])
 
-<div class="flex flex-col gap-y-8">
+<div class="flex flex-col gap-y-8 h-full">
     <div class="h-[250px] w-full rounded-xl overflow-hidden shadow-xl">
         @if ($post->hasMedia('post_feature_image'))
             <a href="{{ route('sabhero-blog.post.show', ['post' => $post->slug]) }}"
@@ -16,7 +16,7 @@
             <p>No featured image available.</p>
         @endif
     </div>
-    <div class="flex flex-col justify-between space-y-3 px-2">
+    <div class="flex flex-col justify-between space-y-3 px-2 flex-1">
         <div>
             <h2 title="{{ $post->title }}"
                 class="hover:text-prime mb-3 line-clamp-2 text-xl font-semibold">
@@ -32,24 +32,12 @@
             </p>
         </div>
         <div class="mb-3 flex flex-wrap gap-2">
-            @foreach ($post->categories as $category)
-                <a href="{{ route('sabhero-blog.post.index', ['category' => $category->slug]) }}">
-                    <span class="bg-prime/10 hover:bg-prime/15 inline-flex rounded-full px-2 py-1.5 text-xs font-semibold cursor-pointer transition-colors">
-                        <x-heroicon-m-bars-3-center-left class="mr-1.5 inline-flex h-5 w-5 text-prime" />
-                        {{ $category->name }}
-                    </span>
-                </a>
+            @foreach ($post->categories->take(1) as $category)
+                <x-sabhero-blog::category-button :category="$category" size="small" />
             @endforeach
-            @if($post->tags->count())
-                @foreach ($post->tags as $tag)
-                    <a href="{{ route('sabhero-blog.post.index', ['tag' => $tag->slug]) }}">
-                        <span class="rounded-full inline-flex border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer transition-colors">
-                            <x-heroicon-m-hashtag class="mr-1.5 inline-flex h-5 w-5 text-prime-700" />
-                            {{ $tag->name }}
-                        </span>
-                    </a>
-                @endforeach
-            @endif
+            @foreach ($post->tags->take(1) as $tag)
+                <x-sabhero-blog::tag-button :tag="$tag" size="small" />
+            @endforeach
         </div>
         <div class="flex items-center gap-4">
             <a href="{{ route('sabhero-blog.author.show', ['user' => $post->user->slug]) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">

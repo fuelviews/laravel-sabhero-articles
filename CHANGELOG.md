@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-blog` will be documented in this file.
 
+## v0.0.10 - 2025-06-17
+
+### What's Changed
+
+* Remove metros by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-blog/pull/17
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-blog/compare/v0.0.9...v0.0.10
+
 ## v0.0.9 - 2025-06-02
 
 ### What's Changed

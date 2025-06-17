@@ -4,12 +4,7 @@
             <h2 class="inherits-color text-balance leading-tighter text-3xl font-semibold tracking-tight pb-8">Browse by Tag</h2>
             <div class="flex flex-wrap gap-x-2">
                 @foreach($tags as $tag)
-                    <a href="{{ route('sabhero-blog.tag.post', ['tag' => $tag->slug]) }}">
-                        <span class="rounded-full inline-flex border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100">
-                            <x-heroicon-m-hashtag class="mr-1.5 inline-flex h-5 w-5 text-prime-600" />
-                            {{ $tag->name }}
-                        </span>
-                    </a>
+                    <x-sabhero-blog::tag-button :tag="$tag" size="medium" route="sabhero-blog.tag.post" />
                 @endforeach
             </div>
         </div>

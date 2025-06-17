@@ -25,6 +25,11 @@ class TagResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Tag::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -11,6 +11,9 @@ Route::middleware(config('sabhero-blog.route.middleware'))
     ->group(function () {
         Route::get('/', [PostController::class, 'index'])
             ->name('sabhero-blog.post.index');
+        Route::get('/page/{page}', [PostController::class, 'index'])
+            ->where('page', '[0-9]+')
+            ->name('sabhero-blog.post.page');
         Route::get('/search', [PostController::class, 'search'])
             ->name('sabhero-blog.post.search');
         Route::get('/tags', [TagController::class, 'allTags'])

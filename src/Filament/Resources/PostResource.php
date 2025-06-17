@@ -120,6 +120,34 @@ class PostResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ReplicateAction::make()
+                    ->beforeReplicaSaved(function (Post $replica, array $data): void {
+                        $replica->title = $replica->title . ' (Copy)';
+                        $replica->slug = Str::slug($replica->title . ' copy ' . time());
+                        $replica->status = \Fuelviews\SabHeroBlog\Enums\PostStatus::PUBLISHED;
+                        $replica->published_at = null;
+                        $replica->scheduled_for = null;
+                    })
+                    ->afterReplicaSaved(function (Post $replica, Post $original): void {
+                        // Copy categories
+                        $replica->categories()->sync($original->categories->pluck('id'));
+
+                        // Copy tags
+                        $replica->tags()->sync($original->tags->pluck('id'));
+
+                        // Copy media/images
+                        foreach ($original->getMedia('post_feature_image') as $media) {
+                            $mediaPath = $media->getPath();
+                            if (file_exists($mediaPath)) {
+                                $replica->addMedia($mediaPath)
+                                    ->usingName($media->name)
+                                    ->usingFileName($media->file_name)
+                                    ->preservingOriginal()
+                                    ->toMediaCollection('post_feature_image');
+                            }
+                        }
+                    })
+                    ->successNotificationTitle('Post copied successfully'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

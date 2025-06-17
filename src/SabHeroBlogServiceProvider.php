@@ -6,7 +6,6 @@ use Fuelviews\SabHeroBlog\Components\Breadcrumb;
 use Fuelviews\SabHeroBlog\Components\Card;
 use Fuelviews\SabHeroBlog\Components\FeatureCard;
 use Fuelviews\SabHeroBlog\Components\HeaderCategory;
-use Fuelviews\SabHeroBlog\Components\HeaderMetro;
 use Fuelviews\SabHeroBlog\Components\Layout;
 use Fuelviews\SabHeroBlog\Components\Markdown;
 use Fuelviews\SabHeroBlog\Components\RecentPost;
@@ -40,7 +39,6 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 Layout::class,
                 RecentPost::class,
                 HeaderCategory::class,
-                HeaderMetro::class,
                 FeatureCard::class,
                 Card::class,
                 Markdown::class,
@@ -61,7 +59,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
         Route::bind('post', function ($value) {
             return Post::where('slug', $value)
                 ->published()
-                ->with(['user', 'categories', 'tags', 'media', 'state', 'city'])
+                ->with(['user', 'categories', 'tags', 'media'])
                 ->firstOrFail();
         });
 

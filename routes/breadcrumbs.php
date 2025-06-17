@@ -26,7 +26,7 @@ Breadcrumbs::for('sabhero-blog.post.show', static function (BreadcrumbTrail $tra
     $trail->push($post->title, route('sabhero-blog.post.show', $post->slug));
 });
 
-Breadcrumbs::for('sabhero-blog.post.metro.state.index', static function (BreadcrumbTrail $trail, $state) {
+/*Breadcrumbs::for('sabhero-blog.post.metro.state.index', static function (BreadcrumbTrail $trail, $state) {
     $trail->parent('home');
     $trail->push($state->name, route('sabhero-blog.post.metro.state.index', [
         'state' => $state->slug,
@@ -48,7 +48,7 @@ Breadcrumbs::for('sabhero-blog.post.metro.show', static function (BreadcrumbTrai
         'city' => $city->slug,
         'post' => $post->slug,
     ]));
-});
+});*/
 
 Breadcrumbs::for('sabhero-blog.category.index', static function (BreadcrumbTrail $trail) {
     $trail->parent('home');

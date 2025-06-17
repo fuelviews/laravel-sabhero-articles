@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function allCategories()
     {
         $posts = Post::published()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
+            ->with(['categories', 'user', 'tags'])
             ->latest()
             ->paginate(10);
 

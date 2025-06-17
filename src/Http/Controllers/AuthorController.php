@@ -11,7 +11,7 @@ class AuthorController extends Controller
     {
         $posts = $author->user
             ->posts()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
+            ->with(['categories', 'user', 'tags'])
             ->published()
             ->paginate(10);
 

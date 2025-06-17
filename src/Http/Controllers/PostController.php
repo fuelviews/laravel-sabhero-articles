@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::query()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
+            ->with(['categories', 'user', 'tags'])
             ->published()
             ->paginate(10);
 
@@ -20,7 +20,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function indexMetroState(Metro $state)
+/*    public function indexMetroState(Metro $state)
     {
         $posts = Post::query()
             ->with(['categories', 'user', 'tags', 'state', 'city'])
@@ -48,7 +48,7 @@ class PostController extends Controller
             'state' => $state,
             'city' => $city ?? null,
         ]);
-    }
+    }*/
 
     public function search(Request $request)
     {
@@ -57,7 +57,7 @@ class PostController extends Controller
         ]);
 
         $searchedPosts = Post::query()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
+            ->with(['categories', 'user', 'tags'])
             ->published()
             ->whereAny(['title', 'sub_title'], 'like', '%'.$request->get('query').'%')
             ->paginate(10)

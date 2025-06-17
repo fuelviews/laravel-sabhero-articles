@@ -30,7 +30,7 @@ Route::middleware(config('sabhero-blog.route.middleware'))
             ->name('sabhero-blog.tag.post');
     });
 
-Route::middleware(config('sabhero-blog.route.middleware'))
+/*Route::middleware(config('sabhero-blog.route.middleware'))
     ->prefix('locations')
     ->group(function () {
         Route::get('/{state:slug}', [PostController::class, 'indexMetroState'])
@@ -39,4 +39,4 @@ Route::middleware(config('sabhero-blog.route.middleware'))
             ->name('sabhero-blog.post.metro.state.city.index');
         Route::get('/{state:slug}/{city:slug}/{post:slug}', [PostController::class, 'showMetro'])
             ->name('sabhero-blog.post.metro.show');
-    });
+    });*/

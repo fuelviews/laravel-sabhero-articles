@@ -22,7 +22,7 @@
             <div class="lg:hidden">
                 <div>
                     <label for="search-mobile" class="block text-sm font-medium text-gray-700 mb-2">Search</label>
-                    @if(class_exists('\Livewire\Livewire'))
+                    @if(class_exists('\Livewire\Livewire') && !app()->environment('testing'))
                         <livewire:sabhero-blog::search-autocomplete :initial-search="$searchTerm" />
                     @else
                         <div class="relative">
@@ -48,7 +48,7 @@
                 <!-- Search Box -->
                 <div class="w-auto lg:w-64 lg:pr-6 self-start">
                     <label for="search" class="block text-sm font-medium text-gray-700 mb-2">Search</label>
-                    @if(class_exists('\Livewire\Livewire'))
+                    @if(class_exists('\Livewire\Livewire') && !app()->environment('testing'))
                         <livewire:sabhero-blog::search-autocomplete :initial-search="$searchTerm" />
                     @else
                         <div class="relative">

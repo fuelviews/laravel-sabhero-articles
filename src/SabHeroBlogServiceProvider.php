@@ -100,7 +100,7 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         // Register Livewire components if Livewire is available and not in testing
-        if (class_exists(\Livewire\Livewire::class) && !$this->app->environment('testing')) {
+        if (class_exists(\Livewire\Livewire::class) && ! $this->app->environment('testing')) {
             Livewire::component('sabhero-blog::search-autocomplete', SearchAutocomplete::class);
         }
     }

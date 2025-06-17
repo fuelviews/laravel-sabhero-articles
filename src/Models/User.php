@@ -164,6 +164,14 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
     }
 
     /**
+     * Capitalize the first letter of the name
+     */
+    public function getNameAttribute($value): string
+    {
+        return ucfirst($value);
+    }
+
+    /**
      * Check if this user is marked as a public author
      */
     public function isAuthor(): bool

@@ -3,6 +3,7 @@
 namespace Fuelviews\SabHeroBlog\Filament\Resources;
 
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\Section;
@@ -25,7 +26,7 @@ class UserResource extends Resource
 {
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationGroup = 'Settings';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -97,11 +98,11 @@ class UserResource extends Resource
 
                 Forms\Components\Section::make('Avatar')
                     ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
-                            ->collection('avatar')
-                            ->image()
+                        SpatieMediaLibraryFileUpload::make('avatar')
                             ->responsiveImages()
-                            ->conversion('avatar')
+                            ->image()
+                            ->label('Avatar')
+                            ->collection('avatar')
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -111,9 +112,6 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                UserAvatar::make('avatar')
-                    ->label('Avatar'),
-
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -121,6 +119,10 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->sortable(),
+
+                Tables\Columns\ImageColumn::make('avatar')
+                    ->label('Avatar')
+                    ->circular(),
 
                 Tables\Columns\IconColumn::make('is_author')
                     ->boolean()

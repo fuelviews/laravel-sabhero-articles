@@ -6,9 +6,6 @@ class AuthorController extends Controller
 {
     public function posts($user)
     {
-        $userModel = config('sabhero-blog.user.model');
-        $user = $userModel::where('slug', $user)->firstOrFail();
-        
         $posts = $user->posts()
             ->with(['categories', 'user', 'tags'])
             ->published()

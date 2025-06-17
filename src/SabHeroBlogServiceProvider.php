@@ -63,6 +63,11 @@ class SabHeroBlogServiceProvider extends PackageServiceProvider
                 ->firstOrFail();
         });
 
+        Route::bind('user', function ($value) {
+            $userModel = config('sabhero-blog.user.model');
+            return $userModel::where('slug', $value)->firstOrFail();
+        });
+
         View::composer([
             '*',
         ], static function ($view) {

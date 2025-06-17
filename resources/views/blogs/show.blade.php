@@ -34,24 +34,7 @@
                                 </div>
                                 <hr class="my-12 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">
                                 <div class="flex flex-wrap items-center gap-4">
-                                    <div class="flex items-center gap-4">
-                                        <a href="{{ route('sabhero-blog.author.show', ['user' => $post->user->slug]) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
-                                            <img
-                                                class="h-24 w-24 overflow-hidden rounded-full border-4 border-white object-cover text-[0] ring-1 ring-slate-300"
-                                                srcset="{{ $post->user->getAuthorMediaSrcSet() }}"
-                                                src="{{ $post->user->getAuthorAvatarUrl() }}"
-                                                alt="{{ $post->user->name() }}"
-                                            >
-                                        </a>
-                                        <div>
-                                            <a href="{{ route('sabhero-blog.author.show', ['user' => $post->user->slug]) }}" title="{{ $post->user->name() }} "class="block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap font-semibold hover:text-prime">
-                                                {{ $post->user->name() }}
-                                            </a>
-                                            <span class="block whitespace-nowrap text-sm font-semibold text-zinc-600">
-                                                {{ $post->formattedPublishedDate() }}
-                                            </span>
-                                        </div>
-                                    </div>
+                                    <x-sabhero-blog::author-profile :user="$post->user" :post="$post" size="large" />
                                     <div class="flex flex-wrap gap-2 min-w-0 flex-1 justify-end">
                                         @foreach ($post->categories as $category)
                                             <x-sabhero-blog::category-button :category="$category" size="medium" />

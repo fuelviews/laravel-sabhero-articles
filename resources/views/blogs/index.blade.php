@@ -2,7 +2,7 @@
     <section class="py-8">
         <div class="container mx-auto">
             <!-- Filter Section -->
-            <x-sabhero-blog::blog-filters 
+            <x-sabhero-blog::blog-filters
                 :categories="$categories"
                 :tags="$tags"
                 :authors="$authors"

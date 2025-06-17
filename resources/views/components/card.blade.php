@@ -16,7 +16,7 @@
             <p>No featured image available.</p>
         @endif
     </div>
-    <div class="flex flex-col justify-between space-y-3 px-2 flex-1">
+    <div class="flex flex-col px-2 flex-1">
         <div>
             <h2 title="{{ $post->title }}"
                 class="hover:text-prime mb-3 line-clamp-2 text-xl font-semibold">
@@ -31,33 +31,17 @@
                 {{ $post->excerpt() }}
             </p>
         </div>
-        <div class="mb-3 flex flex-wrap gap-2">
-            @foreach ($post->categories->take(1) as $category)
-                <x-sabhero-blog::category-button :category="$category" size="small" />
-            @endforeach
-            @foreach ($post->tags->take(1) as $tag)
-                <x-sabhero-blog::tag-button :tag="$tag" size="small" />
-            @endforeach
-        </div>
-        <div class="flex items-center gap-4">
-            <a href="{{ route('sabhero-blog.author.show', ['user' => $post->user->slug]) }}" title="{{ $post->user->name() }}" class="hover:opacity-65">
-
-                <img
-                    class="h-10 w-10 overflow-hidden rounded-full object-cover text-[0]"
-                    srcset="{{ $post->user->getAuthorMediaSrcSet() }}"
-                    src="{{ $post->user->getAuthorAvatarUrl() }}"
-                    alt="{{ $post->user->name() }}"
-                >
-            </a>
-            <div>
-                <a href="{{ route('sabhero-blog.author.show', ['user' => $post->user->slug]) }}" title="{{ $post->user->name() }}"
-                      class="block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-semibold hover:text-prime">
-                      {{ $post->user->name() }}
-                </a>
-                <span
-                    class="block whitespace-nowrap text-sm font-medium text-zinc-600">
-                    {{ $post->formattedPublishedDate() }}
-                </span>
+        <div class="mt-auto">
+            <div class="mt-3 flex flex-wrap gap-2">
+                @foreach ($post->categories->take(1) as $category)
+                    <x-sabhero-blog::category-button :category="$category" size="small" />
+                @endforeach
+                @foreach ($post->tags->take(1) as $tag)
+                    <x-sabhero-blog::tag-button :tag="$tag" size="small" />
+                @endforeach
+            </div>
+            <div class="mt-4 md:mt-6">
+                <x-sabhero-blog::author-profile :user="$post->user" :post="$post" size="medium" />
             </div>
         </div>
     </div>

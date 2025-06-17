@@ -11,7 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Set;
-use Fuelviews\SabHeroBlog\Enums\MetroType;
+//use Fuelviews\SabHeroBlog\Enums\MetroType;
 use Fuelviews\SabHeroBlog\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -188,7 +188,7 @@ class Post extends Model implements Feedable, HasMedia
                                 ->maxLength(255)
                                 ->columnSpanFull(),
 
-                            Select::make('state_id')
+/*                            Select::make('state_id')
                                 ->label('State')
                                 ->options(Metro::where('type', MetroType::STATE->value)->pluck('name', 'id'))
                                 ->searchable()
@@ -237,7 +237,7 @@ class Post extends Model implements Feedable, HasMedia
                                 })
                                 ->searchable()
                                 ->nullable()
-                                ->placeholder('Select a City'),
+                                ->placeholder('Select a City'),*/
 
                             Select::make('category_id')
                                 ->multiple()

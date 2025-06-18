@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `laravel-sabhero-blog` will be documented in this file.
+All notable changes to `laravel-sabhero-article` will be documented in this file.
 
 ## v0.0.10 - 2025-06-17
 

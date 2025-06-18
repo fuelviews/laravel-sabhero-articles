@@ -74,7 +74,7 @@ class UserResource extends Resource
 
                         Forms\Components\Toggle::make('is_author')
                             ->label('Is Author')
-                            ->helperText('Make this user visible as a blog author'),
+                            ->helperText('Make this user visible as a article author'),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Author Information')

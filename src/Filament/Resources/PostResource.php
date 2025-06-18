@@ -16,7 +16,7 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-//use Fuelviews\SabHeroArticle\Enums\MetroType;
+// use Fuelviews\SabHeroArticle\Enums\MetroType;
 use Fuelviews\SabHeroArticle\Enums\PostStatus;
 use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\CreatePost;
 use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\EditPost;
@@ -31,10 +31,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
 use League\Csv\Writer;
-use function parse_url;
 use RuntimeException;
-
 use ZipArchive;
+
+use function parse_url;
 
 class PostResource extends Resource
 {
@@ -42,7 +42,7 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-minus';
 
-    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationGroup = 'Article';
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -121,9 +121,9 @@ class PostResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ReplicateAction::make()
                     ->beforeReplicaSaved(function (Post $replica, array $data): void {
-                        $replica->title = $replica->title . ' (Copy)';
-                        $replica->slug = Str::slug($replica->title . ' copy ' . time());
-                        $replica->status = \Fuelviews\SabHeroBlog\Enums\PostStatus::PUBLISHED;
+                        $replica->title = $replica->title.' (Copy)';
+                        $replica->slug = Str::slug($replica->title.' copy '.time());
+                        $replica->status = \Fuelviews\SabHeroArticle\Enums\PostStatus::PUBLISHED;
                         $replica->published_at = null;
                         $replica->scheduled_for = null;
                     })
@@ -252,8 +252,6 @@ class PostResource extends Resource
             'Content',
             'Slug',
             'Status',
-            'State',
-            'City',
             'Categories',
             'Tags',
             'Feature Image Alt Text',
@@ -287,13 +285,11 @@ class PostResource extends Resource
                 $post->body ?? '',
                 $post->slug ?? '',
                 $post->status->value ?? '',
-                $post->state?->name ?? '',
-                $post->city?->name ?? '',
                 $post->categories->pluck('name')->implode(',') ?? '',
                 $post->tags->pluck('name')->implode(',') ?? '',
                 $post->feature_image_alt_text ?? '',
                 implode(', ', $mediaUrls) ?? '',
-                $post->author?->name ?? '',
+                $post->user?->name ?? '',
                 $post->published_at ? $post->published_at->format('Y-m-d H:i:s') : '',
                 $post->scheduled_for ? $post->scheduled_for->format('Y-m-d H:i:s') : '',
                 $post->created_at ? $post->created_at->format('Y-m-d H:i:s') : '',
@@ -361,39 +357,6 @@ class PostResource extends Resource
                     'updated_at' => ! empty($record['Updated At']) ? $record['Updated At'] : null,
                 ]
             );
-
-            if (! empty($record['State'])) {
-                $stateName = trim($record['State']);
-                $state = Metro::firstOrCreate(
-                    [
-                        'name' => Str::lower($stateName),
-                        'type' => MetroType::STATE->value,
-                    ],
-                    [
-                        'slug' => Str::slug($stateName),
-                    ]
-                );
-
-                $post->state_id = $state->id;
-                $post->save();
-            }
-
-            if (! empty($record['City'])) {
-                $cityName = trim($record['City']);
-                $city = Metro::firstOrCreate(
-                    [
-                        'name' => Str::lower($cityName),
-                        'type' => MetroType::CITY->value,
-                        'parent_id' => $state->id ?? null,
-                    ],
-                    [
-                        'slug' => Str::slug($cityName),
-                    ]
-                );
-
-                $post->city_id = $city->id;
-                $post->save();
-            }
 
             if (! empty($record['Categories'])) {
                 $categoryNames = explode(',', $record['Categories']);

@@ -8,8 +8,11 @@ use Livewire\Component;
 class SearchAutocomplete extends Component
 {
     public $search = '';
+
     public $suggestions = [];
+
     public $showSuggestions = false;
+
     public $highlightIndex = -1;
 
     public function mount($initialSearch = '')
@@ -22,13 +25,13 @@ class SearchAutocomplete extends Component
         if (strlen($this->search) >= 2) {
             $this->suggestions = Post::published()
                 ->where(function ($query) {
-                    $query->where('title', 'like', '%' . $this->search . '%')
-                          ->orWhere('sub_title', 'like', '%' . $this->search . '%');
+                    $query->where('title', 'like', '%'.$this->search.'%')
+                        ->orWhere('sub_title', 'like', '%'.$this->search.'%');
                 })
                 ->limit(8)
                 ->get(['id', 'title', 'slug', 'sub_title'])
                 ->toArray();
-            
+
             $this->showSuggestions = count($this->suggestions) > 0;
             $this->highlightIndex = -1;
         } else {
@@ -42,7 +45,7 @@ class SearchAutocomplete extends Component
         $this->search = $title;
         $this->showSuggestions = false;
         $this->suggestions = [];
-        
+
         // Redirect to the post
         return redirect()->route('sabhero-article.post.show', ['post' => $slug]);
     }

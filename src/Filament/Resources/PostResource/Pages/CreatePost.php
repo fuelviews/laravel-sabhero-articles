@@ -4,7 +4,7 @@ namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages;
 
 use Carbon\Carbon;
 use Filament\Resources\Pages\CreateRecord;
-use Fuelviews\SabHeroArticle\Events\BlogPublished;
+use Fuelviews\SabHeroArticle\Events\ArticlePublished;
 use Fuelviews\SabHeroArticle\Filament\Resources\PostResource;
 use Fuelviews\SabHeroArticle\Jobs\PostScheduleJob;
 
@@ -24,7 +24,7 @@ class CreatePost extends CreateRecord
         if ($this->record->isStatusPublished()) {
             $this->record->published_at = date('Y-m-d H:i:s');
             $this->record->save();
-            event(new BlogPublished($this->record));
+            event(new ArticlePublished($this->record));
         }
     }
 }

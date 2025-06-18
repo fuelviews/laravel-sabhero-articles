@@ -2,7 +2,6 @@
 
 namespace Fuelviews\SabHeroArticle\Http\Controllers;
 
-use Fuelviews\SabHeroArticle\Models\Metro;
 use Fuelviews\SabHeroArticle\Models\Post;
 use Illuminate\Http\Request;
 
@@ -76,37 +75,6 @@ class PostController extends Controller
         ]);
     }
 
-
-    /*    public function indexMetroState(Metro $state)
-        {
-            $posts = Post::query()
-                ->with(['categories', 'user', 'tags', 'state', 'city'])
-                ->published()
-                ->where('state_id', $state->id)
-                ->paginate(10);
-
-            return view('sabhero-article::articles.index', [
-                'posts' => $posts,
-                'state' => $state,
-                'city' => null,
-            ]);
-        }
-
-        public function indexMetroStateCity(Metro $state, Metro $city)
-        {
-            $posts = Post::query()
-                ->with(['categories', 'user', 'tags', 'state', 'city'])
-                ->published()
-                ->where(['state_id' => $state->id, 'city_id' => $city->id])
-                ->paginate(10);
-
-            return view('sabhero-article::articles.index', [
-                'posts' => $posts,
-                'state' => $state,
-                'city' => $city ?? null,
-            ]);
-        }*/
-
     public function search(Request $request)
     {
         $request->validate([
@@ -127,13 +95,6 @@ class PostController extends Controller
     }
 
     public function show(Post $post)
-    {
-        return view('sabhero-article::articles.show', [
-            'post' => $post,
-        ]);
-    }
-
-    public function showMetro(Metro $state, Metro $city, Post $post)
     {
         return view('sabhero-article::articles.show', [
             'post' => $post,

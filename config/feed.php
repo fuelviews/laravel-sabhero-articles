@@ -2,7 +2,7 @@
 
 return [
     'feeds' => [
-        'blog' => [
+        'article' => [
             /*
              * Here you can specify which class and method will return
              * the items that should appear in the feed. For example:
@@ -18,8 +18,8 @@ return [
              */
             'url' => config('sabhero-article.route.prefix').'/rss',
 
-            'title' => config('app.name').' Latest Blog Posts',
-            'description' => 'The latest blog posts from '.config('app.url'),
+            'title' => config('app.name').' Latest Article Posts',
+            'description' => 'The latest article posts from '.config('app.url'),
             'language' => 'en-US',
 
             /*

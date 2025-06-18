@@ -76,7 +76,7 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
         ], static function ($view) {
             if (request()->route() &&
                 in_array(request()->route()->getName(), [
-                    'sabhero-article.post.show'
+                    'sabhero-article.post.show',
                 ])) {
                 $seoPost = request()->route('post');
 

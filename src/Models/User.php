@@ -2,14 +2,12 @@
 
 namespace Fuelviews\SabHeroArticle\Models;
 
-use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Fuelviews\SabHeroArticle\Traits\HasArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -19,8 +17,8 @@ class User extends Authenticatable implements HasAvatar, HasMedia
 {
     use HasArticle;
     use HasFactory;
-    use Notifiable;
     use InteractsWithMedia;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -60,20 +58,6 @@ class User extends Authenticatable implements HasAvatar, HasMedia
     ];
 
     /**
-     * Boot the model - auto-generate slugs
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (empty($model->slug)) {
-                $model->slug = Str::slug($model->name);
-            }
-        });
-    }
-
-    /**
      * Get all posts by this author
      */
     public function posts(): HasMany
@@ -82,7 +66,7 @@ class User extends Authenticatable implements HasAvatar, HasMedia
     }
 
     /**
-     * Register media collections for blog functionality
+     * Register media collections for article functionality
      */
     public function registerMediaCollections(): void
     {
@@ -91,7 +75,7 @@ class User extends Authenticatable implements HasAvatar, HasMedia
     }
 
     /**
-     * Register media conversions for blog functionality
+     * Register media conversions for article functionality
      */
     public function registerMediaConversions(?Media $media = null): void
     {
@@ -150,14 +134,6 @@ class User extends Authenticatable implements HasAvatar, HasMedia
     }
 
     /**
-     * Use slug for route model binding
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
-    /**
      * Get the author's display name
      */
     public function name(): string
@@ -171,32 +147,5 @@ class User extends Authenticatable implements HasAvatar, HasMedia
     public function getNameAttribute($value): string
     {
         return ucfirst($value);
-    }
-
-    /**
-     * Check if this user is marked as a public author
-     */
-    public function isAuthor(): bool
-    {
-        return (bool) $this->is_author;
-    }
-
-    /**
-     * Scope to get only public authors
-     */
-    public function scopeAuthors($query)
-    {
-        return $query->where('is_author', true);
-    }
-
-    /**
-     * Scope to get authors with published posts
-     */
-    public function scopeActiveAuthors($query)
-    {
-        return $query->authors()
-            ->whereHas('posts', function ($q) {
-                $q->where('status', 'published');
-            });
     }
 }

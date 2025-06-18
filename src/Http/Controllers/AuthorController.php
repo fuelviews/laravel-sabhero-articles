@@ -20,7 +20,7 @@ class AuthorController extends Controller
     public function allAuthors()
     {
         $userModel = config('sabhero-article.user.model');
-        
+
         $authors = $userModel::activeAuthors()
             ->withCount([
                 'posts' => function ($query) {

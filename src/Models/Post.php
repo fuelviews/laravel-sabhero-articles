@@ -42,8 +42,6 @@ class Post extends Model implements Feedable, HasMedia
         'scheduled_for',
         'feature_image_alt_text',
         'user_id',
-        'state_id',
-        'city_id',
     ];
 
     protected array $dates = [
@@ -197,7 +195,8 @@ class Post extends Model implements Feedable, HasMedia
                                 ->responsiveImages()
                                 ->image()
                                 ->collection('post_feature_image')
-                                ->label('Feature Image'),
+                                ->label('Feature Image')
+                                ->required(),
 
                             TextInput::make('feature_image_alt_text')
                                 ->label('Alt Text')
@@ -297,7 +296,7 @@ class Post extends Model implements Feedable, HasMedia
     public static function getFeedItems()
     {
         return static::published()
-            ->with(['user', 'categories', 'state', 'city', 'media'])
+            ->with(['user', 'categories', 'media'])
             ->latest('published_at')
             ->limit(50)
             ->get();
@@ -306,7 +305,7 @@ class Post extends Model implements Feedable, HasMedia
     public function toFeedItem(): FeedItem
     {
         $siteUrl = config('app.url');
-        $blogUrl = $siteUrl.'/'.config('sabhero-article.route.prefix');
+        $articleUrl = $siteUrl.'/'.config('sabhero-article.route.prefix');
 
         $link = route('sabhero-article.post.show', $this);
 

@@ -4,7 +4,6 @@ namespace Fuelviews\SabHeroBlog\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
-use Filament\Panel;
 use Fuelviews\SabHeroBlog\Traits\HasBlog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -199,18 +198,5 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
             ->whereHas('posts', function ($q) {
                 $q->where('status', 'published');
             });
-    }
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        $allowedDomains = config('sabhero-blog.user.allowed_domains', []);
-
-        foreach ($allowedDomains as $domain) {
-            if (str_ends_with($this->email, $domain)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

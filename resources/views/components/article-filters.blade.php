@@ -17,13 +17,13 @@
     <div class="p-4 sm:p-5 lg:p-6">
         <h2 class="hidden lg:block text-lg font-medium text-gray-900 mb-4">Search & Filter</h2>
 
-        <form method="GET" action="{{ route('sabhero-blog.post.index') }}" class="space-y-4">
+        <form method="GET" action="{{ route('sabhero-article.post.index') }}" class="space-y-4">
             <!-- Mobile Search Only -->
             <div class="lg:hidden">
                 <div>
                     <label for="search-mobile" class="block text-sm font-medium text-gray-700 mb-2">Search</label>
                     @if(class_exists('\Livewire\Livewire') && !app()->environment('testing'))
-                        <livewire:sabhero-blog::search-autocomplete :initial-search="$searchTerm" />
+                        <livewire:sabhero-article::search-autocomplete :initial-search="$searchTerm" />
                     @else
                         <div class="relative">
                             <button type="submit" class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 hover:text-blue-500 transition-colors z-10">
@@ -49,7 +49,7 @@
                 <div class="w-auto lg:w-64 lg:pr-6 self-start">
                     <label for="search" class="block text-sm font-medium text-gray-700 mb-2">Search</label>
                     @if(class_exists('\Livewire\Livewire') && !app()->environment('testing'))
-                        <livewire:sabhero-blog::search-autocomplete :initial-search="$searchTerm" />
+                        <livewire:sabhero-article::search-autocomplete :initial-search="$searchTerm" />
                     @else
                         <div class="relative">
                             <button type="submit" class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 hover:text-blue-500 transition-colors z-10">
@@ -181,7 +181,7 @@
                         @endif
                     </div>
 
-                    <button type="button" onclick="window.location.href='{{ route('sabhero-blog.post.index') }}'" class="inline-flex items-center px-3 py-1 text-sm text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors duration-150 self-start sm:self-auto">
+                    <button type="button" onclick="window.location.href='{{ route('sabhero-article.post.index') }}'" class="inline-flex items-center px-3 py-1 text-sm text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors duration-150 self-start sm:self-auto">
                         × Reset All
                     </button>
                 </div>

@@ -1,12 +1,12 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages;
+namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Widgets\BlogPostPublishedChart;
+use Fuelviews\SabHeroArticle\Filament\Resources\PostResource;
+use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Widgets\ArticlePostPublishedChart;
 
 class ListPosts extends ListRecords
 {
@@ -22,7 +22,7 @@ class ListPosts extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            BlogPostPublishedChart::class,
+            ArticlePostPublishedChart::class,
         ];
     }
 

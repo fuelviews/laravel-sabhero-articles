@@ -1,13 +1,13 @@
 <?php
 
-use Fuelviews\SabHeroBlog\Models\User;
+use Fuelviews\SabHeroArticle\Models\User;
 
 return [
     'tables' => [
-        'prefix' => 'blog_',
+        'prefix' => 'article_',
     ],
     'route' => [
-        'prefix' => 'blog',
+        'prefix' => 'article',
         'middleware' => ['web'],
     ],
     'user' => [

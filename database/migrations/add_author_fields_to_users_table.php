@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -17,6 +19,28 @@ return new class extends Migration
             $table->json('links')->nullable()->after('bio');
             $table->boolean('is_author')->default(false)->after('links');
         });
+
+        // Update existing users with slugs derived from their names and set them as authors
+        $users = DB::table('users')->whereNull('slug')->get();
+
+        foreach ($users as $user) {
+            $baseSlug = Str::slug($user->name);
+            $slug = $baseSlug;
+            $counter = 1;
+
+            // Ensure slug uniqueness
+            while (DB::table('users')->where('slug', $slug)->exists()) {
+                $slug = $baseSlug.'-'.$counter;
+                $counter++;
+            }
+
+            DB::table('users')
+                ->where('id', $user->id)
+                ->update([
+                    'slug' => $slug,
+                    'is_author' => true,
+                ]);
+        }
     }
 
     /**

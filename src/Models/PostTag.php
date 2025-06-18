@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Models;
+namespace Fuelviews\SabHeroArticle\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class PostTag extends Model
 {
     use HasFactory;
-
-    protected $table = 'blog_post_tag';
 
     protected $fillable = [
         'post_id',
@@ -24,6 +22,6 @@ class PostTag extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix').'post_'.config('sabhero-blog.tables.prefix').'tag';
+        return config('sabhero-article.tables.prefix').'post_'.config('sabhero-article.tables.prefix').'tag';
     }
 }

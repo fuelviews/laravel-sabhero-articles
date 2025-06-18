@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Widgets;
+namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
-use Fuelviews\SabHeroBlog\Models\Post;
+use Fuelviews\SabHeroArticle\Models\Post;
 
-class BlogPostPublishedChart extends BaseWidget
+class ArticlePostPublishedChart extends BaseWidget
 {
     protected function getStats(): array
     {

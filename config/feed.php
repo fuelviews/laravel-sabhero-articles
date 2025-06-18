@@ -2,7 +2,7 @@
 
 return [
     'feeds' => [
-        'blog' => [
+        'article' => [
             /*
              * Here you can specify which class and method will return
              * the items that should appear in the feed. For example:
@@ -11,15 +11,15 @@ return [
              * You can also pass an argument to that method:
              * ['App\Models\Post@getFeedItems', 'argument']
              */
-            'items' => 'Fuelviews\SabHeroBlog\Models\Post@getFeedItems',
+            'items' => 'Fuelviews\SabHeroArticle\Models\Post@getFeedItems',
 
             /*
              * The feed will be available on this url.
              */
-            'url' => config('sabhero-blog.route.prefix').'/rss',
+            'url' => config('sabhero-article.route.prefix').'/rss',
 
-            'title' => config('app.name').' Latest Blog Posts',
-            'description' => 'The latest blog posts from '.config('app.url'),
+            'title' => config('app.name').' Latest Article Posts',
+            'description' => 'The latest article posts from '.config('app.url'),
             'language' => 'en-US',
 
             /*
@@ -37,7 +37,7 @@ return [
             /*
              * The view that will render the feed.
              */
-            'view' => 'sabhero-blog::feed.rss',
+            'view' => 'sabhero-article::feed.rss',
 
             /*
              * The type of feed to use: 'atom' or 'rss'

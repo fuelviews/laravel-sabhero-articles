@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
     @php
-        $baseUrl = route('sabhero-blog.post.index');
-        $prefix = config('sabhero-blog.route.prefix');
+        $baseUrl = route('sabhero-article.post.index');
+        $prefix = config('sabhero-article.route.prefix');
         
         function customPageUrl($page, $baseUrl, $prefix) {
             if ($page == 1) {

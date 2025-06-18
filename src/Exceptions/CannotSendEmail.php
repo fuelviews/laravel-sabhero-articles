@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Exceptions;
+namespace Fuelviews\SabHeroArticle\Exceptions;
 
 use Exception;
 

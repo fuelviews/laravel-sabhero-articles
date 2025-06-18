@@ -1,21 +1,21 @@
-# SabHero Blog Package
+# SabHero Article Package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/fuelviews/laravel-sabhero-blog.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-blog)
-[![Total Downloads](https://img.shields.io/packagist/dt/fuelviews/laravel-sabhero-blog.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-blog)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fuelviews/laravel-sabhero-article.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-article)
+[![Total Downloads](https://img.shields.io/packagist/dt/fuelviews/laravel-sabhero-article.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-article)
 
-A full-featured blog management solution for Laravel applications with Filament admin panel integration. This package provides a complete blogging platform with advanced features and an intuitive admin interface.
+A full-featured article management solution for Laravel applications with Filament admin panel integration. This package provides a complete article publishing platform with advanced features and an intuitive admin interface.
 
 ## Features
 
-- **Complete Blog Management**: Posts, categories, tags, and authors
+- **Complete Article Management**: Posts, categories, tags, and authors
 - **Scheduled Publishing**: Schedule posts to be published automatically
 - **Blade Components**: Ready-to-use UI components including cards, feature cards, and breadcrumbs
 - **Advanced Content**: Markdown rendering with automatic table of contents
 - **Media Management**: Image uploads with responsive images support
-- **SEO Optimization**: Built-in SEO meta data for better search rankings
+- **SEO Optimization**: Built-in SEO metadata for better search rankings
 - **RSS Feed**: Automatic feed generation with customizable settings
 - **Tailwind Pagination**: Custom pagination views for Tailwind CSS
-- **Filament Integration**: Full admin panel for managing all blog content
+- **Filament Integration**: Full admin panel for managing all article content
 
 ## Installation
 
@@ -33,10 +33,10 @@ php artisan filament:install --panels
 php artisan make:filament-user
 ```
 
-### Install the SabHero Blog Package
+### Install the SabHero Article Package
 
 ```bash
-composer require fuelviews/laravel-sabhero-blog
+composer require fuelviews/laravel-sabhero-article
 ```
 
 ## Configuration
@@ -44,13 +44,13 @@ composer require fuelviews/laravel-sabhero-blog
 ### 1. Publish Configuration Files
 
 ```bash
-php artisan vendor:publish --tag="sabhero-blog-config"
+php artisan vendor:publish --tag="sabhero-article-config"
 ```
 
 ### 2. Publish Migrations
 
 ```bash
-php artisan vendor:publish --tag="sabhero-blog-migrations"
+php artisan vendor:publish --tag="sabhero-article-migrations"
 ```
 
 ### 3. Run Migrations
@@ -63,41 +63,56 @@ php artisan migrate
 
 ### 1. Attach to Filament Panel
 
-Add the SabHero Blog plugin to your Filament panel provider:
+Add the SabHero Article plugin to your Filament panel provider:
 
 ```php
-use Fuelviews\SabHeroBlog\Facades\SabHeroBlog;
+use Fuelviews\SabHeroArticle\Facades\SabHeroArticle;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            SabHeroBlog::make()
+            SabHeroArticle::make()
         ]);
 }
 ```
 
 ### 2. Add Traits and CanAccessPanel to User Model
 
-Your user model needs to bet setup to use `HasBlog` and `HasAuthor` traits, don't forget setting `CanAccessPanel`:
+Your user model needs to be setup to use the `HasArticle` trait and ensure the required fields are in the fillable array:
 
 ```php
 use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
-use Fuelviews\SabHeroBlog\Traits\HasAuthor;
-use Fuelviews\SabHeroBlog\Traits\HasBlog;
+use Fuelviews\SabHeroArticle\Traits\HasArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar
+class User extends Authenticatable implements FilamentUser
 {
-    use HasFactory, Notifiable, HasBlog, HasAuthor;
+    use HasFactory, Notifiable, HasArticle;
+    
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'slug',
+        'bio',
+        'links',
+        'is_author',
+    ];
+    
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'links' => 'array',
+        'is_author' => 'boolean',
+    ];
     
     public function canAccessPanel(Panel $panel): bool
     {
-        $allowedDomains = ['@fuelviews.com', 'admin.com'];
+        $allowedDomains = config('sabhero-article.user.allowed_domains', []);
 
         foreach ($allowedDomains as $domain) {
             if (str_ends_with($this->email, $domain)) {
@@ -110,26 +125,18 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 }
 ```
 
-## RSS Feed
-
-The package automatically generates an RSS feed available at `/blog/rss`. To customize feed settings:
-
-```bash
-php artisan vendor:publish --tag="sabhero-blog-feed-config"
-```
-
 ## Available Components
 
-SabHero Blog comes with several Blade components for easy UI implementation:
+SabHero Article comes with several Blade components for easy UI implementation:
 
-- `<x-sabhero-blog::layout>` - Main blog layout
-- `<x-sabhero-blog::card>` - Blog post card
-- `<x-sabhero-blog::feature-card>` - Featured post card
-- `<x-sabhero-blog::breadcrumb>` - Breadcrumb navigation
-- `<x-sabhero-blog::header-category>` - Category header
-- `<x-sabhero-blog::header-metro>` - Metro-style header
-- `<x-sabhero-blog::markdown>` - Markdown content renderer
-- `<x-sabhero-blog::recent-post>` - Recent posts display
+- `<x-sabhero-article::layout>` - Main article layout
+- `<x-sabhero-article::card>` - Article post-card
+- `<x-sabhero-article::feature-card>` - Featured post-card
+- `<x-sabhero-article::breadcrumb>` - Breadcrumb navigation
+- `<x-sabhero-article::header-category>` - Category header
+- `<x-sabhero-article::header-metro>` - Metro-style header
+- `<x-sabhero-article::markdown>` - Markdown content renderer
+- `<x-sabhero-article::recent-post>` - Recent posts display
 
 ## Testing
 

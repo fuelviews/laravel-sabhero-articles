@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
+class User extends Authenticatable implements HasAvatar, HasMedia
 {
     use HasBlog;
     use HasFactory;
@@ -199,18 +199,5 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
             ->whereHas('posts', function ($q) {
                 $q->where('status', 'published');
             });
-    }
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        $allowedDomains = config('sabhero-blog.user.allowed_domains', []);
-
-        foreach ($allowedDomains as $domain) {
-            if (str_ends_with($this->email, $domain)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

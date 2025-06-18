@@ -12,7 +12,7 @@ A full-featured blog management solution for Laravel applications with Filament 
 - **Blade Components**: Ready-to-use UI components including cards, feature cards, and breadcrumbs
 - **Advanced Content**: Markdown rendering with automatic table of contents
 - **Media Management**: Image uploads with responsive images support
-- **SEO Optimization**: Built-in SEO meta data for better search rankings
+- **SEO Optimization**: Built-in SEO metadata for better search rankings
 - **RSS Feed**: Automatic feed generation with customizable settings
 - **Tailwind Pagination**: Custom pagination views for Tailwind CSS
 - **Filament Integration**: Full admin panel for managing all blog content
@@ -83,21 +83,17 @@ Your user model needs to bet setup to use `HasBlog` and `HasAuthor` traits, don'
 
 ```php
 use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
-use Fuelviews\SabHeroBlog\Traits\HasAuthor;
-use Fuelviews\SabHeroBlog\Traits\HasBlog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar
+class User extends Authenticatable implements FilamentUser
 {
-    use HasFactory, Notifiable, HasBlog, HasAuthor;
+    use HasFactory;
     
     public function canAccessPanel(Panel $panel): bool
     {
-        $allowedDomains = ['@fuelviews.com', 'admin.com'];
+        $allowedDomains = config('sabhero-blog.user.allowed_domains', []);
 
         foreach ($allowedDomains as $domain) {
             if (str_ends_with($this->email, $domain)) {
@@ -127,7 +123,6 @@ SabHero Blog comes with several Blade components for easy UI implementation:
 - `<x-sabhero-blog::feature-card>` - Featured post card
 - `<x-sabhero-blog::breadcrumb>` - Breadcrumb navigation
 - `<x-sabhero-blog::header-category>` - Category header
-- `<x-sabhero-blog::header-metro>` - Metro-style header
 - `<x-sabhero-blog::markdown>` - Markdown content renderer
 - `<x-sabhero-blog::recent-post>` - Recent posts display
 

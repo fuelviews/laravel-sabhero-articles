@@ -4,7 +4,6 @@ namespace Fuelviews\SabHeroBlog\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
-use Filament\Panel;
 use Fuelviews\SabHeroBlog\Traits\HasBlog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;

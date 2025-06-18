@@ -24,9 +24,6 @@ return [
     'heading_permalink' => [
         'html_class' => 'scroll-mt-40',
     ],
-    'dropdown' => [
-        'name' => 'Posts',
-    ],
     'crm' => [
         'name' => 'CRM',
         'link' => '#',

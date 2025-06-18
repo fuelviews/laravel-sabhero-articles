@@ -200,17 +200,4 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
                 $q->where('status', 'published');
             });
     }
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        $allowedDomains = config('sabhero-blog.user.allowed_domains', []);
-
-        foreach ($allowedDomains as $domain) {
-            if (str_ends_with($this->email, $domain)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

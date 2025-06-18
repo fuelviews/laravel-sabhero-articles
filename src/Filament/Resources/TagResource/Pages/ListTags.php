@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources\TagResource\Pages;
+namespace Fuelviews\SabHeroArticle\Filament\Resources\TagResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Fuelviews\SabHeroBlog\Filament\Resources\TagResource;
+use Fuelviews\SabHeroArticle\Filament\Resources\TagResource;
 
 class ListTags extends ListRecords
 {

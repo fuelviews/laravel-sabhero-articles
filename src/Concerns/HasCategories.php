@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Concerns;
+namespace Fuelviews\SabHeroArticle\Concerns;
 
-use Fuelviews\SabHeroBlog\Models\Category;
+use Fuelviews\SabHeroArticle\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

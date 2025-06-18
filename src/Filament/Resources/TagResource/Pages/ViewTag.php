@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources\TagResource\Pages;
+namespace Fuelviews\SabHeroArticle\Filament\Resources\TagResource\Pages;
 
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
-use Fuelviews\SabHeroBlog\Filament\Resources\TagResource;
-use Fuelviews\SabHeroBlog\Models\Tag;
+use Fuelviews\SabHeroArticle\Filament\Resources\TagResource;
+use Fuelviews\SabHeroArticle\Models\Tag;
 
 class ViewTag extends ViewRecord
 {

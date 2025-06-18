@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Components;
+namespace Fuelviews\SabHeroArticle\Components;
 
-use Fuelviews\SabHeroBlog\Renderers\TableOfContentsRenderer;
+use Fuelviews\SabHeroArticle\Renderers\TableOfContentsRenderer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\View\Component;
@@ -33,7 +33,7 @@ class Markdown extends Component
 
     public function render(): View
     {
-        $headingConfig = Config::get('sabhero-blog.heading_permalink', []);
+        $headingConfig = Config::get('sabhero-article.heading_permalink', []);
 
         $config = [
             'table_of_contents' => [
@@ -108,7 +108,7 @@ class Markdown extends Component
 
         $html = $converter->convert($this->content)->getContent();
 
-        return view('sabhero-blog::components.markdown', [
+        return view('sabhero-article::components.markdown', [
             'html' => $html,
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources;
+namespace Fuelviews\SabHeroArticle\Filament\Resources;
 
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
@@ -9,11 +9,11 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\EditCategory;
-use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\ListCategories;
-use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\Pages\ViewCategory;
-use Fuelviews\SabHeroBlog\Filament\Resources\CategoryResource\RelationManagers\PostsRelationManager;
-use Fuelviews\SabHeroBlog\Models\Category;
+use Fuelviews\SabHeroArticle\Filament\Resources\CategoryResource\Pages\EditCategory;
+use Fuelviews\SabHeroArticle\Filament\Resources\CategoryResource\Pages\ListCategories;
+use Fuelviews\SabHeroArticle\Filament\Resources\CategoryResource\Pages\ViewCategory;
+use Fuelviews\SabHeroArticle\Filament\Resources\CategoryResource\RelationManagers\PostsRelationManager;
+use Fuelviews\SabHeroArticle\Models\Category;
 
 class CategoryResource extends Resource
 {
@@ -21,9 +21,14 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-plus';
 
-    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationGroup = 'Article';
 
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Category::count();
+    }
 
     public static function form(Form $form): Form
     {

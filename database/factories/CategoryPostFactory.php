@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Database\Factories;
+namespace Fuelviews\SabHeroArticle\Database\Factories;
 
-use Fuelviews\SabHeroBlog\Models\CategoryPost;
+use Fuelviews\SabHeroArticle\Models\CategoryPost;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoryPostFactory extends Factory

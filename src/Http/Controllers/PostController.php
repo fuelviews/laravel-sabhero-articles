@@ -1,52 +1,77 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Http\Controllers;
+namespace Fuelviews\SabHeroArticle\Http\Controllers;
 
-use Fuelviews\SabHeroBlog\Models\Metro;
-use Fuelviews\SabHeroBlog\Models\Post;
+use Fuelviews\SabHeroArticle\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $page = 1)
     {
-        $posts = Post::query()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
-            ->published()
-            ->paginate(10);
+        $query = Post::query()
+            ->with(['categories', 'user', 'tags'])
+            ->published();
 
-        return view('sabhero-blog::blogs.index', [
+        // Filter by category
+        if ($request->filled('category')) {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('slug', $request->category);
+            });
+        }
+
+        // Filter by tag
+        if ($request->filled('tag')) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('slug', $request->tag);
+            });
+        }
+
+        // Filter by author
+        if ($request->filled('author')) {
+            $query->whereHas('user', function ($q) use ($request) {
+                $q->where('slug', $request->author);
+            });
+        }
+
+        // Search functionality
+        if ($request->filled('search')) {
+            $query->whereAny(['title', 'sub_title'], 'like', '%'.$request->search.'%');
+        }
+
+        // Set current page for pagination
+        \Illuminate\Pagination\Paginator::currentPageResolver(function () use ($page) {
+            return $page;
+        });
+
+        $posts = $query->paginate(10)->withQueryString();
+
+        // Get all categories, tags, and authors for the filter dropdowns
+        $categories = \Fuelviews\SabHeroArticle\Models\Category::whereHas('posts', function ($q) {
+            $q->published();
+        })->orderBy('name')->get();
+
+        $tags = \Fuelviews\SabHeroArticle\Models\Tag::whereHas('posts', function ($q) {
+            $q->published();
+        })->orderBy('name')->get();
+
+        $userModel = config('sabhero-article.user.model');
+        $authors = $userModel::authors()
+            ->whereHas('posts', function ($q) {
+                $q->published();
+            })
+            ->orderBy('name')
+            ->get();
+
+        return view('sabhero-article::articles.index', [
             'posts' => $posts,
-        ]);
-    }
-
-    public function indexMetroState(Metro $state)
-    {
-        $posts = Post::query()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
-            ->published()
-            ->where('state_id', $state->id)
-            ->paginate(10);
-
-        return view('sabhero-blog::blogs.index', [
-            'posts' => $posts,
-            'state' => $state,
-            'city' => null,
-        ]);
-    }
-
-    public function indexMetroStateCity(Metro $state, Metro $city)
-    {
-        $posts = Post::query()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
-            ->published()
-            ->where(['state_id' => $state->id, 'city_id' => $city->id])
-            ->paginate(10);
-
-        return view('sabhero-blog::blogs.index', [
-            'posts' => $posts,
-            'state' => $state,
-            'city' => $city ?? null,
+            'categories' => $categories,
+            'tags' => $tags,
+            'authors' => $authors,
+            'selectedCategory' => $request->category,
+            'selectedTag' => $request->tag,
+            'selectedAuthor' => $request->author,
+            'searchTerm' => $request->search,
         ]);
     }
 
@@ -57,13 +82,13 @@ class PostController extends Controller
         ]);
 
         $searchedPosts = Post::query()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
+            ->with(['categories', 'user', 'tags'])
             ->published()
             ->whereAny(['title', 'sub_title'], 'like', '%'.$request->get('query').'%')
             ->paginate(10)
             ->withQueryString();
 
-        return view('sabhero-blog::blogs.search', [
+        return view('sabhero-article::articles.search', [
             'posts' => $searchedPosts,
             'searchMessage' => 'Search result for '.$request->get('query'),
         ]);
@@ -71,14 +96,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('sabhero-blog::blogs.show', [
-            'post' => $post,
-        ]);
-    }
-
-    public function showMetro(Metro $state, Metro $city, Post $post)
-    {
-        return view('sabhero-blog::blogs.show', [
+        return view('sabhero-article::articles.show', [
             'post' => $post,
         ]);
     }

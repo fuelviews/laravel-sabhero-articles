@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Components;
+namespace Fuelviews\SabHeroArticle\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +47,6 @@ class Layout extends Component
 
     public function render(): View
     {
-        return view('sabhero-blog::layouts.app');
+        return view('sabhero-article::layouts.app');
     }
 }

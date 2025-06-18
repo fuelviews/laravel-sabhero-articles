@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Models;
+namespace Fuelviews\SabHeroArticle\Models;
 
 use Database\Factories\PageFactory;
 use Filament\Forms\Components\Section;

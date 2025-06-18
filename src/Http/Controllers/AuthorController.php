@@ -1,40 +1,36 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Http\Controllers;
-
-use App\Models\User;
-use Fuelviews\SabHeroBlog\Models\Author;
+namespace Fuelviews\SabHeroArticle\Http\Controllers;
 
 class AuthorController extends Controller
 {
-    public function posts(Author $author)
+    public function posts($user)
     {
-        $posts = $author->user
-            ->posts()
-            ->with(['categories', 'user', 'tags', 'state', 'city'])
+        $posts = $user->posts()
+            ->with(['categories', 'user', 'tags'])
             ->published()
             ->paginate(10);
 
-        return view('sabhero-blog::blogs.authors.show', [
+        return view('sabhero-article::articles.authors.show', [
             'posts' => $posts,
-            'author' => $author,
+            'author' => $user,
         ]);
     }
 
     public function allAuthors()
     {
-        $authors = User::whereHas('author', function ($query) {
-            $query->where('is_author', true);
-        })
+        $userModel = config('sabhero-article.user.model');
+
+        $authors = $userModel::activeAuthors()
             ->withCount([
                 'posts' => function ($query) {
                     $query->published();
                 },
             ])
-            ->orderBy('name') // or orderBy('your_column') as needed
+            ->orderBy('name')
             ->paginate(10);
 
-        return view('sabhero-blog::blogs.authors.index', [
+        return view('sabhero-article::articles.authors.index', [
             'authors' => $authors,
         ]);
     }

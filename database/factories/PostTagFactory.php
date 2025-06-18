@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Database\Factories;
+namespace Fuelviews\SabHeroArticle\Database\Factories;
 
-use Fuelviews\SabHeroBlog\Models\PostTag;
+use Fuelviews\SabHeroArticle\Models\PostTag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostTagFactory extends Factory

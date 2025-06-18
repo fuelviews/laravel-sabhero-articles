@@ -7,10 +7,10 @@
             @include($componentPath)
         @endif
         <section class="max-w-standard mx-auto px-2 xl:px-4 my-12">
-            <a id="{{ $dynamicAnchorLink }}" class="{{ config('sabhero-blog.heading_permalink.html_class') }}"></a>
+            <a id="{{ $dynamicAnchorLink }}" class="{{ config('sabhero-article.heading_permalink.html_class') }}"></a>
             @if(!empty(\Diglactic\Breadcrumbs\Breadcrumbs::exists()))
                 <section>
-                    <x-sabhero-blog::breadcrumb />
+                    <x-sabhero-article::breadcrumb />
                 </section>
             @endif
             {{ $slot }}

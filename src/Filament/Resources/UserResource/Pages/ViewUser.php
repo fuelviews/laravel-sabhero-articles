@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages;
+namespace Fuelviews\SabHeroArticle\Filament\Resources\UserResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
-use Fuelviews\SabHeroBlog\Filament\Resources\UserResource;
+use Fuelviews\SabHeroArticle\Filament\Resources\UserResource;
 
 class ViewUser extends ViewRecord
 {

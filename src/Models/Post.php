@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Models;
+namespace Fuelviews\SabHeroArticle\Models;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
@@ -11,8 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Set;
-//use Fuelviews\SabHeroBlog\Enums\MetroType;
-use Fuelviews\SabHeroBlog\Enums\PostStatus;
+use Fuelviews\SabHeroArticle\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -59,45 +58,19 @@ class Post extends Model implements Feedable, HasMedia
         'user_id' => 'integer',
     ];
 
-    protected static function booted(): void
-    {
-        static::saved(static function ($post) {
-            $post->metros()->detach();
-
-            if ($post->state_id) {
-                $post->metros()->attach($post->state_id, ['type' => MetroType::STATE->value]);
-            }
-
-            if ($post->city_id) {
-                $post->metros()->attach($post->city_id, ['type' => MetroType::CITY->value]);
-            }
-        });
-    }
-
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class, config('sabhero-blog.tables.prefix').'category_'.config('sabhero-blog.tables.prefix').'post');
+        return $this->belongsToMany(Category::class, config('sabhero-article.tables.prefix').'category_'.config('sabhero-article.tables.prefix').'post');
     }
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, config('sabhero-blog.tables.prefix').'post_'.config('sabhero-blog.tables.prefix').'tag');
-    }
-
-    public function metros(): BelongsToMany
-    {
-        return $this->belongsToMany(
-            Metro::class,
-            config('sabhero-blog.tables.prefix').'metro_'.config('sabhero-blog.tables.prefix').'post',
-            'post_id',
-            'metro_id'
-        )->withPivot('type')
-            ->withTimestamps();
+        return $this->belongsToMany(Tag::class, config('sabhero-article.tables.prefix').'post_'.config('sabhero-article.tables.prefix').'tag');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(config('sabhero-blog.user.model'), config('sabhero-blog.user.foreign_key'));
+        return $this->belongsTo(config('sabhero-article.user.model'), config('sabhero-article.user.foreign_key'));
     }
 
     public function isNotPublished(): bool
@@ -138,8 +111,8 @@ class Post extends Model implements Feedable, HasMedia
     public function relatedPosts($take = 3)
     {
         return $this->whereHas('categories', function ($query) {
-            $query->whereIn(config('sabhero-blog.tables.prefix').'categories.id', $this->categories->pluck('id'))
-                ->whereNotIn(config('sabhero-blog.tables.prefix').'posts.id', [$this->id]);
+            $query->whereIn(config('sabhero-article.tables.prefix').'categories.id', $this->categories->pluck('id'))
+                ->whereNotIn(config('sabhero-article.tables.prefix').'posts.id', [$this->id]);
         })->published()->with('user')->take($take)->get();
     }
 
@@ -166,7 +139,7 @@ class Post extends Model implements Feedable, HasMedia
     public static function getForm(): array
     {
         return [
-            Section::make('Blog Details')
+            Section::make('Article Details')
                 ->schema([
                     Fieldset::make('Titles')
                         ->schema([
@@ -177,7 +150,7 @@ class Post extends Model implements Feedable, HasMedia
                                     Str::slug($state)
                                 ))
                                 ->required()
-                                ->unique(config('sabhero-blog.tables.prefix').'posts', 'title', null, 'id')
+                                ->unique(config('sabhero-article.tables.prefix').'posts', 'title', null, 'id')
                                 ->maxLength(255),
 
                             TextInput::make('slug')
@@ -187,57 +160,6 @@ class Post extends Model implements Feedable, HasMedia
                             Textarea::make('sub_title')
                                 ->maxLength(255)
                                 ->columnSpanFull(),
-
-/*                            Select::make('state_id')
-                                ->label('State')
-                                ->options(Metro::where('type', MetroType::STATE->value)->pluck('name', 'id'))
-                                ->searchable()
-                                ->reactive()
-                                ->afterStateUpdated(function (callable $get, callable $set) {
-                                    $set('city_id', null);
-                                })
-                                ->nullable()
-                                ->placeholder('Select a State')
-                                ->createOptionForm(Metro::getForm())
-                                ->createOptionUsing(function (array $data) {
-                                    $metro = Metro::create([
-                                        'name' => $data['name'],
-                                        'slug' => Str::slug($data['slug']),
-                                        'type' => $data['type'] ?? MetroType::STATE->value,
-                                        'parent_id' => $data['parent_id'] ?? null,
-                                    ]);
-
-                                    return $metro->id;
-                                }),
-
-                            Select::make('city_id')
-                                ->label('City')
-                                ->options(function (callable $get) {
-                                    $stateId = $get('state_id');
-                                    if (! $stateId) {
-                                        return [];
-                                    }
-
-                                    return Metro::where('parent_id', $stateId)
-                                        ->where('type', MetroType::CITY->value)
-                                        ->pluck('name', 'id');
-                                })
-                                ->createOptionForm(Metro::getForm())
-                                ->createOptionUsing(function (array $data, callable $get) {
-                                    $stateId = $get('state_id');
-
-                                    $metro = Metro::create([
-                                        'name' => $data['name'],
-                                        'slug' => Str::slug($data['name']),
-                                        'type' => MetroType::CITY->value,
-                                        'parent_id' => $stateId,
-                                    ]);
-
-                                    return $metro->id;
-                                })
-                                ->searchable()
-                                ->nullable()
-                                ->placeholder('Select a City'),*/
 
                             Select::make('category_id')
                                 ->multiple()
@@ -301,9 +223,9 @@ class Post extends Model implements Feedable, HasMedia
                                 ->native(false),
                         ]),
 
-                    Select::make(config('sabhero-blog.user.foreign_key'))
+                    Select::make(config('sabhero-article.user.foreign_key'))
                         ->label('Author')
-                        ->relationship('user', config('sabhero-blog.user.columns.name'))
+                        ->relationship('user', config('sabhero-article.user.columns.name'))
                         ->nullable(false)
                         ->default(auth()->id()),
 
@@ -315,22 +237,6 @@ class Post extends Model implements Feedable, HasMedia
     {
         return 'slug';
     }
-
-    /*    public function state(): BelongsTo
-        {
-            return $this->belongsTo(Metro::class, 'state_id')->where('type', MetroType::STATE->value);
-        }*/
-
-    /*    public function city(): BelongsTo
-        {
-            return $this->belongsTo(Metro::class, 'city_id')->where('type', MetroType::CITY->value);
-        }*/
-
-    /*public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('post_feature_image')
-            ->withResponsiveImages();
-    }*/
 
     public function registerMediaConversions(?Media $media = null): void
     {
@@ -385,7 +291,7 @@ class Post extends Model implements Feedable, HasMedia
 
     public function getTable(): string
     {
-        return config('sabhero-blog.tables.prefix').'posts';
+        return config('sabhero-article.tables.prefix').'posts';
     }
 
     public static function getFeedItems()
@@ -400,9 +306,9 @@ class Post extends Model implements Feedable, HasMedia
     public function toFeedItem(): FeedItem
     {
         $siteUrl = config('app.url');
-        $blogUrl = $siteUrl.'/'.config('sabhero-blog.route.prefix');
+        $blogUrl = $siteUrl.'/'.config('sabhero-article.route.prefix');
 
-        $link = route('sabhero-blog.post.show', $this);
+        $link = route('sabhero-article.post.show', $this);
 
         return FeedItem::create()
             ->id($link)

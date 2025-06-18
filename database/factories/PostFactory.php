@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Database\Factories;
+namespace Fuelviews\SabHeroArticle\Database\Factories;
 
 use Carbon\Carbon;
-use Fuelviews\SabHeroBlog\Enums\PostStatus;
-use Fuelviews\SabHeroBlog\Models\Post;
-use Fuelviews\SabHeroBlog\Models\UserBak;
+use Fuelviews\SabHeroArticle\Enums\PostStatus;
+use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticle\Models\UserBak;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

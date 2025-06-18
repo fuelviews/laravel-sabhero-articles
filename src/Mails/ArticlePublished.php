@@ -1,16 +1,16 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Mails;
+namespace Fuelviews\SabHeroArticle\Mails;
 
-use Fuelviews\SabHeroBlog\Exceptions\CannotSendEmail;
-use Fuelviews\SabHeroBlog\Models\Post;
+use Fuelviews\SabHeroArticle\Exceptions\CannotSendEmail;
+use Fuelviews\SabHeroArticle\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class BlogPublished extends Mailable
+class ArticlePublished extends Mailable
 {
     use Queueable;
     use SerializesModels;
@@ -35,7 +35,7 @@ class BlogPublished extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'filament-blog::mails.blog-published',
+            view: 'filament-article::mails.article-published',
             with: ['post' => $this->post]
         );
     }

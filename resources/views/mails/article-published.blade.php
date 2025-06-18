@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Blog Post Notification</title>
+     <title>New Article Notification</title>
     <style>
         /* Reset styles for email compatibility */
         body, p, h1, h2, h3, h4, h5, h6 {
@@ -74,7 +74,7 @@
     <div class="project-name">
         {{ config('app.name') }}
     </div>
-    <h2 class="flash">New Blog Post Published!</h2>
+    <h2 class="flash">New Article Published!</h2>
     <div class="header">
         <img
             srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
@@ -84,10 +84,10 @@
     <div class="content">
         <h2>{{ $post->title }}</h2>
         <p>{!! Str::limit($post->body, 500) !!} </p>
-        <a href="{{route('sabhero-blog.post.show', ['post' => $post->slug])}}" class="btn">Read More</a>
+        <a href="{{route('sabhero-article.post.show', ['post' => $post->slug])}}" class="btn">Read More</a>
     </div>
     <div class="footer">
-        <p>Thank you for subscribing to our blog updates!</p>
+        <p>Thank you for subscribing to our article updates!</p>
     </div>
 </div>
 </body>

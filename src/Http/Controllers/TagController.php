@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Http\Controllers;
+namespace Fuelviews\SabHeroArticle\Http\Controllers;
 
-use Fuelviews\SabHeroBlog\Models\Post;
-use Fuelviews\SabHeroBlog\Models\Tag;
+use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticle\Models\Tag;
 
 class TagController extends Controller
 {
@@ -14,7 +14,7 @@ class TagController extends Controller
             ->published()
             ->paginate(10);
 
-        return view('sabhero-blog::blogs.tags.show', [
+        return view('sabhero-article::articles.tags.show', [
             'posts' => $posts,
             'tag' => $tag,
         ]);
@@ -31,7 +31,7 @@ class TagController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('sabhero-blog::blogs.tags.index', [
+        return view('sabhero-article::articles.tags.index', [
             'posts' => $posts,
             'tags' => $tags,
         ]);

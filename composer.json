@@ -1,13 +1,13 @@
 {
-    "name": "fuelviews/laravel-sabhero-blog",
-    "description": "Sabhero blog package",
+    "name": "fuelviews/laravel-sabhero-article",
+    "description": "Sabhero article package",
     "keywords": [
         "fuelviews",
         "laravel",
         "sabhero",
-        "sabhero-blog"
+        "sabhero-article"
     ],
-    "homepage": "https://github.com/fuelviews/laravel-sabhero-blog",
+    "homepage": "https://github.com/fuelviews/laravel-sabhero-article",
     "license": "MIT",
     "authors": [
         {
@@ -41,13 +41,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Fuelviews\\SabHeroBlog\\": "src/",
-            "Fuelviews\\SabHeroBlog\\Database\\Factories\\": "database/factories/"
+            "Fuelviews\\SabHeroArticle\\": "src/",
+            "Fuelviews\\SabHeroArticle\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fuelviews\\SabHeroBlog\\Tests\\": "tests/",
+            "Fuelviews\\SabHeroArticle\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -66,10 +66,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fuelviews\\SabHeroBlog\\SabHeroBlogServiceProvider"
+                "Fuelviews\\SabHeroArticle\\SabHeroArticleServiceProvider"
             ],
             "aliases": {
-                "SabHeroBlog": "Fuelviews\\SabHeroBlog\\Facades\\SabHeroBlog"
+                "SabHeroArticle": "Fuelviews\\SabHeroArticle\\Facades\\SabHeroArticle"
             }
         }
     },

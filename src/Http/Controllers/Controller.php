@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Http\Controllers;
+namespace Fuelviews\SabHeroArticle\Http\Controllers;
 
 abstract class Controller
 {

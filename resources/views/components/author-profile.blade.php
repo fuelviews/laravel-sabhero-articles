@@ -31,7 +31,7 @@
 @endphp
 
 <div class="flex items-center {{ $containerClasses }}" {{ $attributes }}>
-    <a href="{{ route('sabhero-blog.author.show', ['user' => $user->slug]) }}" title="{{ $user->name() }}" class="hover:opacity-65">
+    <a href="{{ route('sabhero-article.author.show', ['user' => $user->slug]) }}" title="{{ $user->name() }}" class="hover:opacity-65">
         <img
             class="{{ $avatarClasses }} overflow-hidden rounded-full object-cover text-[0]"
             srcset="{{ $user->getAuthorMediaSrcSet() }}"
@@ -40,7 +40,7 @@
         >
     </a>
     <div class="min-w-0">
-        <a href="{{ route('sabhero-blog.author.show', ['user' => $user->slug]) }}" title="{{ $user->name() }}"
+        <a href="{{ route('sabhero-article.author.show', ['user' => $user->slug]) }}" title="{{ $user->name() }}"
            class="block overflow-hidden text-ellipsis whitespace-nowrap hover:text-prime {{ $nameClasses }}">
             {{ $user->name() }}
         </a>

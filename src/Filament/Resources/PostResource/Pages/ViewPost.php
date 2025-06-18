@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages;
+namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages;
 
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
-use Fuelviews\SabHeroBlog\Events\BlogPublished;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource;
+use Fuelviews\SabHeroArticle\Events\BlogPublished;
+use Fuelviews\SabHeroArticle\Filament\Resources\PostResource;
 use Illuminate\Contracts\Support\Htmlable;
 
 class ViewPost extends ViewRecord
@@ -32,7 +32,7 @@ class ViewPost extends ViewRecord
             Action::make('previewDefault')
                 ->label('Preview')
                 ->icon('heroicon-o-eye')
-                ->url(fn () => route('sabhero-blog.post.show', $this->record->slug), true)
+                ->url(fn () => route('sabhero-article.post.show', $this->record->slug), true)
                 ->disabled(fn () => $this->record->isNotPublished())
                 ->visible(fn () => is_null($this->record->state) || is_null($this->record->city)),
 
@@ -51,7 +51,7 @@ class ViewPost extends ViewRecord
         $citySlug = $this->record->city?->slug ?? null;
         $postSlug = $this->record->slug;
 
-        return route('sabhero-blog.post.metro.show', [
+        return route('sabhero-article.post.metro.show', [
             'state' => $stateSlug,
             'city' => $citySlug,
             'post' => $postSlug,

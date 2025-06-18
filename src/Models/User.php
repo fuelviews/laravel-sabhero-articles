@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Models;
+namespace Fuelviews\SabHeroArticle\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
-use Fuelviews\SabHeroBlog\Traits\HasBlog;
+use Fuelviews\SabHeroArticle\Traits\HasArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,9 +15,9 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
+class User extends Authenticatable implements HasAvatar, HasMedia
 {
-    use HasBlog;
+    use HasArticle;
     use HasFactory;
     use Notifiable;
     use InteractsWithMedia;
@@ -78,7 +78,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
      */
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, config('sabhero-blog.user.foreign_key'));
+        return $this->hasMany(Post::class, config('sabhero-article.user.foreign_key'));
     }
 
     /**
@@ -162,7 +162,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
      */
     public function name(): string
     {
-        return $this->{config('sabhero-blog.user.columns.name', 'name')};
+        return $this->{config('sabhero-article.user.columns.name', 'name')};
     }
 
     /**

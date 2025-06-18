@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Events;
+namespace Fuelviews\SabHeroArticle\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class BlogPublished
+class ArticlePublished
 {
     use Dispatchable;
     use SerializesModels;

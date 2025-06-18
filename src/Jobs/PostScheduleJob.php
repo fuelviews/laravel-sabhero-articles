@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Jobs;
+namespace Fuelviews\SabHeroArticle\Jobs;
 
-use Fuelviews\SabHeroBlog\Enums\PostStatus;
-use Fuelviews\SabHeroBlog\Models\Post;
+use Fuelviews\SabHeroArticle\Enums\PostStatus;
+use Fuelviews\SabHeroArticle\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

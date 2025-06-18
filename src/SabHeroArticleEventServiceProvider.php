@@ -1,14 +1,14 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog;
+namespace Fuelviews\SabHeroArticle;
 
-use Fuelviews\SabHeroBlog\Events\BlogPublished;
+use Fuelviews\SabHeroArticle\Events\ArticlePublished;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
-class SabHeroBlogEventServiceProvider extends ServiceProvider
+class SabHeroArticleEventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        BlogPublished::class => [
+        ArticlePublished::class => [
         ],
     ];
 

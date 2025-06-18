@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Tests;
+namespace Fuelviews\SabHeroArticle\Tests;
 
-use Fuelviews\SabHeroBlog\SabHeroBlogServiceProvider;
+use Fuelviews\SabHeroArticle\SabHeroBlogServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources;
+namespace Fuelviews\SabHeroArticle\Filament\Resources;
 
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
@@ -9,11 +9,11 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Fuelviews\SabHeroBlog\Filament\Resources\TagResource\Pages\EditTag;
-use Fuelviews\SabHeroBlog\Filament\Resources\TagResource\Pages\ListTags;
-use Fuelviews\SabHeroBlog\Filament\Resources\TagResource\Pages\ViewTag;
-use Fuelviews\SabHeroBlog\Filament\Resources\TagResource\RelationManagers\PostsRelationManager;
-use Fuelviews\SabHeroBlog\Models\Tag;
+use Fuelviews\SabHeroArticle\Filament\Resources\TagResource\Pages\EditTag;
+use Fuelviews\SabHeroArticle\Filament\Resources\TagResource\Pages\ListTags;
+use Fuelviews\SabHeroArticle\Filament\Resources\TagResource\Pages\ViewTag;
+use Fuelviews\SabHeroArticle\Filament\Resources\TagResource\RelationManagers\PostsRelationManager;
+use Fuelviews\SabHeroArticle\Models\Tag;
 
 class TagResource extends Resource
 {

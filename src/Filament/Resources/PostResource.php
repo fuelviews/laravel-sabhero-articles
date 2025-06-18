@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources;
+namespace Fuelviews\SabHeroArticle\Filament\Resources;
 
 use App\Models\User;
 use Filament\Forms;
@@ -16,18 +16,17 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-//use Fuelviews\SabHeroBlog\Enums\MetroType;
-use Fuelviews\SabHeroBlog\Enums\PostStatus;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\CreatePost;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\EditPost;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ListPosts;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Pages\ViewPost;
-use Fuelviews\SabHeroBlog\Filament\Resources\PostResource\Widgets\BlogPostPublishedChart;
-use Fuelviews\SabHeroBlog\Filament\Tables\Columns\UserAvatar;
-use Fuelviews\SabHeroBlog\Models\Category;
-use Fuelviews\SabHeroBlog\Models\Metro;
-use Fuelviews\SabHeroBlog\Models\Post;
-use Fuelviews\SabHeroBlog\Models\Tag;
+//use Fuelviews\SabHeroArticle\Enums\MetroType;
+use Fuelviews\SabHeroArticle\Enums\PostStatus;
+use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\CreatePost;
+use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\EditPost;
+use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\ListPosts;
+use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\ViewPost;
+use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Widgets\ArticlePostPublishedChart;
+use Fuelviews\SabHeroArticle\Filament\Tables\Columns\UserAvatar;
+use Fuelviews\SabHeroArticle\Models\Category;
+use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticle\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
@@ -98,7 +97,7 @@ class PostResource extends Resource
             ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\SelectFilter::make('user')
-                    ->relationship('user', config('sabhero-blog.user.columns.name'))
+                    ->relationship('user', config('sabhero-article.user.columns.name'))
                     ->searchable()
                     ->preload()
                     ->multiple(),
@@ -196,14 +195,6 @@ class PostResource extends Resource
                             TextEntry::make('updated_at')
                                 ->label('Last Updated')
                                 ->dateTime(),
-                        ]),
-                    Fieldset::make('Metros')
-                        ->schema([
-                            TextEntry::make('state.name')
-                                ->label('State'),
-
-                            TextEntry::make('city.name')
-                                ->label('City'),
                         ]),
                     Fieldset::make('Categories and Tags')
                         ->schema([
@@ -485,7 +476,7 @@ class PostResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            BlogPostPublishedChart::class,
+            ArticlePostPublishedChart::class,
         ];
     }
 

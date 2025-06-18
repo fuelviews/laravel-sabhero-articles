@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Database\Factories;
+namespace Fuelviews\SabHeroArticle\Database\Factories;
 
-use Fuelviews\SabHeroBlog\Models\PostLocation;
+use Fuelviews\SabHeroArticle\Models\PostLocation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

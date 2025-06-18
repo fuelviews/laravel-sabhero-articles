@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Http\Controllers;
+namespace Fuelviews\SabHeroArticle\Http\Controllers;
 
-use Fuelviews\SabHeroBlog\Models\Metro;
-use Fuelviews\SabHeroBlog\Models\Post;
+use Fuelviews\SabHeroArticle\Models\Metro;
+use Fuelviews\SabHeroArticle\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -48,15 +48,15 @@ class PostController extends Controller
         $posts = $query->paginate(10)->withQueryString();
 
         // Get all categories, tags, and authors for the filter dropdowns
-        $categories = \Fuelviews\SabHeroBlog\Models\Category::whereHas('posts', function ($q) {
+        $categories = \Fuelviews\SabHeroArticle\Models\Category::whereHas('posts', function ($q) {
             $q->published();
         })->orderBy('name')->get();
 
-        $tags = \Fuelviews\SabHeroBlog\Models\Tag::whereHas('posts', function ($q) {
+        $tags = \Fuelviews\SabHeroArticle\Models\Tag::whereHas('posts', function ($q) {
             $q->published();
         })->orderBy('name')->get();
 
-        $userModel = config('sabhero-blog.user.model');
+        $userModel = config('sabhero-article.user.model');
         $authors = $userModel::authors()
             ->whereHas('posts', function ($q) {
                 $q->published();
@@ -64,7 +64,7 @@ class PostController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('sabhero-blog::blogs.index', [
+        return view('sabhero-article::articles.index', [
             'posts' => $posts,
             'categories' => $categories,
             'tags' => $tags,
@@ -85,7 +85,7 @@ class PostController extends Controller
                 ->where('state_id', $state->id)
                 ->paginate(10);
 
-            return view('sabhero-blog::blogs.index', [
+            return view('sabhero-article::articles.index', [
                 'posts' => $posts,
                 'state' => $state,
                 'city' => null,
@@ -100,7 +100,7 @@ class PostController extends Controller
                 ->where(['state_id' => $state->id, 'city_id' => $city->id])
                 ->paginate(10);
 
-            return view('sabhero-blog::blogs.index', [
+            return view('sabhero-article::articles.index', [
                 'posts' => $posts,
                 'state' => $state,
                 'city' => $city ?? null,
@@ -120,7 +120,7 @@ class PostController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('sabhero-blog::blogs.search', [
+        return view('sabhero-article::articles.search', [
             'posts' => $searchedPosts,
             'searchMessage' => 'Search result for '.$request->get('query'),
         ]);
@@ -128,14 +128,14 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('sabhero-blog::blogs.show', [
+        return view('sabhero-article::articles.show', [
             'post' => $post,
         ]);
     }
 
     public function showMetro(Metro $state, Metro $city, Post $post)
     {
-        return view('sabhero-blog::blogs.show', [
+        return view('sabhero-article::articles.show', [
             'post' => $post,
         ]);
     }

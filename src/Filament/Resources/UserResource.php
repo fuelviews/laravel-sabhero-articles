@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroBlog\Filament\Resources;
+namespace Fuelviews\SabHeroArticle\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -14,10 +14,10 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\CreateUser;
-use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\EditUser;
-use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\ListUsers;
-use Fuelviews\SabHeroBlog\Filament\Resources\UserResource\Pages\ViewUser;
+use Fuelviews\SabHeroArticle\Filament\Resources\UserResource\Pages\CreateUser;
+use Fuelviews\SabHeroArticle\Filament\Resources\UserResource\Pages\EditUser;
+use Fuelviews\SabHeroArticle\Filament\Resources\UserResource\Pages\ListUsers;
+use Fuelviews\SabHeroArticle\Filament\Resources\UserResource\Pages\ViewUser;
 use Illuminate\Support\Str;
 
 class UserResource extends Resource
@@ -34,7 +34,7 @@ class UserResource extends Resource
 
     public static function getModel(): string
     {
-        return config('sabhero-blog.user.model');
+        return config('sabhero-article.user.model');
     }
 
     public static function getNavigationBadge(): ?string

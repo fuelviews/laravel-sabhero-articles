@@ -1,4 +1,4 @@
-@props(['category', 'size' => 'small', 'route' => 'sabhero-blog.post.index'])
+@props(['category', 'size' => 'small', 'route' => 'sabhero-article.post.index'])
 
 @php
     $sizeClasses = match($size) {
@@ -11,7 +11,7 @@
         default => 'mr-1 h-3 w-3'
     };
 
-    $routeParams = $route === 'sabhero-blog.category.post'
+    $routeParams = $route === 'sabhero-article.category.post'
         ? ['category' => $category->slug]
         : ['category' => $category->slug];
 @endphp

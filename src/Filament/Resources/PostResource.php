@@ -31,10 +31,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
 use League\Csv\Writer;
-use RuntimeException;
-use ZipArchive;
-
 use function parse_url;
+use RuntimeException;
+
+use ZipArchive;
 
 class PostResource extends Resource
 {

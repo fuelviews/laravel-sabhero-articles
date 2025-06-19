@@ -2,7 +2,9 @@
 
 namespace Fuelviews\SabHeroArticle\Models;
 
+use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
 use Fuelviews\SabHeroArticle\Traits\HasArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +15,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements HasAvatar, HasMedia
+class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
     use HasArticle;
     use HasFactory;
@@ -147,5 +149,18 @@ class User extends Authenticatable implements HasAvatar, HasMedia
     public function getNameAttribute($value): string
     {
         return ucfirst($value);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        $allowedDomains = config('sabhero-article.user.allowed_domains', []);
+
+        foreach ($allowedDomains as $domain) {
+            if (str_ends_with($this->email, $domain)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

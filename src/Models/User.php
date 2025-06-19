@@ -2,6 +2,7 @@
 
 namespace Fuelviews\SabHeroArticle\Models;
 
+use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Fuelviews\SabHeroArticle\Traits\HasArticle;
@@ -13,7 +14,6 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Filament\Models\Contracts\FilamentUser;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {

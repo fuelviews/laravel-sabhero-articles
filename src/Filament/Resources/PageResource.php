@@ -47,6 +47,7 @@ class PageResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('slug')
+                    ->label('Route')
                     ->sortable()
                     ->searchable(),
 
@@ -86,7 +87,8 @@ class PageResource extends Resource
                 ->schema([
                     TextEntry::make('title'),
 
-                    TextEntry::make('slug'),
+                    TextEntry::make('slug')
+                        ->label('Route'),
 
                     TextEntry::make('description')
                         ->label('Meta Description')

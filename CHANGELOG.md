@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-article` will be documented in this file.
 
+## v0.0.13 - 2025-07-27
+
+### What's Changed
+
+* Update article config prefixes to plural, add 'Route' labels to slug fields for clarity, enhance Table of Contents styling for better dark mode support, and adjust service provider to register FeedServiceProvider after views are loaded. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/23
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.12...v0.0.13
+
 ## v0.0.10 - 2025-06-17
 
 ### What's Changed

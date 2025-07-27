@@ -63,6 +63,7 @@ class Page extends Model implements HasMedia
                         ->required(),
 
                     TextInput::make('slug')
+                        ->label('Route')
                         ->required()
                         ->unique(Page::class, ignoreRecord: true)
                         ->formatStateUsing(fn ($state) => Str::slug($state)),
@@ -77,7 +78,6 @@ class Page extends Model implements HasMedia
                         ->collection('page_feature_image')
                         ->image()
                         ->responsiveImages()
-                        ->required()
                         ->columnSpanFull(),
                 ]),
         ];

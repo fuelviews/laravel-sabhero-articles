@@ -18,7 +18,7 @@ class TableOfContentsRenderer implements NodeRendererInterface
 
         $title = new HtmlElement(
             'div',
-            ['class' => 'flex w-full text-xl font-semibold mb-4'],
+            ['class' => 'flex w-full text-xl font-semibold mb-4 text-gray-900 dark:text-white'],
             'Table of Contents'
         );
 
@@ -26,17 +26,17 @@ class TableOfContentsRenderer implements NodeRendererInterface
         $tocHtml = $childRenderer->renderNodes($node->children());
 
         // Modify all <a> tags by injecting a custom class
-        $tocHtml = preg_replace('/<a /', '<a class="underline underline-offset-[0.35rem] hover:opacity-75 hover:underline transition-colors" ', $tocHtml);
+        $tocHtml = preg_replace('/<a /', '<a class="underline underline-offset-[0.35rem] hover:opacity-75 hover:underline transition-colors text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white" ', $tocHtml);
 
         $toc = new HtmlElement(
             'ol',
-            ['class' => 'pl-6 list-decimal columns-1 md:columns-2 gap-6 not-prose'],
+            ['class' => 'pl-6 list-decimal columns-1 md:columns-2 gap-6 not-prose text-gray-600 dark:text-gray-400'],
             $tocHtml
         );
 
         $tocContainer = new HtmlElement(
             'div',
-            ['class' => 'rounded-2xl bg-gray-100 p-4 mb-12 toc'],
+            ['class' => 'rounded-2xl bg-gray-100 dark:bg-gray-800 p-4 mb-12 toc'],
             [$title, $toc]
         );
 

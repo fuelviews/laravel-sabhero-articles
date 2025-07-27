@@ -5,6 +5,7 @@ namespace Fuelviews\SabHeroArticle\Tests;
 use Fuelviews\SabHeroArticle\SabHeroArticleServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Spatie\Feed\FeedServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -21,6 +22,7 @@ class TestCase extends Orchestra
     {
         return [
             SabHeroArticleServiceProvider::class,
+            FeedServiceProvider::class,
         ];
     }
 

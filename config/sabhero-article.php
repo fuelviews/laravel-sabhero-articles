@@ -4,10 +4,10 @@ use Fuelviews\SabHeroArticle\Models\User;
 
 return [
     'tables' => [
-        'prefix' => 'article_',
+        'prefix' => 'articles_',
     ],
     'route' => [
-        'prefix' => 'article',
+        'prefix' => 'articles',
         'middleware' => ['web'],
     ],
     'user' => [

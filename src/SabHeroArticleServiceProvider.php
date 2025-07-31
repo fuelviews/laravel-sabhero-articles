@@ -10,6 +10,7 @@ use Fuelviews\SabHeroArticle\Components\Layout;
 use Fuelviews\SabHeroArticle\Components\Markdown;
 use Fuelviews\SabHeroArticle\Components\RecentPost;
 use Fuelviews\SabHeroArticle\Http\Livewire\SearchAutocomplete;
+use Fuelviews\SabHeroArticle\Models\Page;
 use Fuelviews\SabHeroArticle\Models\Post;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
@@ -89,6 +90,18 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
         $this->app->register(SabHeroArticleEventServiceProvider::class);
 
         return parent::register();
+    }
+
+    public function bootingPackage(): void
+    {
+        View::composer('*', function ($view) {
+            $routeName = Route::currentRouteName();
+
+            $seoPage = Page::where('slug', $routeName)
+                ->first();
+
+            $view->with('seoPage', $seoPage);
+        });
     }
 
     public function packageBooted(): void

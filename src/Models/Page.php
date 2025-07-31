@@ -38,7 +38,7 @@ class Page extends Model implements HasMedia
         return new PageFactory;
     }
 
-    public function getSeoDataAttribute(): SEOData
+    public function getDynamicSEOData(): SEOData
     {
         return new SEOData(
             title: ucfirst($this->title ?? ''),
@@ -49,7 +49,7 @@ class Page extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        $this->addMediaConversion('feature_image')
+        $this->addMediaConversion('page_feature_image')
             ->withResponsiveImages()
             ->performOnCollections('page_feature_image');
     }

@@ -38,7 +38,7 @@ class Page extends Model implements HasMedia
         return new PageFactory;
     }
 
-    public function getSeoDataAttribute(): SEOData
+    public function getDynamicSEOData(): SEOData
     {
         return new SEOData(
             title: ucfirst($this->title ?? ''),

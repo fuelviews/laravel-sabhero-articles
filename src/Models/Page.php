@@ -26,6 +26,7 @@ class Page extends Model implements HasMedia
         'title',
         'slug',
         'description',
+        'feature_image',
     ];
 
     protected $casts = [
@@ -65,8 +66,8 @@ class Page extends Model implements HasMedia
                     TextInput::make('slug')
                         ->label('Route')
                         ->required()
-                        ->unique(Page::class, ignoreRecord: true)
-                        ->formatStateUsing(fn ($state) => Str::slug($state)),
+                        ->unique(__CLASS__, ignoreRecord: true)
+                        ->formatStateUsing(fn ($state) => Str::lower($state)),
 
                     Textarea::make('description')
                         ->label('Meta Description')

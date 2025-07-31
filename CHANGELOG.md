@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-article` will be documented in this file.
 
+## v0.0.14 - 2025-07-31
+
+### What's Changed
+
+* Add 'feature_image' to the fillable attributes in the Page model and update the unique validation to use the class name dynamically while ensuring the slug is formatted to lowercase. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/24
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.13...v0.0.14
+
 ## v0.0.13 - 2025-07-27
 
 ### What's Changed

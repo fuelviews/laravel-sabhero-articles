@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-article` will be documented in this file.
 
+## v0.0.15 - 2025-07-31
+
+### What's Changed
+
+* Add a new seeder for the Page model to populate initial page data and update the media conversion name for feature images to ensure consistency in the media library. This change enhances the database seeding process and improves the handling of feature images associated with pages. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/25
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.14...v0.0.15
+
 ## v0.0.14 - 2025-07-31
 
 ### What's Changed

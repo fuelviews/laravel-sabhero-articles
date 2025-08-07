@@ -36,7 +36,7 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
                 'create_imports_table',
                 'create_exports_table',
                 'create_failed_import_rows_table',
-                'create_pages_table'
+                'create_pages_table',
             ])
 
             ->hasViewComponents(

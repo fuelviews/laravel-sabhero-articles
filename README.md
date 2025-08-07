@@ -59,6 +59,23 @@ php artisan vendor:publish --tag="sabhero-article-migrations"
 php artisan migrate
 ```
 
+### 4. Publish Seeders
+
+```bash
+php artisan vendor:publish --tag="sabhero-article-seeders"
+```
+
+### 5. Publish Seeders
+
+Fill pages data in `database/seeders/PageTableSeeder.php`
+
+### 6. Run Seeders
+
+```bash
+php artisan db:seed --class=PageTableSeede
+```
+
+
 ## Integration
 
 ### 1. Attach to Filament Panel

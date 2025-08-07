@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-article` will be documented in this file.
 
+## v0.0.16 - 2025-08-07
+
+### What's Changed
+
+* Add pages table migration and seeder publishing; update README with seeder publishing and running instructions; remove unused package dependency. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/26
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.15...v0.0.16
+
 ## v0.0.15 - 2025-07-31
 
 ### What's Changed

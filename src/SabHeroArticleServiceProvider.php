@@ -36,7 +36,9 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
                 'create_imports_table',
                 'create_exports_table',
                 'create_failed_import_rows_table',
+                'create_pages_table'
             ])
+
             ->hasViewComponents(
                 'sabhero-article',
                 Layout::class,
@@ -106,9 +108,13 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        $this->publishes([
+            __DIR__.'/../database/seeders/PageTableSeeder.php' => database_path('seeders/PageTableSeeder.php'),
+        ], 'sabhero-article-seeders');
+
         // Register FeedServiceProvider after views are registered
         $this->app->register(FeedServiceProvider::class);
-        
+
         // Register Livewire components if Livewire is available and not in testing
         if (class_exists(\Livewire\Livewire::class) && ! $this->app->environment('testing')) {
             Livewire::component('sabhero-article::search-autocomplete', SearchAutocomplete::class);

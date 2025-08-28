@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Fuelviews\SabHeroArticle\Models\Page;
+use Fuelviews\SabHeroArticles\Models\Page;
 
 class PageTableSeeder extends Seeder
 {

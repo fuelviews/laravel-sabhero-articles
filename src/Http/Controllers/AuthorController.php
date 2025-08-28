@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Http\Controllers;
+namespace Fuelviews\SabHeroArticles\Http\Controllers;
 
 class AuthorController extends Controller
 {
@@ -11,7 +11,7 @@ class AuthorController extends Controller
             ->published()
             ->paginate(10);
 
-        return view('sabhero-article::articles.authors.show', [
+        return view('sabhero-articles::articles.authors.show', [
             'posts' => $posts,
             'author' => $user,
         ]);
@@ -19,7 +19,7 @@ class AuthorController extends Controller
 
     public function allAuthors()
     {
-        $userModel = config('sabhero-article.user.model');
+        $userModel = config('sabhero-articles.user.model');
 
         $authors = $userModel::activeAuthors()
             ->withCount([
@@ -30,7 +30,7 @@ class AuthorController extends Controller
             ->orderBy('name')
             ->paginate(10);
 
-        return view('sabhero-article::articles.authors.index', [
+        return view('sabhero-articles::articles.authors.index', [
             'authors' => $authors,
         ]);
     }

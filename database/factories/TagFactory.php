@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Database\Factories;
+namespace Fuelviews\SabHeroArticles\Database\Factories;
 
-use Fuelviews\SabHeroArticle\Models\Tag;
+use Fuelviews\SabHeroArticles\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

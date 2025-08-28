@@ -1,34 +1,34 @@
 <?php
 
-use Fuelviews\SabHeroArticle\Http\Controllers\AuthorController;
-use Fuelviews\SabHeroArticle\Http\Controllers\CategoryController;
-use Fuelviews\SabHeroArticle\Http\Controllers\PostController;
-use Fuelviews\SabHeroArticle\Http\Controllers\TagController;
+use Fuelviews\SabHeroArticles\Http\Controllers\AuthorController;
+use Fuelviews\SabHeroArticles\Http\Controllers\CategoryController;
+use Fuelviews\SabHeroArticles\Http\Controllers\PostController;
+use Fuelviews\SabHeroArticles\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(config('sabhero-article.route.middleware'))
-    ->prefix(config('sabhero-article.route.prefix'))
+Route::middleware(config('sabhero-articles.route.middleware'))
+    ->prefix(config('sabhero-articles.route.prefix'))
     ->group(function () {
         Route::get('/', [PostController::class, 'index'])
-            ->name('sabhero-article.post.index');
+            ->name('sabhero-articles.post.index');
         Route::get('/page/{page}', [PostController::class, 'index'])
             ->where('page', '[0-9]+')
-            ->name('sabhero-article.post.page');
+            ->name('sabhero-articles.post.page');
         Route::get('/search', [PostController::class, 'search'])
-            ->name('sabhero-article.post.search');
+            ->name('sabhero-articles.post.search');
         Route::get('/tags', [TagController::class, 'allTags'])
-            ->name('sabhero-article.tag.index');
+            ->name('sabhero-articles.tag.index');
         Route::get('/categories', [CategoryController::class, 'allCategories'])
-            ->name('sabhero-article.category.index');
+            ->name('sabhero-articles.category.index');
         Route::get('/authors', [AuthorController::class, 'allAuthors'])
-            ->name('sabhero-article.author.index');
+            ->name('sabhero-articles.author.index');
         Route::get('/authors/{user:slug}', [AuthorController::class, 'posts'])
-            ->name('sabhero-article.author.show');
+            ->name('sabhero-articles.author.show');
         Route::feeds();
         Route::get('/{post:slug}', [PostController::class, 'show'])
-            ->name('sabhero-article.post.show');
+            ->name('sabhero-articles.post.show');
         Route::get('/categories/{category:slug}', [CategoryController::class, 'posts'])
-            ->name('sabhero-article.category.post');
+            ->name('sabhero-articles.category.post');
         Route::get('/tags/{tag:slug}', [TagController::class, 'posts'])
-            ->name('sabhero-article.tag.post');
+            ->name('sabhero-articles.tag.post');
     });

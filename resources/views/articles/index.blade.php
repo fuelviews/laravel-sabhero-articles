@@ -1,8 +1,8 @@
-<x-sabhero-article-layout>
+<x-sabhero-articles-layout>
     <section class="py-8">
         <div class="container mx-auto">
             <!-- Filter Section -->
-            <x-sabhero-article::article-filters
+            <x-sabhero-articles::article-filters
                 :categories="$categories"
                 :tags="$tags"
                 :authors="$authors"
@@ -12,7 +12,7 @@
                 :search-term="$searchTerm"
             />
 
-            <h1 class="text-4xl font-bold mb-4 lg:mb-8">{{ str(config('sabhero-article.route.prefix'))->plural()->ucfirst() }}</h1>
+            <h1 class="text-4xl font-bold mb-4 lg:mb-8">{{ str(config('sabhero-articles.route.prefix'))->plural()->ucfirst() }}</h1>
         </div>
     </section>
 
@@ -23,7 +23,7 @@
                     <div class="">
                         @foreach ($posts->take(1) as $post)
                             <div>
-                                <x-sabhero-article::feature-card :post="$post" />
+                                <x-sabhero-articles::feature-card :post="$post" />
                             </div>
                         @endforeach
                     </div>
@@ -36,11 +36,11 @@
                 <div class="container mx-auto">
                     <div class="grid sm:grid-cols-3 gap-x-14 gap-y-14">
                         @foreach ($posts->skip(1) as $post)
-                            <x-sabhero-article::card :post="$post" />
+                            <x-sabhero-articles::card :post="$post" />
                         @endforeach
                     </div>
                     <div class="mt-8">
-                        {{ $posts->links('sabhero-article::pagination.tailwind') }}
+                        {{ $posts->links('sabhero-articles::pagination.tailwind') }}
                     </div>
                 </div>
             </section>
@@ -58,4 +58,4 @@
             </div>
         </section>
     @endif
-</x-sabhero-article-layout>
+</x-sabhero-articles-layout>

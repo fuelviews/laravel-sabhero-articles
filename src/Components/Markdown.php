@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Components;
+namespace Fuelviews\SabHeroArticles\Components;
 
-use Fuelviews\SabHeroArticle\Renderers\GlideImageRenderer;
-use Fuelviews\SabHeroArticle\Renderers\TableOfContentsRenderer;
+use Fuelviews\SabHeroArticles\Renderers\GlideImageRenderer;
+use Fuelviews\SabHeroArticles\Renderers\TableOfContentsRenderer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\View\Component;
@@ -35,8 +35,8 @@ class Markdown extends Component
 
     public function render(): View
     {
-        $headingConfig = Config::get('sabhero-article.heading_permalink', []);
-        $glideConfig = Config::get('sabhero-article.glide', []);
+        $headingConfig = Config::get('sabhero-articles.heading_permalink', []);
+        $glideConfig = Config::get('sabhero-articles.glide', []);
 
         $config = [
             'table_of_contents' => [
@@ -115,7 +115,7 @@ class Markdown extends Component
 
         $html = $converter->convert($this->content)->getContent();
 
-        return view('sabhero-article::components.markdown', [
+        return view('sabhero-articles::components.markdown', [
             'html' => $html,
         ]);
     }

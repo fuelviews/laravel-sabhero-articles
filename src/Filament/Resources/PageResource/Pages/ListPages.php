@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\PageResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\PageResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Fuelviews\SabHeroArticle\Filament\Resources\PageResource;
+use Fuelviews\SabHeroArticles\Filament\Resources\PageResource;
 
 class ListPages extends ListRecords
 {

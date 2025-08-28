@@ -1,7 +1,7 @@
 # SAB Hero Articles Package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/fuelviews/laravel-sabhero-article.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-article)
-[![Total Downloads](https://img.shields.io/packagist/dt/fuelviews/laravel-sabhero-article.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-article)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fuelviews/laravel-sabhero-articles.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-articles)
+[![Total Downloads](https://img.shields.io/packagist/dt/fuelviews/laravel-sabhero-articles.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-articles)
 
 A full-featured article management solution for Laravel applications with Filament admin panel integration. This package provides a complete article publishing platform with advanced features and an intuitive admin interface.
 
@@ -36,7 +36,7 @@ php artisan make:filament-user
 ### Install the SAB Hero Articles Package
 
 ```bash
-composer require fuelviews/laravel-sabhero-article
+composer require fuelviews/laravel-sabhero-articles
 ```
 
 ## Configuration
@@ -44,13 +44,13 @@ composer require fuelviews/laravel-sabhero-article
 ### 1. Publish Configuration Files
 
 ```bash
-php artisan vendor:publish --tag="sabhero-article-config"
+php artisan vendor:publish --tag="sabhero-articles-config"
 ```
 
 ### 2. Publish Migrations
 
 ```bash
-php artisan vendor:publish --tag="sabhero-article-migrations"
+php artisan vendor:publish --tag="sabhero-articles-migrations"
 ```
 
 ### 3. Run Migrations
@@ -62,7 +62,7 @@ php artisan migrate
 ### 4. Publish Seeders
 
 ```bash
-php artisan vendor:publish --tag="sabhero-article-seeders"
+php artisan vendor:publish --tag="sabhero-articles-seeders"
 ```
 
 ### 5. Publish Seeders
@@ -83,13 +83,13 @@ php artisan db:seed --class=PageTableSeede
 Add the SAB Hero Articles plugin to your Filament panel provider:
 
 ```php
-use Fuelviews\SabHeroArticle\Facades\SabHeroArticle;
+use Fuelviews\SabHeroArticles\Facades\SabHeroArticles;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            SabHeroArticle::make()
+            SabHeroArticles::make()
         ]);
 }
 ```
@@ -101,7 +101,7 @@ Your user model needs to be setup to use the `HasArticle` trait and ensure the r
 ```php
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
-use Fuelviews\SabHeroArticle\Traits\HasArticle;
+use Fuelviews\SabHeroArticles\Traits\HasArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -129,7 +129,7 @@ class User extends Authenticatable implements FilamentUser
     
     public function canAccessPanel(Panel $panel): bool
     {
-        $allowedDomains = config('sabhero-article.user.allowed_domains', []);
+        $allowedDomains = config('sabhero-articles.user.allowed_domains', []);
 
         foreach ($allowedDomains as $domain) {
             if (str_ends_with($this->email, $domain)) {
@@ -146,14 +146,14 @@ class User extends Authenticatable implements FilamentUser
 
 SAB Hero Articles comes with several Blade components for easy UI implementation:
 
-- `<x-sabhero-article::layout>` - Main article layout
-- `<x-sabhero-article::card>` - Article post-card
-- `<x-sabhero-article::feature-card>` - Featured post-card
-- `<x-sabhero-article::breadcrumb>` - Breadcrumb navigation
-- `<x-sabhero-article::header-category>` - Category header
-- `<x-sabhero-article::header-metro>` - Metro-style header
-- `<x-sabhero-article::markdown>` - Markdown content renderer
-- `<x-sabhero-article::recent-post>` - Recent posts display
+- `<x-sabhero-articles::layout>` - Main article layout
+- `<x-sabhero-articles::card>` - Article post-card
+- `<x-sabhero-articles::feature-card>` - Featured post-card
+- `<x-sabhero-articles::breadcrumb>` - Breadcrumb navigation
+- `<x-sabhero-articles::header-category>` - Category header
+- `<x-sabhero-articles::header-metro>` - Metro-style header
+- `<x-sabhero-articles::markdown>` - Markdown content renderer
+- `<x-sabhero-articles::recent-post>` - Recent posts display
 
 ## Testing
 

@@ -3,7 +3,7 @@
 <div class="grid sm:grid-cols-2 gap-y-5 gap-x-10">
     <div class="md:h-[400px] w-full overflow-hidden rounded-2xl shadow-2xl">
         @if ($post->hasMedia('post_feature_image'))
-            <a href="{{ route('sabhero-article.post.show', ['post' => $post->slug]) }}"
+            <a href="{{ route('sabhero-articles.post.show', ['post' => $post->slug]) }}"
                     class="hover:opacity-65">
                 <img
                     srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
@@ -19,7 +19,7 @@
     <div class="flex flex-col justify-between py-4 sm:pl-10 h-full">
         <div>
             <div class="mb-5">
-                <a href="{{ route('sabhero-article.post.show', ['post' => $post->slug]) }}" class="mb-4 block text-xl md:text-4xl font-semibold hover:text-prime">
+                <a href="{{ route('sabhero-articles.post.show', ['post' => $post->slug]) }}" class="mb-4 block text-xl md:text-4xl font-semibold hover:text-prime">
                     {{ $post->title }}
                 </a>
             </div>
@@ -33,14 +33,14 @@
         <div class="mt-auto space-y-4">
             <div class="mt-3 flex flex-wrap gap-2">
                 @foreach ($post->categories->take(1) as $category)
-                    <x-sabhero-article::category-button :category="$category" size="medium" />
+                    <x-sabhero-articles::category-button :category="$category" size="medium" />
                 @endforeach
                 @foreach ($post->tags->take(1) as $tag)
-                    <x-sabhero-article::tag-button :tag="$tag" size="medium" />
+                    <x-sabhero-articles::tag-button :tag="$tag" size="medium" />
                 @endforeach
             </div>
             <div class="pt-1">
-                <x-sabhero-article::author-profile :user="$post->user" :post="$post" size="large" />
+                <x-sabhero-articles::author-profile :user="$post->user" :post="$post" size="large" />
             </div>
         </div>
     </div>

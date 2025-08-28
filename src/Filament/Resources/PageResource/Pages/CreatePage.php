@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\PageResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\PageResource\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
-use Fuelviews\SabHeroArticle\Filament\Resources\PageResource;
+use Fuelviews\SabHeroArticles\Filament\Resources\PageResource;
 
 class CreatePage extends CreateRecord
 {

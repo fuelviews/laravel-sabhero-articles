@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\CategoryResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\CategoryResource\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
-use Fuelviews\SabHeroArticle\Filament\Resources\CategoryResource;
+use Fuelviews\SabHeroArticles\Filament\Resources\CategoryResource;
 
 class CreateCategory extends CreateRecord
 {

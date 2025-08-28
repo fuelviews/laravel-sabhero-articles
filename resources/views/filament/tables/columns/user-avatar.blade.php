@@ -6,7 +6,7 @@
     <div class="flex gap-2 items-center">
         <img
             src="{{ $record->avatar }}"
-            alt="{{ $record->{config('sabhero-article.user.columns.name')} }}" class="w-7 h-7 rounded-full">
+            alt="{{ $record->{config('sabhero-articles.user.columns.name')} }}" class="w-7 h-7 rounded-full">
         <p class="text-xs font-semibold text-green-500">{{ $record->name }}</p>
     </div>
 </div>

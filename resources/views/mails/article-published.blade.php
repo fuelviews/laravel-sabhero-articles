@@ -84,7 +84,7 @@
     <div class="content">
         <h2>{{ $post->title }}</h2>
         <p>{!! Str::limit($post->body, 500) !!} </p>
-        <a href="{{route('sabhero-article.post.show', ['post' => $post->slug])}}" class="btn">Read More</a>
+        <a href="{{route('sabhero-articles.post.show', ['post' => $post->slug])}}" class="btn">Read More</a>
     </div>
     <div class="footer">
         <p>Thank you for subscribing to our article updates!</p>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Models;
+namespace Fuelviews\SabHeroArticles\Models;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
@@ -22,7 +22,7 @@ class Category extends Model
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, config('sabhero-article.tables.prefix').'category_'.config('sabhero-article.tables.prefix').'post');
+        return $this->belongsToMany(Post::class, config('sabhero-articles.tables.prefix').'category_'.config('sabhero-articles.tables.prefix').'post');
     }
 
     public static function getForm(): array
@@ -33,12 +33,12 @@ class Category extends Model
                 ->afterStateUpdated(function (Get $get, Set $set, ?string $operation, ?string $old, ?string $state) {
                     $set('slug', Str::slug($state));
                 })
-                ->unique(config('sabhero-article.tables.prefix').'categories', 'name', null, 'id')
+                ->unique(config('sabhero-articles.tables.prefix').'categories', 'name', null, 'id')
                 ->required()
                 ->maxLength(155),
 
             TextInput::make('slug')
-                ->unique(config('sabhero-article.tables.prefix').'categories', 'slug', null, 'id')
+                ->unique(config('sabhero-articles.tables.prefix').'categories', 'slug', null, 'id')
                 ->readOnly()
                 ->maxLength(255),
         ];
@@ -56,6 +56,6 @@ class Category extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-article.tables.prefix').'categories';
+        return config('sabhero-articles.tables.prefix').'categories';
     }
 }

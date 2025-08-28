@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Database\Factories;
+namespace Fuelviews\SabHeroArticles\Database\Factories;
 
-use Fuelviews\SabHeroArticle\Models\Page;
+use Fuelviews\SabHeroArticles\Models\Page;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 

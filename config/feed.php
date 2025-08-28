@@ -11,12 +11,12 @@ return [
              * You can also pass an argument to that method:
              * ['App\Models\Post@getFeedItems', 'argument']
              */
-            'items' => 'Fuelviews\SabHeroArticle\Models\Post@getFeedItems',
+            'items' => 'Fuelviews\SabHeroArticles\Models\Post@getFeedItems',
 
             /*
              * The feed will be available on this url.
              */
-            'url' => config('sabhero-article.route.prefix').'/rss',
+            'url' => config('sabhero-articles.route.prefix').'/rss',
 
             'title' => config('app.name').' Latest Article Posts',
             'description' => 'The latest article posts from '.config('app.url'),
@@ -37,7 +37,7 @@ return [
             /*
              * The view that will render the feed.
              */
-            'view' => 'sabhero-article::feed.rss',
+            'view' => 'sabhero-articles::feed.rss',
 
             /*
              * The type of feed to use: 'atom' or 'rss'

@@ -1,12 +1,12 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages;
 
 use Carbon\Carbon;
 use Filament\Resources\Pages\CreateRecord;
-use Fuelviews\SabHeroArticle\Events\ArticlePublished;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource;
-use Fuelviews\SabHeroArticle\Jobs\PostScheduleJob;
+use Fuelviews\SabHeroArticles\Events\ArticlePublished;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource;
+use Fuelviews\SabHeroArticles\Jobs\PostScheduleJob;
 
 class CreatePost extends CreateRecord
 {

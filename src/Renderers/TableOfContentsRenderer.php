@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Renderers;
+namespace Fuelviews\SabHeroArticles\Renderers;
 
 use InvalidArgumentException;
 use League\CommonMark\Extension\TableOfContents\Node\TableOfContents;

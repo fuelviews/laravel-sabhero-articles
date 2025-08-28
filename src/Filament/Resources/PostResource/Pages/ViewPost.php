@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages;
 
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
-use Fuelviews\SabHeroArticle\Events\ArticlePublished;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource;
+use Fuelviews\SabHeroArticles\Events\ArticlePublished;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource;
 use Illuminate\Contracts\Support\Htmlable;
 
 class ViewPost extends ViewRecord
@@ -32,7 +32,7 @@ class ViewPost extends ViewRecord
             Action::make('preview')
                 ->label('Preview')
                 ->icon('heroicon-o-eye')
-                ->url(fn () => route('sabhero-article.post.show', $this->record->slug), true)
+                ->url(fn () => route('sabhero-articles.post.show', $this->record->slug), true)
                 ->disabled(fn () => $this->record->isNotPublished()),
         ];
     }

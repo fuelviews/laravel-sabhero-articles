@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\UserResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\UserResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
-use Fuelviews\SabHeroArticle\Filament\Resources\UserResource;
+use Fuelviews\SabHeroArticles\Filament\Resources\UserResource;
 
 class ListUsers extends ListRecords
 {

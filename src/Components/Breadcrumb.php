@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Components;
+namespace Fuelviews\SabHeroArticles\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -10,6 +10,6 @@ class Breadcrumb extends Component
 {
     public function render(): View|Closure|string
     {
-        return view('sabhero-article::components.breadcrumb');
+        return view('sabhero-articles::components.breadcrumb');
     }
 }

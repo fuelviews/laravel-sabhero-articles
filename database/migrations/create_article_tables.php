@@ -8,14 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create(config('sabhero-article.tables.prefix').'categories', function (Blueprint $table) {
+        Schema::create(config('sabhero-articles.tables.prefix').'categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 155)->unique();
             $table->string('slug', 155)->unique();
             $table->timestamps();
         });
 
-        Schema::create(config('sabhero-article.tables.prefix').'authors', function (Blueprint $table) {
+        Schema::create(config('sabhero-articles.tables.prefix').'authors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->string('slug')->unique();
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('sabhero-article.tables.prefix').'posts', function (Blueprint $table) {
+        Schema::create(config('sabhero-articles.tables.prefix').'posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('slug');
@@ -35,37 +35,37 @@ return new class extends Migration
             $table->dateTime('published_at')->nullable();
             $table->dateTime('scheduled_for')->nullable();
             $table->string('feature_image_alt_text');
-            $table->foreignId(config('sabhero-article.user.foreign_key'))
+            $table->foreignId(config('sabhero-articles.user.foreign_key'))
                 ->constrained()
                 ->cascadeOnDelete();
             $table->timestamps();
         });
 
-        Schema::create(config('sabhero-article.tables.prefix').'category_'.config('sabhero-article.tables.prefix').'post', function (Blueprint $table) {
+        Schema::create(config('sabhero-articles.tables.prefix').'category_'.config('sabhero-articles.tables.prefix').'post', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')
-                ->constrained(table: config('sabhero-article.tables.prefix').'posts')
+                ->constrained(table: config('sabhero-articles.tables.prefix').'posts')
                 ->cascadeOnDelete();
             $table->foreignId('category_id')
-                ->constrained(table: config('sabhero-article.tables.prefix').'categories')
+                ->constrained(table: config('sabhero-articles.tables.prefix').'categories')
                 ->cascadeOnDelete();
             $table->timestamps();
         });
 
-        Schema::create(config('sabhero-article.tables.prefix').'tags', function (Blueprint $table) {
+        Schema::create(config('sabhero-articles.tables.prefix').'tags', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50)->unique();
             $table->string('slug', 155)->unique();
             $table->timestamps();
         });
 
-        Schema::create(config('sabhero-article.tables.prefix').'post_'.config('sabhero-article.tables.prefix').'tag', function (Blueprint $table) {
+        Schema::create(config('sabhero-articles.tables.prefix').'post_'.config('sabhero-articles.tables.prefix').'tag', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')
-                ->constrained(table: config('sabhero-article.tables.prefix').'posts')
+                ->constrained(table: config('sabhero-articles.tables.prefix').'posts')
                 ->cascadeOnDelete();
             $table->foreignId('tag_id')
-                ->constrained(table: config('sabhero-article.tables.prefix').'tags')
+                ->constrained(table: config('sabhero-articles.tables.prefix').'tags')
                 ->cascadeOnDelete();
             $table->timestamps();
         });
@@ -77,12 +77,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists(config('sabhero-article.tables.prefix').'category_'.config('sabhero-article.tables.prefix').'post');
-        Schema::dropIfExists(config('sabhero-article.tables.prefix').'categories');
-        Schema::dropIfExists(config('sabhero-article.tables.prefix').'authors');
-        Schema::dropIfExists(config('sabhero-article.tables.prefix').'posts');
-        Schema::dropIfExists(config('sabhero-article.tables.prefix').'tags');
-        Schema::dropIfExists(config('sabhero-article.tables.prefix').'post_'.config('sabhero-article.tables.prefix').'tag');
+        Schema::dropIfExists(config('sabhero-articles.tables.prefix').'category_'.config('sabhero-articles.tables.prefix').'post');
+        Schema::dropIfExists(config('sabhero-articles.tables.prefix').'categories');
+        Schema::dropIfExists(config('sabhero-articles.tables.prefix').'authors');
+        Schema::dropIfExists(config('sabhero-articles.tables.prefix').'posts');
+        Schema::dropIfExists(config('sabhero-articles.tables.prefix').'tags');
+        Schema::dropIfExists(config('sabhero-articles.tables.prefix').'post_'.config('sabhero-articles.tables.prefix').'tag');
         Schema::enableForeignKeyConstraints();
     }
 };

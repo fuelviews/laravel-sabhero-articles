@@ -1,17 +1,17 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle;
+namespace Fuelviews\SabHeroArticles;
 
-use Fuelviews\SabHeroArticle\Components\Breadcrumb;
-use Fuelviews\SabHeroArticle\Components\Card;
-use Fuelviews\SabHeroArticle\Components\FeatureCard;
-use Fuelviews\SabHeroArticle\Components\HeaderCategory;
-use Fuelviews\SabHeroArticle\Components\Layout;
-use Fuelviews\SabHeroArticle\Components\Markdown;
-use Fuelviews\SabHeroArticle\Components\RecentPost;
-use Fuelviews\SabHeroArticle\Http\Livewire\SearchAutocomplete;
-use Fuelviews\SabHeroArticle\Models\Page;
-use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticles\Components\Breadcrumb;
+use Fuelviews\SabHeroArticles\Components\Card;
+use Fuelviews\SabHeroArticles\Components\FeatureCard;
+use Fuelviews\SabHeroArticles\Components\HeaderCategory;
+use Fuelviews\SabHeroArticles\Components\Layout;
+use Fuelviews\SabHeroArticles\Components\Markdown;
+use Fuelviews\SabHeroArticles\Components\RecentPost;
+use Fuelviews\SabHeroArticles\Http\Livewire\SearchAutocomplete;
+use Fuelviews\SabHeroArticles\Models\Page;
+use Fuelviews\SabHeroArticles\Models\Post;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -20,13 +20,13 @@ use Spatie\Feed\FeedServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class SabHeroArticleServiceProvider extends PackageServiceProvider
+class SabHeroArticlesServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        $package->name('sabhero-article')
+        $package->name('sabhero-articles')
             ->hasConfigFile([
-                'sabhero-article',
+                'sabhero-articles',
                 'feed',
             ])
             ->hasMigrations([
@@ -40,7 +40,7 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
             ])
 
             ->hasViewComponents(
-                'sabhero-article',
+                'sabhero-articles',
                 Layout::class,
                 RecentPost::class,
                 HeaderCategory::class,
@@ -49,7 +49,7 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
                 Markdown::class,
                 Breadcrumb::class,
             )
-            ->hasViews('sabhero-article')
+            ->hasViews('sabhero-articles')
             ->hasRoutes([
                 'web',
                 'breadcrumbs',
@@ -59,7 +59,7 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
 
     public function register()
     {
-        Paginator::defaultView('sabhero-article::pagination.tailwind');
+        Paginator::defaultView('sabhero-articles::pagination.tailwind');
 
         Route::bind('post', function ($value) {
             return Post::where('slug', $value)
@@ -69,7 +69,7 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
         });
 
         Route::bind('user', function ($value) {
-            $userModel = config('sabhero-article.user.model');
+            $userModel = config('sabhero-articles.user.model');
 
             return $userModel::where('slug', $value)->firstOrFail();
         });
@@ -79,7 +79,7 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
         ], static function ($view) {
             if (request()->route() &&
                 in_array(request()->route()->getName(), [
-                    'sabhero-article.post.show',
+                    'sabhero-articles.post.show',
                 ])) {
                 $seoPost = request()->route('post');
 
@@ -89,7 +89,7 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
             }
         });
 
-        $this->app->register(SabHeroArticleEventServiceProvider::class);
+        $this->app->register(SabHeroArticlesEventServiceProvider::class);
 
         return parent::register();
     }
@@ -110,14 +110,14 @@ class SabHeroArticleServiceProvider extends PackageServiceProvider
     {
         $this->publishes([
             __DIR__.'/../database/seeders/PageTableSeeder.php' => database_path('seeders/PageTableSeeder.php'),
-        ], 'sabhero-article-seeders');
+        ], 'sabhero-articles-seeders');
 
         // Register FeedServiceProvider after views are registered
         $this->app->register(FeedServiceProvider::class);
 
         // Register Livewire components if Livewire is available and not in testing
         if (class_exists(\Livewire\Livewire::class) && ! $this->app->environment('testing')) {
-            Livewire::component('sabhero-article::search-autocomplete', SearchAutocomplete::class);
+            Livewire::component('sabhero-articles::search-autocomplete', SearchAutocomplete::class);
         }
     }
 

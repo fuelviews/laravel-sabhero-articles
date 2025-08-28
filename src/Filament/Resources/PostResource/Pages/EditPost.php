@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use Fuelviews\SabHeroArticle\Enums\PostStatus;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource;
+use Fuelviews\SabHeroArticles\Enums\PostStatus;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource;
 
 class EditPost extends EditRecord
 {

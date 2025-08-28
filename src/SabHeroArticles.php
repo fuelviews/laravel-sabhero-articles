@@ -1,13 +1,13 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle;
+namespace Fuelviews\SabHeroArticles;
 
 use Filament\Contracts\Plugin;
 use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
 
-class SabHeroArticle implements Plugin
+class SabHeroArticles implements Plugin
 {
     public static function make(): static
     {
@@ -16,7 +16,7 @@ class SabHeroArticle implements Plugin
 
     public function getId(): string
     {
-        return 'sabhero-article';
+        return 'sabhero-articles';
     }
 
     public function register(Panel $panel): void
@@ -35,9 +35,9 @@ class SabHeroArticle implements Plugin
 
         $panel->navigationItems([
             NavigationItem::make('CRM')
-                ->label(config('sabhero-article.crm.name'))
+                ->label(config('sabhero-articles.crm.name'))
                 ->url(function () {
-                    $link = config('sabhero-article.crm.link');
+                    $link = config('sabhero-articles.crm.link');
                     if (! str_starts_with($link, 'http://') && ! str_starts_with($link, 'https://')) {
                         $link = 'https://'.$link;
                     }

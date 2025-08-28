@@ -1,4 +1,4 @@
-<x-sabhero-article-layout>
+<x-sabhero-articles-layout>
     <section class="py-8">
         <div class="container mx-auto">
             <div class="mx-auto mb-12 space-y-10">
@@ -28,18 +28,18 @@
                                             </p>
                                             <p>{{ $post->sub_title }}</p>
                                         </div>
-                                        <x-sabhero-article-markdown :content="$post->body" />
+                                        <x-sabhero-articles-markdown :content="$post->body" />
                                     </article>
                                 </div>
                                 <hr class="my-12 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">
                                 <div class="flex flex-wrap items-center gap-4">
-                                    <x-sabhero-article::author-profile :user="$post->user" :post="$post" size="large" />
+                                    <x-sabhero-articles::author-profile :user="$post->user" :post="$post" size="large" />
                                     <div class="flex flex-wrap gap-2 min-w-0 flex-1 justify-end">
                                         @foreach ($post->categories as $category)
-                                            <x-sabhero-article::category-button :category="$category" size="medium" />
+                                            <x-sabhero-articles::category-button :category="$category" size="medium" />
                                         @endforeach
                                         @foreach ($post->tags as $tag)
-                                            <x-sabhero-article::tag-button :tag="$tag" size="medium" />
+                                            <x-sabhero-articles::tag-button :tag="$tag" size="medium" />
                                         @endforeach
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-x-12 gap-y-10">
                         @forelse($post->relatedPosts() as $post)
-                            <x-sabhero-article::card :post="$post" />
+                            <x-sabhero-articles::card :post="$post" />
                         @empty
                         <div class="col-span-3">
                             <p class="text-center text-xl font-semibold text-gray-300">No related posts found.</p>
@@ -72,4 +72,4 @@
             </div>
         </div>
     </section>
-</x-sabhero-article-layout>
+</x-sabhero-articles-layout>

@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Components;
+namespace Fuelviews\SabHeroArticles\Components;
 
-use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticles\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -12,7 +12,7 @@ class RecentPost extends Component
     {
         $posts = Post::query()->published()->whereNot('slug', request('post')->slug)->latest()->take(5)->get();
 
-        return view('sabhero-article::components.recent-post', [
+        return view('sabhero-articles::components.recent-post', [
             'posts' => $posts,
         ]);
     }

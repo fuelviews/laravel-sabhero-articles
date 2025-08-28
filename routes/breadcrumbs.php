@@ -14,44 +14,44 @@ Breadcrumbs::for('home', static function ($trail) {
     ]);
 });
 
-Breadcrumbs::for('sabhero-article.post.index', static function (BreadcrumbTrail $trail) {
-    $prefix = config('sabhero-article.route.prefix');
+Breadcrumbs::for('sabhero-articles.post.index', static function (BreadcrumbTrail $trail) {
+    $prefix = config('sabhero-articles.route.prefix');
 
     $trail->parent('home');
-    $trail->push(Str::title($prefix), route('sabhero-article.post.index'));
+    $trail->push(Str::title($prefix), route('sabhero-articles.post.index'));
 });
 
-Breadcrumbs::for('sabhero-article.post.show', static function (BreadcrumbTrail $trail, $post) {
-    $trail->parent('sabhero-article.post.index');
-    $trail->push($post->title, route('sabhero-article.post.show', $post->slug));
+Breadcrumbs::for('sabhero-articles.post.show', static function (BreadcrumbTrail $trail, $post) {
+    $trail->parent('sabhero-articles.post.index');
+    $trail->push($post->title, route('sabhero-articles.post.show', $post->slug));
 });
 
-Breadcrumbs::for('sabhero-article.category.index', static function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('sabhero-articles.category.index', static function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('Categories', route('sabhero-article.category.index'));
+    $trail->push('Categories', route('sabhero-articles.category.index'));
 });
 
-Breadcrumbs::for('sabhero-article.category.post', static function (BreadcrumbTrail $trail, $category) {
-    $trail->parent('sabhero-article.category.index');
-    $trail->push($category->name, route('sabhero-article.category.post', $category->slug));
+Breadcrumbs::for('sabhero-articles.category.post', static function (BreadcrumbTrail $trail, $category) {
+    $trail->parent('sabhero-articles.category.index');
+    $trail->push($category->name, route('sabhero-articles.category.post', $category->slug));
 });
 
-Breadcrumbs::for('sabhero-article.tag.post', static function (BreadcrumbTrail $trail, $tag) {
-    $trail->parent('sabhero-article.tag.index');
-    $trail->push($tag->name, route('sabhero-article.tag.post', $tag->slug));
+Breadcrumbs::for('sabhero-articles.tag.post', static function (BreadcrumbTrail $trail, $tag) {
+    $trail->parent('sabhero-articles.tag.index');
+    $trail->push($tag->name, route('sabhero-articles.tag.post', $tag->slug));
 });
 
-Breadcrumbs::for('sabhero-article.tag.index', static function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('sabhero-articles.tag.index', static function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('Tags', route('sabhero-article.tag.index'));
+    $trail->push('Tags', route('sabhero-articles.tag.index'));
 });
 
-Breadcrumbs::for('sabhero-article.author.index', static function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('sabhero-articles.author.index', static function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('Authors', route('sabhero-article.author.index'));
+    $trail->push('Authors', route('sabhero-articles.author.index'));
 });
 
-Breadcrumbs::for('sabhero-article.author.show', static function (BreadcrumbTrail $trail, $author) {
-    $trail->parent('sabhero-article.author.index');
-    $trail->push($author->name, route('sabhero-article.author.show', $author->slug));
+Breadcrumbs::for('sabhero-articles.author.show', static function (BreadcrumbTrail $trail, $author) {
+    $trail->parent('sabhero-articles.author.index');
+    $trail->push($author->name, route('sabhero-articles.author.show', $author->slug));
 });

@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\TagResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\TagResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use Fuelviews\SabHeroArticle\Filament\Resources\TagResource;
+use Fuelviews\SabHeroArticles\Filament\Resources\TagResource;
 
 class EditTag extends EditRecord
 {

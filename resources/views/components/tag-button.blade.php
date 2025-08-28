@@ -1,4 +1,4 @@
-@props(['tag', 'size' => 'small', 'route' => 'sabhero-article.post.index'])
+@props(['tag', 'size' => 'small', 'route' => 'sabhero-articles.post.index'])
 
 @php
     $sizeClasses = match($size) {
@@ -11,7 +11,7 @@
         default => 'mr-1 h-3 w-3'
     };
 
-    $routeParams = $route === 'sabhero-article.tag.post'
+    $routeParams = $route === 'sabhero-articles.tag.post'
         ? ['tag' => $tag->slug]
         : ['tag' => $tag->slug];
 @endphp

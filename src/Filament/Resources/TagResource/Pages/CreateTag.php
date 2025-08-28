@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\TagResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\TagResource\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
-use Fuelviews\SabHeroArticle\Filament\Resources\TagResource;
+use Fuelviews\SabHeroArticles\Filament\Resources\TagResource;
 
 class CreateTag extends CreateRecord
 {

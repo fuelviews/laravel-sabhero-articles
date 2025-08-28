@@ -1,6 +1,6 @@
 <?php
 
-use Fuelviews\SabHeroArticle\Models\User;
+use Fuelviews\SabHeroArticles\Models\User;
 
 return [
     'tables' => [

@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\CategoryResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\CategoryResource\Pages;
 
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
-use Fuelviews\SabHeroArticle\Filament\Resources\CategoryResource;
-use Fuelviews\SabHeroArticle\Models\Category;
+use Fuelviews\SabHeroArticles\Filament\Resources\CategoryResource;
+use Fuelviews\SabHeroArticles\Models\Category;
 
 class ViewCategory extends ViewRecord
 {

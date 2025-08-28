@@ -1,12 +1,12 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Widgets\ArticlePostPublishedChart;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Widgets\ArticlePostPublishedChart;
 
 class ListPosts extends ListRecords
 {

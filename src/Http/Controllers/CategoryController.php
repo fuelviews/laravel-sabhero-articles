@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Http\Controllers;
+namespace Fuelviews\SabHeroArticles\Http\Controllers;
 
-use Fuelviews\SabHeroArticle\Models\Category;
-use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticles\Models\Category;
+use Fuelviews\SabHeroArticles\Models\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,7 +15,7 @@ class CategoryController extends Controller
             ->published()
             ->paginate(10);
 
-        return view('sabhero-article::articles.categories.show', [
+        return view('sabhero-articles::articles.categories.show', [
             'posts' => $posts,
             'category' => $category,
         ]);
@@ -32,7 +32,7 @@ class CategoryController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('sabhero-article::articles.categories.index', [
+        return view('sabhero-articles::articles.categories.index', [
             'posts' => $posts,
             'categories' => $categories,
         ]);

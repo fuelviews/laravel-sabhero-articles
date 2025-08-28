@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Models;
+namespace Fuelviews\SabHeroArticles\Models;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
@@ -11,7 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Set;
-use Fuelviews\SabHeroArticle\Enums\PostStatus;
+use Fuelviews\SabHeroArticles\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -58,17 +58,17 @@ class Post extends Model implements Feedable, HasMedia
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class, config('sabhero-article.tables.prefix').'category_'.config('sabhero-article.tables.prefix').'post');
+        return $this->belongsToMany(Category::class, config('sabhero-articles.tables.prefix').'category_'.config('sabhero-articles.tables.prefix').'post');
     }
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, config('sabhero-article.tables.prefix').'post_'.config('sabhero-article.tables.prefix').'tag');
+        return $this->belongsToMany(Tag::class, config('sabhero-articles.tables.prefix').'post_'.config('sabhero-articles.tables.prefix').'tag');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(config('sabhero-article.user.model'), config('sabhero-article.user.foreign_key'));
+        return $this->belongsTo(config('sabhero-articles.user.model'), config('sabhero-articles.user.foreign_key'));
     }
 
     public function isNotPublished(): bool
@@ -109,8 +109,8 @@ class Post extends Model implements Feedable, HasMedia
     public function relatedPosts($take = 3)
     {
         return $this->whereHas('categories', function ($query) {
-            $query->whereIn(config('sabhero-article.tables.prefix').'categories.id', $this->categories->pluck('id'))
-                ->whereNotIn(config('sabhero-article.tables.prefix').'posts.id', [$this->id]);
+            $query->whereIn(config('sabhero-articles.tables.prefix').'categories.id', $this->categories->pluck('id'))
+                ->whereNotIn(config('sabhero-articles.tables.prefix').'posts.id', [$this->id]);
         })->published()->with('user')->take($take)->get();
     }
 
@@ -148,7 +148,7 @@ class Post extends Model implements Feedable, HasMedia
                                     Str::slug($state)
                                 ))
                                 ->required()
-                                ->unique(config('sabhero-article.tables.prefix').'posts', 'title', null, 'id')
+                                ->unique(config('sabhero-articles.tables.prefix').'posts', 'title', null, 'id')
                                 ->maxLength(255),
 
                             TextInput::make('slug')
@@ -222,9 +222,9 @@ class Post extends Model implements Feedable, HasMedia
                                 ->native(false),
                         ]),
 
-                    Select::make(config('sabhero-article.user.foreign_key'))
+                    Select::make(config('sabhero-articles.user.foreign_key'))
                         ->label('Author')
-                        ->relationship('user', config('sabhero-article.user.columns.name'))
+                        ->relationship('user', config('sabhero-articles.user.columns.name'))
                         ->nullable(false)
                         ->default(auth()->id()),
 
@@ -290,7 +290,7 @@ class Post extends Model implements Feedable, HasMedia
 
     public function getTable(): string
     {
-        return config('sabhero-article.tables.prefix').'posts';
+        return config('sabhero-articles.tables.prefix').'posts';
     }
 
     public static function getFeedItems()
@@ -305,9 +305,9 @@ class Post extends Model implements Feedable, HasMedia
     public function toFeedItem(): FeedItem
     {
         $siteUrl = config('app.url');
-        $articleUrl = $siteUrl.'/'.config('sabhero-article.route.prefix');
+        $articleUrl = $siteUrl.'/'.config('sabhero-articles.route.prefix');
 
-        $link = route('sabhero-article.post.show', $this);
+        $link = route('sabhero-articles.post.show', $this);
 
         return FeedItem::create()
             ->id($link)

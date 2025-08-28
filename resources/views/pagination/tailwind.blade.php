@@ -1,23 +1,23 @@
 @if ($paginator->hasPages())
     @php
-        $baseUrl = route('sabhero-article.post.index');
-        $prefix = config('sabhero-article.route.prefix');
-        
+        $baseUrl = route('sabhero-articles.post.index');
+        $prefix = config('sabhero-articles.route.prefix');
+
         function customPageUrl($page, $baseUrl, $prefix) {
             if ($page == 1) {
                 $url = $baseUrl;
             } else {
                 $url = str_replace('/' . $prefix, '/' . $prefix . '/page/' . $page, $baseUrl);
             }
-            
+
             // Preserve query parameters
             $queryParams = request()->query();
             unset($queryParams['page']); // Remove the default page parameter
-            
+
             if (!empty($queryParams)) {
                 $url .= '?' . http_build_query($queryParams);
             }
-            
+
             return $url;
         }
     @endphp

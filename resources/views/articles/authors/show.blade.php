@@ -1,9 +1,9 @@
-<x-sabhero-article-layout>
+<x-sabhero-articles-layout>
     <section class="py-8">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row md:items-center gap-8">
                 <div class="flex-shrink-0">
-                    <a href="{{ route('sabhero-article.author.show', $author->slug) }}">
+                    <a href="{{ route('sabhero-articles.author.show', $author->slug) }}">
                         <img
                             class="h-48 w-48 rounded-full shadow-lg"
                             srcset="{{ $author->getAuthorMediaSrcSet() }}"
@@ -67,7 +67,7 @@
                 <div class="">
                     @foreach ($posts->take(1) as $post)
                         <div>
-                            <x-sabhero-article::feature-card :post="$post" />
+                            <x-sabhero-articles::feature-card :post="$post" />
                         </div>
                     @endforeach
                 </div>
@@ -77,7 +77,7 @@
             <div class="container mx-auto">
                 <div class="grid sm:grid-cols-3 gap-x-14 gap-y-14">
                     @foreach ($posts->skip(1) as $post)
-                        <x-sabhero-article::card :post="$post" />
+                        <x-sabhero-articles::card :post="$post" />
                     @endforeach
                 </div>
             </div>
@@ -89,4 +89,4 @@
             </div>
         </div>
     @endif
-</x-sabhero-article-layout>
+</x-sabhero-articles-layout>

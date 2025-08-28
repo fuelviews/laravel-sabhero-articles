@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Components;
+namespace Fuelviews\SabHeroArticles\Components;
 
-use Fuelviews\SabHeroArticle\Models\Category;
+use Fuelviews\SabHeroArticles\Models\Category;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -10,7 +10,7 @@ class HeaderCategory extends Component
 {
     public function render(): View
     {
-        return view('sabhero-article::components.header-category', [
+        return view('sabhero-articles::components.header-category', [
             'categories' => Category::all(),
         ]);
     }

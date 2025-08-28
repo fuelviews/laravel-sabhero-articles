@@ -6,7 +6,7 @@
         @if($componentPath && \Illuminate\Support\Facades\View::exists($componentPath))
             @include($componentPath)
         @endif
-        <section class="max-w-standard mx-auto px-2 xl:px-4 my-12">
+        <section class="max-w-standard mx-auto px-2 sm:px-3 md:px-4 lg:px-4 xl:px-4 my-2 md:my-6 lg:my-12">
             <a id="{{ $dynamicAnchorLink }}" class="{{ config('sabhero-article.heading_permalink.html_class') }}"></a>
             @if(!empty(\Diglactic\Breadcrumbs\Breadcrumbs::exists()))
                 <section>

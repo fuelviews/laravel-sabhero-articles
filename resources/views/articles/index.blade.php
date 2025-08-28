@@ -12,7 +12,7 @@
                 :search-term="$searchTerm"
             />
 
-            <h1 class="text-4xl font-bold mb-8">Articles</h1>
+            <h1 class="text-4xl font-bold mb-4 lg:mb-8">{{ str(config('sabhero-article.route.prefix'))->plural()->ucfirst() }}</h1>
         </div>
     </section>
 

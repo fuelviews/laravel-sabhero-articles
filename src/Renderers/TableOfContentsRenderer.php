@@ -23,7 +23,7 @@ class TableOfContentsRenderer implements NodeRendererInterface
                 'id' => 'toc-toggle',
                 'class' => 'flex w-full items-center justify-between text-xl font-semibold mb-4 text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition-colors',
                 'aria-expanded' => 'false',
-                'aria-controls' => 'toc-content'
+                'aria-controls' => 'toc-content',
             ],
             [
                 new HtmlElement('span', [], 'Table of Contents'),
@@ -31,8 +31,8 @@ class TableOfContentsRenderer implements NodeRendererInterface
                     'class' => 'w-5 h-5 transition-transform duration-200',
                     'fill' => 'none',
                     'stroke' => 'currentColor',
-                    'viewBox' => '0 0 24 24'
-                ], '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>')
+                    'viewBox' => '0 0 24 24',
+                ], '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>'),
             ]
         );
 
@@ -46,7 +46,7 @@ class TableOfContentsRenderer implements NodeRendererInterface
             'ol',
             [
                 'id' => 'toc-content',
-                'class' => 'hidden pl-6 list-disc columns-1 md:columns-2 gap-6 not-prose text-gray-600 dark:text-gray-400 transition-all duration-300'
+                'class' => 'hidden pl-6 list-disc columns-1 md:columns-2 gap-6 not-prose text-gray-600 dark:text-gray-400 transition-all duration-300',
             ],
             $tocHtml
         );

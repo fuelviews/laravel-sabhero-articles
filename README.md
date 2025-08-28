@@ -1,4 +1,4 @@
-# SabHero Article Package
+# SAB Hero Articles Package
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fuelviews/laravel-sabhero-article.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-article)
 [![Total Downloads](https://img.shields.io/packagist/dt/fuelviews/laravel-sabhero-article.svg?style=flat-square)](https://packagist.org/packages/fuelviews/laravel-sabhero-article)
@@ -33,7 +33,7 @@ php artisan filament:install --panels
 php artisan make:filament-user
 ```
 
-### Install the SabHero Article Package
+### Install the SAB Hero Articles Package
 
 ```bash
 composer require fuelviews/laravel-sabhero-article
@@ -80,7 +80,7 @@ php artisan db:seed --class=PageTableSeede
 
 ### 1. Attach to Filament Panel
 
-Add the SabHero Article plugin to your Filament panel provider:
+Add the SAB Hero Articles plugin to your Filament panel provider:
 
 ```php
 use Fuelviews\SabHeroArticle\Facades\SabHeroArticle;
@@ -144,7 +144,7 @@ class User extends Authenticatable implements FilamentUser
 
 ## Available Components
 
-SabHero Article comes with several Blade components for easy UI implementation:
+SAB Hero Articles comes with several Blade components for easy UI implementation:
 
 - `<x-sabhero-article::layout>` - Main article layout
 - `<x-sabhero-article::card>` - Article post-card

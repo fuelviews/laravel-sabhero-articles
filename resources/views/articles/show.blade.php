@@ -6,29 +6,28 @@
                     <div class="space-y-10">
                         <div>
                             <div class="flex flex-col justify-end">
-                                <div class="mb-16 h-full w-full overflow-hidden bg-slate-200 rounded-2xl shadow-2xl">
-
+                                <div class="mb-6 lg:mb-16 h-full w-full overflow-hidden bg-slate-200 rounded-2xl shadow-2xl">
                                     @if ($post->hasMedia('post_feature_image'))
                                         <img
                                             srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
                                             src="{{ $post->getFirstMedia('post_feature_image')->getUrl() }}"
                                             alt="{{ $post->feature_image_alt_text }}"
-                                            class="flex h-full min-h-[400px] items-center justify-center object-cover object-top"
+                                            class="flex h-full w-full min-h-[200px] max-h-[500px] items-center justify-center object-cover object-center"
                                             loading="eager"
                                         >
                                     @else
                                         <p>No featured image available.</p>
                                     @endif
                                 </div>
-                                <div class="">
-                                    <p class="mb-4 text-4xl font-semibold">
-                                        {{ $post->title }}
-                                    </p>
-                                    <p>{{ $post->sub_title }}</p>
-                                </div>
-                                <hr class="my-12 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">
+                                <hr class="mb-6 h-[2px] border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-200">
                                 <div>
                                     <article class="w-full mx-auto">
+                                        <div class="pb-6">
+                                            <p class="mb-4 text-4xl font-semibold">
+                                                {{ $post->title }}
+                                            </p>
+                                            <p>{{ $post->sub_title }}</p>
+                                        </div>
                                         <x-sabhero-article-markdown :content="$post->body" />
                                     </article>
                                 </div>

@@ -14,8 +14,6 @@ use League\CommonMark\Util\RegexHelper;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
-use League\Glide\ServerFactory;
-use League\Glide\Urls\UrlBuilderFactory;
 
 final class GlideImageRenderer implements NodeRendererInterface, XmlNodeRendererInterface, ConfigurationAwareInterface
 {

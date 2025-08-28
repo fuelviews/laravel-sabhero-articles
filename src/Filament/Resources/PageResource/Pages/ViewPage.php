@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\PageResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\PageResource\Pages;
 
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
-use Fuelviews\SabHeroArticle\Filament\Resources\PageResource;
-use Fuelviews\SabHeroArticle\Models\Page;
+use Fuelviews\SabHeroArticles\Filament\Resources\PageResource;
+use Fuelviews\SabHeroArticles\Models\Page;
 
 class ViewPage extends ViewRecord
 {

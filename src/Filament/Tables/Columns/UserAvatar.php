@@ -1,12 +1,12 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Tables\Columns;
+namespace Fuelviews\SabHeroArticles\Filament\Tables\Columns;
 
 use Filament\Tables\Columns\Column;
 
 class UserAvatar extends Column
 {
-    protected string $view = 'sabhero-article::filament.tables.columns.user-avatar';
+    protected string $view = 'sabhero-articles::filament.tables.columns.user-avatar';
 
     public function getViewData(): array
     {

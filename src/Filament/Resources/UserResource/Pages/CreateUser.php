@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\UserResource\Pages;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\UserResource\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
-use Fuelviews\SabHeroArticle\Filament\Resources\UserResource;
+use Fuelviews\SabHeroArticles\Filament\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 
 class CreateUser extends CreateRecord

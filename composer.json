@@ -1,13 +1,15 @@
 {
-    "name": "fuelviews/laravel-sabhero-article",
-    "description": "SAB Hero Articles package",
+    "name": "fuelviews/laravel-sabhero-articles",
+    "description": "SAB Hero Articles Package",
     "keywords": [
         "fuelviews",
         "laravel",
         "sabhero",
-        "sabhero-article"
+        "sabhero-articles",
+        "articles",
+        "blog"
     ],
-    "homepage": "https://github.com/fuelviews/laravel-sabhero-article",
+    "homepage": "https://github.com/fuelviews/laravel-sabhero-articles",
     "license": "MIT",
     "authors": [
         {
@@ -41,13 +43,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Fuelviews\\SabHeroArticle\\": "src/",
-            "Fuelviews\\SabHeroArticle\\Database\\Factories\\": "database/factories/"
+            "Fuelviews\\SabHeroArticles\\": "src/",
+            "Fuelviews\\SabHeroArticles\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fuelviews\\SabHeroArticle\\Tests\\": "tests/",
+            "Fuelviews\\SabHeroArticles\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -66,10 +68,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fuelviews\\SabHeroArticle\\SabHeroArticleServiceProvider"
+                "Fuelviews\\SabHeroArticles\\SabHeroArticlesServiceProvider"
             ],
             "aliases": {
-                "SabHeroArticle": "Fuelviews\\SabHeroArticle\\Facades\\SabHeroArticle"
+                "SabHeroArticles": "Fuelviews\\SabHeroArticles\\Facades\\SabHeroArticles"
             }
         }
     },

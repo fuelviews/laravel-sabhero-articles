@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Traits;
+namespace Fuelviews\SabHeroArticles\Traits;
 
-use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticles\Models\Post;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
@@ -44,7 +44,7 @@ trait HasArticle
 
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, config('sabhero-article.user.foreign_key'));
+        return $this->hasMany(Post::class, config('sabhero-articles.user.foreign_key'));
     }
 
     /**

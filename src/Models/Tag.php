@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Models;
+namespace Fuelviews\SabHeroArticles\Models;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Set;
@@ -24,7 +24,7 @@ class Tag extends Model
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, config('sabhero-article.tables.prefix').'post_'.config('sabhero-article.tables.prefix').'tag');
+        return $this->belongsToMany(Post::class, config('sabhero-articles.tables.prefix').'post_'.config('sabhero-articles.tables.prefix').'tag');
     }
 
     public static function getForm(): array
@@ -35,12 +35,12 @@ class Tag extends Model
                     'slug',
                     Str::slug($state)
                 ))
-                ->unique(config('sabhero-article.tables.prefix').'tags', 'name', null, 'id')
+                ->unique(config('sabhero-articles.tables.prefix').'tags', 'name', null, 'id')
                 ->required()
                 ->maxLength(50),
 
             TextInput::make('slug')
-                ->unique(config('sabhero-article.tables.prefix').'tags', 'slug', null, 'id')
+                ->unique(config('sabhero-articles.tables.prefix').'tags', 'slug', null, 'id')
                 ->readOnly()
                 ->maxLength(155),
         ];
@@ -58,6 +58,6 @@ class Tag extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-article.tables.prefix').'tags';
+        return config('sabhero-articles.tables.prefix').'tags';
     }
 }

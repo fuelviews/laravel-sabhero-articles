@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources;
+namespace Fuelviews\SabHeroArticles\Filament\Resources;
 
 use App\Models\User;
 use Filament\Forms;
@@ -16,17 +16,17 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-// use Fuelviews\SabHeroArticle\Enums\MetroType;
-use Fuelviews\SabHeroArticle\Enums\PostStatus;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\CreatePost;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\EditPost;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\ListPosts;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Pages\ViewPost;
-use Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Widgets\ArticlePostPublishedChart;
-use Fuelviews\SabHeroArticle\Filament\Tables\Columns\UserAvatar;
-use Fuelviews\SabHeroArticle\Models\Category;
-use Fuelviews\SabHeroArticle\Models\Post;
-use Fuelviews\SabHeroArticle\Models\Tag;
+// use Fuelviews\SabHeroArticles\Enums\MetroType;
+use Fuelviews\SabHeroArticles\Enums\PostStatus;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\CreatePost;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\EditPost;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\ListPosts;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\ViewPost;
+use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Widgets\ArticlePostPublishedChart;
+use Fuelviews\SabHeroArticles\Filament\Tables\Columns\UserAvatar;
+use Fuelviews\SabHeroArticles\Models\Category;
+use Fuelviews\SabHeroArticles\Models\Post;
+use Fuelviews\SabHeroArticles\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
@@ -97,7 +97,7 @@ class PostResource extends Resource
             ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\SelectFilter::make('user')
-                    ->relationship('user', config('sabhero-article.user.columns.name'))
+                    ->relationship('user', config('sabhero-articles.user.columns.name'))
                     ->searchable()
                     ->preload()
                     ->multiple(),
@@ -123,7 +123,7 @@ class PostResource extends Resource
                     ->beforeReplicaSaved(function (Post $replica, array $data): void {
                         $replica->title = $replica->title.' (Copy)';
                         $replica->slug = Str::slug($replica->title.' copy '.time());
-                        $replica->status = \Fuelviews\SabHeroArticle\Enums\PostStatus::PUBLISHED;
+                        $replica->status = \Fuelviews\SabHeroArticles\Enums\PostStatus::PUBLISHED;
                         $replica->published_at = null;
                         $replica->scheduled_for = null;
                     })

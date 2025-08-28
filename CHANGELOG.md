@@ -1,54 +1,55 @@
 # Changelog
 
-All notable changes to `laravel-sabhero-article` will be documented in this file.
+All notable changes to `laravel-sabhero-articles` will be documented in this file.
+
 
 ## v0.0.18 - 2025-08-28
 
 ### What's Changed
 
-* Integrate ralphjsmit glide by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/28
+* Integrate ralphjsmit glide by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/28
 
-**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.17...v0.0.18
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v0.0.17...v0.0.18
 
 ## v0.0.17 - 2025-08-28
 
 ### What's Changed
 
-* Improve article views layout and styling, enhance breadcrumb link truncation, adjust app layout padding and margins, and add a collapsible, state-persistent toggle button to the Table of Contents for better usability. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/27
+* Improve article views layout and styling, enhance breadcrumb link truncation, adjust app layout padding and margins, and add a collapsible, state-persistent toggle button to the Table of Contents for better usability. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/27
 
-**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.16...v0.0.17
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v0.0.16...v0.0.17
 
 ## v0.0.16 - 2025-08-07
 
 ### What's Changed
 
-* Add pages table migration and seeder publishing; update README with seeder publishing and running instructions; remove unused package dependency. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/26
+* Add pages table migration and seeder publishing; update README with seeder publishing and running instructions; remove unused package dependency. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/26
 
-**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.15...v0.0.16
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v0.0.15...v0.0.16
 
 ## v0.0.15 - 2025-07-31
 
 ### What's Changed
 
-* Add a new seeder for the Page model to populate initial page data and update the media conversion name for feature images to ensure consistency in the media library. This change enhances the database seeding process and improves the handling of feature images associated with pages. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/25
+* Add a new seeder for the Page model to populate initial page data and update the media conversion name for feature images to ensure consistency in the media library. This change enhances the database seeding process and improves the handling of feature images associated with pages. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/25
 
-**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.14...v0.0.15
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v0.0.14...v0.0.15
 
 ## v0.0.14 - 2025-07-31
 
 ### What's Changed
 
-* Add 'feature_image' to the fillable attributes in the Page model and update the unique validation to use the class name dynamically while ensuring the slug is formatted to lowercase. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/24
+* Add 'feature_image' to the fillable attributes in the Page model and update the unique validation to use the class name dynamically while ensuring the slug is formatted to lowercase. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/24
 
-**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.13...v0.0.14
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v0.0.13...v0.0.14
 
 ## v0.0.13 - 2025-07-27
 
 ### What's Changed
 
-* Update article config prefixes to plural, add 'Route' labels to slug fields for clarity, enhance Table of Contents styling for better dark mode support, and adjust service provider to register FeedServiceProvider after views are loaded. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/23
+* Update article config prefixes to plural, add 'Route' labels to slug fields for clarity, enhance Table of Contents styling for better dark mode support, and adjust service provider to register FeedServiceProvider after views are loaded. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/23
 
-**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.12...v0.0.13
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v0.0.12...v0.0.13
 
 ## v0.0.10 - 2025-06-17
 

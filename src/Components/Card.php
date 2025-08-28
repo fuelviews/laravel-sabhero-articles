@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Components;
+namespace Fuelviews\SabHeroArticles\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -9,6 +9,6 @@ class Card extends Component
 {
     public function render(): View
     {
-        return view('sabhero-article::components.card');
+        return view('sabhero-articles::components.card');
     }
 }

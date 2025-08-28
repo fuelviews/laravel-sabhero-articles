@@ -1,11 +1,11 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Models;
+namespace Fuelviews\SabHeroArticles\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
-use Fuelviews\SabHeroArticle\Traits\HasArticle;
+use Fuelviews\SabHeroArticles\Traits\HasArticle;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -64,7 +64,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
      */
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class, config('sabhero-article.user.foreign_key'));
+        return $this->hasMany(Post::class, config('sabhero-articles.user.foreign_key'));
     }
 
     /**
@@ -140,7 +140,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
      */
     public function name(): string
     {
-        return $this->{config('sabhero-article.user.columns.name', 'name')};
+        return $this->{config('sabhero-articles.user.columns.name', 'name')};
     }
 
     /**
@@ -153,7 +153,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 
     public function canAccessPanel(Panel $panel): bool
     {
-        $allowedDomains = config('sabhero-article.user.allowed_domains', []);
+        $allowedDomains = config('sabhero-articles.user.allowed_domains', []);
 
         foreach ($allowedDomains as $domain) {
             if (str_ends_with($this->email, $domain)) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Models;
+namespace Fuelviews\SabHeroArticles\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +22,6 @@ class PostTag extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-article.tables.prefix').'post_'.config('sabhero-article.tables.prefix').'tag';
+        return config('sabhero-articles.tables.prefix').'post_'.config('sabhero-articles.tables.prefix').'tag';
     }
 }

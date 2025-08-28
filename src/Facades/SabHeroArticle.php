@@ -1,16 +1,16 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Facades;
+namespace Fuelviews\SabHeroArticles\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Fuelviews\SabHeroArticle\SabHeroArticle
+ * @see \Fuelviews\SabHeroArticles\SabHeroArticles
  */
-class SabHeroArticle extends Facade
+class SabHeroArticles extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Fuelviews\SabHeroArticle\SabHeroArticle::class;
+        return \Fuelviews\SabHeroArticles\SabHeroArticles::class;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Models;
+namespace Fuelviews\SabHeroArticles\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +19,6 @@ class CategoryPost extends Model
 
     public function getTable(): string
     {
-        return config('sabhero-article.tables.prefix').'category_'.config('sabhero-article.tables.prefix').'post';
+        return config('sabhero-articles.tables.prefix').'category_'.config('sabhero-articles.tables.prefix').'post';
     }
 }

@@ -1,11 +1,11 @@
-<x-sabhero-article-layout>
+<x-sabhero-articles-layout>
     <section class="py-8">
         <div class="container mx-auto">
             <h1 class="text-3xl font-semibold mb-8">Our Authors</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($authors as $user)
                     <div class="bg-white p-6 rounded-lg shadow">
-                        <a href="{{ route('sabhero-article.author.show', ['user' => $user->slug]) }}">
+                        <a href="{{ route('sabhero-articles.author.show', ['user' => $user->slug]) }}">
 
                             <img
                                 class="h-48 w-48 rounded-full mx-auto hover:opacity-65"
@@ -31,4 +31,4 @@
             @endif
         </div>
     </section>
-</x-sabhero-article-layout>
+</x-sabhero-articles-layout>

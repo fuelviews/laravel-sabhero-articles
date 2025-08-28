@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Filament\Resources\PostResource\Widgets;
+namespace Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
-use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticles\Models\Post;
 
 class ArticlePostPublishedChart extends BaseWidget
 {

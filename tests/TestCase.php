@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Tests;
+namespace Fuelviews\SabHeroArticles\Tests;
 
-use Fuelviews\SabHeroArticle\SabHeroArticleServiceProvider;
+use Fuelviews\SabHeroArticles\SabHeroArticlesServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Feed\FeedServiceProvider;
@@ -14,14 +14,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName): string => 'Fuelviews\\SabHeroArticle\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName): string => 'Fuelviews\\SabHeroArticles\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SabHeroArticleServiceProvider::class,
+            SabHeroArticlesServiceProvider::class,
             FeedServiceProvider::class,
         ];
     }

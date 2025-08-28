@@ -1,9 +1,9 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Mails;
+namespace Fuelviews\SabHeroArticles\Mails;
 
-use Fuelviews\SabHeroArticle\Exceptions\CannotSendEmail;
-use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticles\Exceptions\CannotSendEmail;
+use Fuelviews\SabHeroArticles\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;

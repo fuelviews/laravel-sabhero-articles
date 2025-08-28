@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Renderers;
+namespace Fuelviews\SabHeroArticles\Renderers;
 
 use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
 use League\CommonMark\Node\Inline\Newline;
@@ -19,9 +19,9 @@ final class GlideImageRenderer implements NodeRendererInterface, XmlNodeRenderer
 {
     /** @psalm-readonly-allow-private-mutation */
     private ConfigurationInterface $config;
-    
+
     private array $glideConfig;
-    
+
     public function __construct(array $glideConfig = [])
     {
         $this->glideConfig = array_merge([
@@ -102,11 +102,11 @@ final class GlideImageRenderer implements NodeRendererInterface, XmlNodeRenderer
 
         // Normalize the URL once for all srcset generation
         $normalizedUrl = $this->normalizeImagePath($url);
-        
+
         // Use Laravel Glide's built-in srcset generation
         $maxWidth = max($this->glideConfig['srcset_widths']);
         $attributes = glide()->src($normalizedUrl, $maxWidth, sizes: $this->glideConfig['sizes']);
-        
+
         return $attributes->get('srcset');
     }
 
@@ -166,7 +166,7 @@ final class GlideImageRenderer implements NodeRendererInterface, XmlNodeRenderer
 
         return $altText;
     }
-    
+
     /**
      * Normalize image path for Glide processing
      * Convert /storage/images/ to images/ since Glide expects relative paths
@@ -175,11 +175,11 @@ final class GlideImageRenderer implements NodeRendererInterface, XmlNodeRenderer
     {
         // Remove the /storage/ prefix if present
         $path = ltrim($url, '/');
-        
+
         if (str_starts_with($path, 'storage/')) {
             $path = substr($path, 8); // Remove 'storage/' prefix
         }
-        
+
         return $path;
     }
 }

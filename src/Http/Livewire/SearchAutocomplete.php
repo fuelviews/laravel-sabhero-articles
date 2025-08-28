@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\SabHeroArticle\Http\Livewire;
+namespace Fuelviews\SabHeroArticles\Http\Livewire;
 
-use Fuelviews\SabHeroArticle\Models\Post;
+use Fuelviews\SabHeroArticles\Models\Post;
 use Livewire\Component;
 
 class SearchAutocomplete extends Component
@@ -47,13 +47,13 @@ class SearchAutocomplete extends Component
         $this->suggestions = [];
 
         // Redirect to the post
-        return redirect()->route('sabhero-article.post.show', ['post' => $slug]);
+        return redirect()->route('sabhero-articles.post.show', ['post' => $slug]);
     }
 
     public function performSearch()
     {
         if (! empty($this->search)) {
-            return redirect()->route('sabhero-article.post.index', ['search' => $this->search]);
+            return redirect()->route('sabhero-articles.post.index', ['search' => $this->search]);
         }
     }
 
@@ -72,6 +72,6 @@ class SearchAutocomplete extends Component
 
     public function render()
     {
-        return view('sabhero-article::livewire.search-autocomplete');
+        return view('sabhero-articles::livewire.search-autocomplete');
     }
 }

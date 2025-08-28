@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-article` will be documented in this file.
 
+## v0.0.18 - 2025-08-28
+
+### What's Changed
+
+* Integrate ralphjsmit glide by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/28
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.17...v0.0.18
+
 ## v0.0.17 - 2025-08-28
 
 ### What's Changed

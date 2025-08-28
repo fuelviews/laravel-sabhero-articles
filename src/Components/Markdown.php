@@ -2,6 +2,7 @@
 
 namespace Fuelviews\SabHeroArticle\Components;
 
+use Fuelviews\SabHeroArticle\Renderers\GlideImageRenderer;
 use Fuelviews\SabHeroArticle\Renderers\TableOfContentsRenderer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Config;
@@ -9,6 +10,7 @@ use Illuminate\View\Component;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
 use League\CommonMark\Extension\DescriptionList\DescriptionListExtension;
 use League\CommonMark\Extension\Embed\Bridge\OscaroteroEmbedAdapter;
 use League\CommonMark\Extension\Embed\EmbedExtension;
@@ -34,6 +36,7 @@ class Markdown extends Component
     public function render(): View
     {
         $headingConfig = Config::get('sabhero-article.heading_permalink', []);
+        $glideConfig = Config::get('sabhero-article.glide', []);
 
         $config = [
             'table_of_contents' => [
@@ -87,6 +90,10 @@ class Markdown extends Component
         $environment->addExtension(new TableOfContentsExtension);
 
         $environment->addRenderer(TableOfContents::class, new TableOfContentsRenderer);
+
+        // Register custom Glide image renderer with Glide config
+        $glideRenderer = new GlideImageRenderer($glideConfig);
+        $environment->addRenderer(Image::class, $glideRenderer, 10);
 
         $environment->addExtension(new HeadingPermalinkExtension);
 

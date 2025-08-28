@@ -6,7 +6,7 @@ All notable changes to `laravel-sabhero-articles` will be documented in this fil
 
 ### What's Changed
 
-* Rename package from singular "sabhero-article" to plural "sabhero-articles" across all namespaces, classes, configs, routes, views, and documentation to ensure consistent naming and branding. #major by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/31
+* Rename package from singular "sabhero-article" to plural "sabhero-articles" across all namespaces, classes, configs, routes, views, and documentation to ensure consistent naming and branding. #major by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/32
 
 **Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v0.0.18...v0.0.19
 

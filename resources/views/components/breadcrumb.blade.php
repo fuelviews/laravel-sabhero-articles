@@ -18,11 +18,11 @@
                     @endif
 
                     @if($crumb->url && !$loop->last)
-                        <a href="{{ $crumb->url }}" class="text-gray-600 hover:text-prime-700" >
+                        <a href="{{ $crumb->url }}" class="text-gray-600 hover:text-prime-700 {{ $loop->first ? '' : 'truncate max-w-32 sm:max-w-48 md:max-w-64' }}" >
                             {{ $crumb->title }}
                         </a>
                     @else
-                        <a href="{{ $crumb->url }}" class="text-gray-500 hover:text-prime-700">
+                        <a href="{{ $crumb->url }}" class="text-gray-500 hover:text-prime-700 truncate max-w-[200px] md:max-w-[500px] lg:max-w-[800px]">
                             {{ $crumb->title }}
                         </a>
                     @endif

@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-article` will be documented in this file.
 
+## v0.0.17 - 2025-08-28
+
+### What's Changed
+
+* Improve article views layout and styling, enhance breadcrumb link truncation, adjust app layout padding and margins, and add a collapsible, state-persistent toggle button to the Table of Contents for better usability. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-article/pull/27
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-article/compare/v0.0.16...v0.0.17
+
 ## v0.0.16 - 2025-08-07
 
 ### What's Changed

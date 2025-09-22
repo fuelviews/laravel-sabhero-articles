@@ -305,7 +305,7 @@ class PostResource extends Resource
 
     public static function importFromZip($zipFile)
     {
-        $diskName = config('filament.default_filesystem_disk', 'public');
+        $diskName = config('sabhero-articles.media.disk');
 
         $zipFilePath = Storage::disk($diskName)->path($zipFile);
 

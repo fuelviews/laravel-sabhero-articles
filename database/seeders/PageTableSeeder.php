@@ -25,18 +25,22 @@ class PageTableSeeder extends Seeder
         }
 
         $pages = [
+            // Main Pages
             [
-                'title' => 'Title one',
+                'title' => 'Default',
                 'slug' => 'home',
-                'description' => 'Description here',
-                'feature_image' => 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=800&h=600&fit=crop',
+                'description' => 'Default',
+                'feature_image' => null,
             ],
         ];
 
-        foreach ($pages as $pageData) {
-            // Extract feature image URL if present
-            $featureImageUrl = $pageData['feature_image'] ?? null;
-            unset($pageData['feature_image']); // Remove from page data
+        foreach ($pages as $index => $pageData) {
+            // Store the actual image path for media library
+            $actualImagePath = $pageData['feature_image'] ?? null;
+
+            // Since feature_image is nullable in the database, we can set it to null
+            // The actual image will be stored in the media library
+            $pageData['feature_image'] = null;
 
             // Check if a page with this slug OR title already exists
             $existingPage = $pageModel::where('slug', $pageData['slug'])
@@ -60,14 +64,28 @@ class PageTableSeeder extends Seeder
                 $page = $pageModel::create($pageData);
             }
 
-            // Add feature image to media library if URL provided and model supports it
-            if ($featureImageUrl && $page && method_exists($page, 'hasMedia') && method_exists($page, 'addMediaFromUrl')) {
+            // Add feature image to media library if provided and model supports it
+            if ($actualImagePath && $page && method_exists($page, 'hasMedia') && method_exists($page, 'addMedia')) {
                 try {
-                    // Clear existing media first, then add new one
-                    $page->clearMediaCollection('page_feature_image');
-                    $page->addMediaFromUrl($featureImageUrl)
-                        ->toMediaCollection('page_feature_image');
-                    $this->command->info("Added feature image for page: {$page->title}");
+                    // Build the full path to the image
+                    $imagePath = public_path($actualImagePath);
+
+                    if (file_exists($imagePath)) {
+                        // Clear existing media first, then add new one
+                        $page->clearMediaCollection('page_feature_image');
+
+                        // Get the configured media disk from config
+                        $mediaDisk = config('sabhero-articles.media.disk', 'public');
+
+                        $page->addMedia($imagePath)
+                            ->preservingOriginal()
+                            ->withResponsiveImages()
+                            ->toMediaCollection('page_feature_image', $mediaDisk);
+
+                        $this->command->info("Added feature image for page '{$page->title}' from: {$actualImagePath}");
+                    } else {
+                        $this->command->warn("Image file not found for page '{$page->title}': {$imagePath}");
+                    }
                 } catch (\Exception $e) {
                     $this->command->warn("Could not add feature image for page '{$page->title}': " . $e->getMessage());
                 }

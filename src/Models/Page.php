@@ -47,6 +47,12 @@ class Page extends Model implements HasMedia
         );
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('page_feature_image')
+            ->useDisk(config('sabhero-articles.media.disk'));
+    }
+
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('page_feature_image')
@@ -75,6 +81,7 @@ class Page extends Model implements HasMedia
                         ->columnSpanFull(),
 
                     SpatieMediaLibraryFileUpload::make('feature_image')
+                        ->disk(config('sabhero-articles.media.disk'))
                         ->label('Feature Image')
                         ->collection('page_feature_image')
                         ->image()

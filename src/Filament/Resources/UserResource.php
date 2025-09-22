@@ -98,6 +98,7 @@ class UserResource extends Resource
                 Forms\Components\Section::make('Avatar')
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('avatar')
+                            ->disk(config('sabhero-articles.media.disk'))
                             ->responsiveImages()
                             ->image()
                             ->label('Avatar')

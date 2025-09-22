@@ -11,7 +11,7 @@ A full-featured article management solution for Laravel applications with Filame
 - **Scheduled Publishing**: Schedule posts to be published automatically
 - **Blade Components**: Ready-to-use UI components including cards, feature cards, and breadcrumbs
 - **Advanced Content**: Markdown rendering with automatic table of contents
-- **Media Management**: Image uploads with responsive images support
+- **Media Management**: Image uploads with responsive images support and configurable storage
 - **SEO Optimization**: Built-in SEO metadata for better search rankings
 - **RSS Feed**: Automatic feed generation with customizable settings
 - **Tailwind Pagination**: Custom pagination views for Tailwind CSS
@@ -46,6 +46,13 @@ composer require fuelviews/laravel-sabhero-articles
 ```bash
 php artisan vendor:publish --tag="sabhero-articles-config"
 ```
+
+The configuration file allows you to customize various aspects of the package:
+
+- **Media Storage**: Configure which disk to use for media files (defaults to FilamentPHP's default disk)
+- **Table Prefixes**: Customize database table naming
+- **User Model**: Configure which user model to use
+- **Routes**: Set route prefixes and middleware
 
 ### 2. Publish Migrations
 

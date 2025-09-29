@@ -78,7 +78,7 @@ class PageTableSeeder extends Seeder
                         $page->clearMediaCollection('page_feature_image');
 
                         // Get the configured media disk from config
-                        $mediaDisk = config('sabhero-articles.media.disk', 'public');
+                        $mediaDisk = config('sabhero-articles.media.disk');
 
                         $page->addMedia($imagePath)
                             ->preservingOriginal()

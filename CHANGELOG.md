@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-articles` will be documented in this file.
 
+## v1.0.2 - 2025-09-29
+
+### What's Changed
+
+* Simplify media disk configuration by hardcoding 'public' and update PageTableSeeder with clearer page data and improved seeding notes, removing redundant info messages. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/38
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v1.0.1...v1.0.2
+
 ## v1.0.1 - 2025-09-22
 
 ### What's Changed

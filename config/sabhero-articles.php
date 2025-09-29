@@ -33,7 +33,17 @@ return [
         'link' => '#',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Media Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configure media storage settings including the filesystem disk.
+    | You may use any of the disks defined in `config/filesystems.php`.
+    |
+    */
+
     'media' => [
-        'disk' => config('filament.default_filesystem_disk', 'public'),
+        'disk' => 'public',
     ],
 ];

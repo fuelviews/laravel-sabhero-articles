@@ -34,6 +34,6 @@ return [
     ],
 
     'media' => [
-        'disk' => config('filament.default_filesystem_disk', 'public'),
+        'disk' => 'public',
     ],
 ];

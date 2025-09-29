@@ -9,6 +9,9 @@ class PageTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * Note: This seeder uses the media disk configured in config/media-library.php
+     * Default is 'media' disk, but can be overridden with MEDIA_DISK env variable
      */
     public function run(): void
     {
@@ -27,9 +30,9 @@ class PageTableSeeder extends Seeder
         $pages = [
             // Main Pages
             [
-                'title' => 'Default',
-                'slug' => 'home',
-                'description' => 'Default',
+                'title' => 'Title',
+                'slug' => 'title', // actually needs the route name, not the slug
+                'description' => 'Desc here',
                 'feature_image' => null,
             ],
         ];
@@ -81,8 +84,6 @@ class PageTableSeeder extends Seeder
                             ->preservingOriginal()
                             ->withResponsiveImages()
                             ->toMediaCollection('page_feature_image', $mediaDisk);
-
-                        $this->command->info("Added feature image for page '{$page->title}' from: {$actualImagePath}");
                     } else {
                         $this->command->warn("Image file not found for page '{$page->title}': {$imagePath}");
                     }

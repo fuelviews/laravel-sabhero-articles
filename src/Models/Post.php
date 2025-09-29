@@ -177,6 +177,7 @@ class Post extends Model implements Feedable, HasMedia
                         ]),
 
                     MarkdownEditor::make('body')
+                        ->fileAttachmentsDisk(config('sabhero-articles.media.disk'))
                         ->fileAttachmentsVisibility('public')
                         ->required()
                         ->columnSpanFull(),
@@ -185,6 +186,7 @@ class Post extends Model implements Feedable, HasMedia
                         ->columns(1)
                         ->schema([
                             SpatieMediaLibraryFileUpload::make('post_feature_image')
+                                ->disk(config('sabhero-articles.media.disk'))
                                 ->getUploadedFileNameForStorageUsing(function (UploadedFile $file): string {
                                     $baseName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                                     $slug = Str::slug(strtolower($baseName), '_');
@@ -235,6 +237,12 @@ class Post extends Model implements Feedable, HasMedia
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('post_feature_image')
+            ->useDisk(config('sabhero-articles.media.disk'));
     }
 
     public function registerMediaConversions(?Media $media = null): void

@@ -73,6 +73,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('avatar')
+            ->useDisk(config('sabhero-articles.media.disk'))
             ->withResponsiveImages();
     }
 

@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-sabhero-articles` will be documented in this file.
 
+## v1.0.1 - 2025-09-22
+
+### What's Changed
+
+* Bump platisd/openai-pr-description from 1.4.0 to 1.5.0 by @dependabot[bot] in https://github.com/fuelviews/laravel-sabhero-articles/pull/34
+* Bump anothrNick/github-tag-action from 1.73.0 to 1.75.0 by @dependabot[bot] in https://github.com/fuelviews/laravel-sabhero-articles/pull/36
+* Add configurable media storage disk support across the package, update README and config for customization, and modify media handling in models, resources, and seeders to use the configured disk. Adjust page title length and nullable description, and improve feature image seeding with local file checks and media library integration. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/37
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v1.0.0...v1.0.1
+
 ## v1.0.0 - 2025-08-28
 
 ### What's Changed

@@ -7,9 +7,17 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * Update media collection names to be more specific.
+     * Renames 'feature_image' to 'page_feature_image' for pages
+     * and 'post_feature_image' for posts.
      */
     public function up(): void
     {
+        if (! \Schema::hasTable('media')) {
+            return;
+        }
+
         // Update media collection names for pages
         // Rename 'feature_image' to 'page_feature_image' for pages
         DB::table('media')
@@ -30,6 +38,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (! \Schema::hasTable('media')) {
+            return;
+        }
+
         // Revert page_feature_image back to feature_image for pages
         DB::table('media')
             ->where('model_type', 'Fuelviews\\SabHeroArticles\\Models\\Page')

@@ -2,7 +2,7 @@
 
 namespace Fuelviews\SabHeroArticles;
 
-use Fuelviews\SabHeroArticles\Commands\UpgradeCommand;
+use Fuelviews\SabHeroArticles\Commands\UpgradeV2Command;
 use Fuelviews\SabHeroArticles\Components\Breadcrumb;
 use Fuelviews\SabHeroArticles\Components\Card;
 use Fuelviews\SabHeroArticles\Components\FeatureCard;
@@ -31,7 +31,7 @@ class SabHeroArticlesServiceProvider extends PackageServiceProvider
                 'feed',
             ])
             ->hasCommands([
-                UpgradeCommand::class,
+                UpgradeV2Command::class,
             ])
             ->hasMigrations([
                 'add_author_fields_to_users_table',
@@ -43,7 +43,7 @@ class SabHeroArticlesServiceProvider extends PackageServiceProvider
                 'create_pages_table',
                 'rename_feature_image_alt_text_column',
                 'rename_media_collection_names',
-                'drop_page_feature_image_column',
+                'drop_feature_image_columns',
                 'rename_page_slug_to_route',
             ])
 

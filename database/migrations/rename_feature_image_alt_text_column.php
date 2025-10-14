@@ -8,12 +8,23 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * Rename feature_image_alt_text to post_feature_image_alt_text in posts table.
+     * This provides more specific naming to distinguish post images from page images.
      */
     public function up(): void
     {
-        // Rename feature_image_alt_text to post_feature_image_alt_text in posts table
-        if (Schema::hasColumn(config('sabhero-articles.tables.prefix').'posts', 'feature_image_alt_text')) {
-            Schema::table(config('sabhero-articles.tables.prefix').'posts', function (Blueprint $table) {
+        $postsTable = config('sabhero-articles.tables.prefix').'posts';
+
+        if (! Schema::hasTable($postsTable)) {
+            return;
+        }
+
+        $hasOldColumn = Schema::hasColumn($postsTable, 'feature_image_alt_text');
+        $hasNewColumn = Schema::hasColumn($postsTable, 'post_feature_image_alt_text');
+
+        if ($hasOldColumn && ! $hasNewColumn) {
+            Schema::table($postsTable, function (Blueprint $table) {
                 $table->renameColumn('feature_image_alt_text', 'post_feature_image_alt_text');
             });
         }
@@ -24,9 +35,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Revert post_feature_image_alt_text back to feature_image_alt_text
-        if (Schema::hasColumn(config('sabhero-articles.tables.prefix').'posts', 'post_feature_image_alt_text')) {
-            Schema::table(config('sabhero-articles.tables.prefix').'posts', function (Blueprint $table) {
+        $postsTable = config('sabhero-articles.tables.prefix').'posts';
+
+        if (Schema::hasColumn($postsTable, 'post_feature_image_alt_text') && ! Schema::hasColumn($postsTable, 'feature_image_alt_text')) {
+            Schema::table($postsTable, function (Blueprint $table) {
                 $table->renameColumn('post_feature_image_alt_text', 'feature_image_alt_text');
             });
         }

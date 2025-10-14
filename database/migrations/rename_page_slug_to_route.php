@@ -17,38 +17,17 @@ return new class extends Migration
     public function up(): void
     {
         if (! Schema::hasTable('pages')) {
-            echo "  ⚠ pages table does not exist - skipping\n";
             return;
         }
 
         $hasSlug = Schema::hasColumn('pages', 'slug');
         $hasRoute = Schema::hasColumn('pages', 'route');
 
-        echo "  → Before: slug={$hasSlug}, route={$hasRoute}\n";
-
         if ($hasSlug && ! $hasRoute) {
-            echo "  → Renaming column slug to route...\n";
-
-            try {
-                Schema::table('pages', function (Blueprint $table) {
-                    $table->renameColumn('slug', 'route');
-                });
-
-                echo "  ✓ Column renamed successfully\n";
-            } catch (\Exception $e) {
-                echo "  ✗ Error: " . $e->getMessage() . "\n";
-                throw $e;
-            }
-        } elseif ($hasRoute) {
-            echo "  ℹ Column already renamed - skipping\n";
-        } else {
-            echo "  ⚠ Unexpected state - both columns missing?\n";
+            Schema::table('pages', function (Blueprint $table) {
+                $table->renameColumn('slug', 'route');
+            });
         }
-
-        // Verify after
-        $hasSlugAfter = Schema::hasColumn('pages', 'slug');
-        $hasRouteAfter = Schema::hasColumn('pages', 'route');
-        echo "  → After: slug={$hasSlugAfter}, route={$hasRouteAfter}\n";
     }
 
     /**

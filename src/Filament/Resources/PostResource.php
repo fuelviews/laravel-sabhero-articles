@@ -178,7 +178,7 @@ class PostResource extends Resource
 
                             TextEntry::make('body')
                                 ->label('Content')
-                                ->html()
+                                ->markdown()
                                 ->columnSpanFull(),
                         ]),
                     Fieldset::make('Author and Meta')

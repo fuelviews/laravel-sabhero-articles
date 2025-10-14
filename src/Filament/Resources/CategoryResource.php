@@ -42,14 +42,17 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
 
-                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('slug')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('posts_count')
                     ->badge()
                     ->label('Posts Count')
-                    ->counts('posts'),
+                    ->counts('posts')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y g:i A')

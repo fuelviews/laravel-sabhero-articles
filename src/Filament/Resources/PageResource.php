@@ -47,6 +47,7 @@ class PageResource extends Resource
                         return Str::limit($record->description, 80);
                     })
                     ->searchable()
+                    ->sortable()
                     ->limit(80),
 
                 Tables\Columns\TextColumn::make('slug')

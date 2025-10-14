@@ -127,7 +127,8 @@ class UserResource extends Resource
 
                 Tables\Columns\IconColumn::make('is_author')
                     ->boolean()
-                    ->label('Author'),
+                    ->label('Author')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('posts_count')
                     ->counts('posts')

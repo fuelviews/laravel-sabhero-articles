@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-articles` will be documented in this file.
 
+## v1.0.3 - 2025-10-14
+
+### What's Changed
+
+* Add PostExportAction and PostImportAction classes to handle exportingand importing posts as ZIP files with CSV and images; refactor PostResource to delegate export and import logic to these new actions for cleaner and more maintainable code. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/39
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v1.0.2...v1.0.3
+
 ## v1.0.2 - 2025-09-29
 
 ### What's Changed

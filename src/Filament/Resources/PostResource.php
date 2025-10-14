@@ -2,7 +2,6 @@
 
 namespace Fuelviews\SabHeroArticles\Filament\Resources;
 
-use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Fieldset;
@@ -10,13 +9,13 @@ use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
-use Filament\Notifications\Notification;
 use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-// use Fuelviews\SabHeroArticles\Enums\MetroType;
+use Fuelviews\SabHeroArticles\Actions\PostExportAction;
+use Fuelviews\SabHeroArticles\Actions\PostImportAction;
 use Fuelviews\SabHeroArticles\Enums\PostStatus;
 use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\CreatePost;
 use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\EditPost;
@@ -24,17 +23,8 @@ use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\ListPosts;
 use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\ViewPost;
 use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Widgets\ArticlePostPublishedChart;
 use Fuelviews\SabHeroArticles\Filament\Tables\Columns\UserAvatar;
-use Fuelviews\SabHeroArticles\Models\Category;
 use Fuelviews\SabHeroArticles\Models\Post;
-use Fuelviews\SabHeroArticles\Models\Tag;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use League\Csv\Reader;
-use League\Csv\Writer;
-use function parse_url;
-use RuntimeException;
-
-use ZipArchive;
 
 class PostResource extends Resource
 {
@@ -232,188 +222,27 @@ class PostResource extends Resource
         ]);
     }
 
+    /**
+     * Export posts to ZIP file with CSV and images
+     *
+     * Delegates to PostExportAction for cleaner, testable code.
+     */
     public static function exportToZip($records)
     {
-        $storagePath = storage_path('app/public/exports');
-        if (! file_exists($storagePath)) {
-            if (! mkdir($storagePath, 0777, true) && ! is_dir($storagePath)) {
-                throw new RuntimeException(sprintf('Directory "%s" was not created', $storagePath));
-            }
-        }
+        $exportAction = new PostExportAction;
 
-        $zipFilePath = $storagePath.'/posts_export.zip';
-        $csvFilePath = $storagePath.'/posts.csv';
-
-        $csv = Writer::createFromPath($csvFilePath, 'w+');
-        $csv->insertOne([
-            'ID',
-            'Title',
-            'Subtitle',
-            'Content',
-            'Slug',
-            'Status',
-            'Categories',
-            'Tags',
-            'Feature Image Alt Text',
-            'Additional Media',
-            'Author',
-            'Published At',
-            'Scheduled For',
-            'Created At',
-            'Updated At',
-        ]);
-
-        $zip = new ZipArchive;
-        if ($zip->open($zipFilePath, ZipArchive::CREATE) !== true) {
-            return back()->withErrors('Failed to create ZIP file.');
-        }
-
-        foreach ($records as $post) {
-            $mediaUrls = [];
-            foreach ($post->getMedia('post_feature_image') as $media) {
-                $filePath = $media->getPath();
-                if (file_exists($filePath)) {
-                    $zip->addFile($filePath, 'images/'.$media->file_name);
-                    $mediaUrls[] = asset($media->getUrl());
-                }
-            }
-
-            $csv->insertOne([
-                $post->id ?? '',
-                $post->title ?? '',
-                $post->sub_title ?? '',
-                $post->body ?? '',
-                $post->slug ?? '',
-                $post->status->value ?? '',
-                $post->categories->pluck('name')->implode(',') ?? '',
-                $post->tags->pluck('name')->implode(',') ?? '',
-                $post->feature_image_alt_text ?? '',
-                implode(', ', $mediaUrls) ?? '',
-                $post->user?->name ?? '',
-                $post->published_at ? $post->published_at->format('Y-m-d H:i:s') : '',
-                $post->scheduled_for ? $post->scheduled_for->format('Y-m-d H:i:s') : '',
-                $post->created_at ? $post->created_at->format('Y-m-d H:i:s') : '',
-                $post->updated_at ? $post->updated_at->format('Y-m-d H:i:s') : '',
-            ]);
-        }
-
-        $zip->addFile($csvFilePath, 'posts.csv');
-        $zip->close();
-
-        return response()->download($zipFilePath)->deleteFileAfterSend(true);
+        return $exportAction->execute($records);
     }
 
+    /**
+     * Import posts from ZIP file containing CSV and images
+     *
+     * Delegates to PostImportAction for cleaner, testable code.
+     */
     public static function importFromZip($zipFile)
     {
-        $diskName = config('sabhero-articles.media.disk');
-
-        $zipFilePath = Storage::disk($diskName)->path($zipFile);
-
-        $extractFolder = 'unzipped_'.time();
-        Storage::disk($diskName)->makeDirectory($extractFolder);
-        $extractPath = Storage::disk($diskName)->path($extractFolder);
-
-        $zip = new ZipArchive;
-        $openResult = $zip->open($zipFilePath);
-        if ($openResult === true) {
-            $zip->extractTo($extractPath);
-            $zip->close();
-        } else {
-            return back()->withErrors([
-                'zip_file' => "Failed to extract ZIP file (Error code: $openResult).",
-            ]);
-        }
-
-        $csvFilePath = null;
-        foreach (scandir($extractPath) as $file) {
-            if (\Str::endsWith($file, '.csv')) {
-                $csvFilePath = $extractPath.'/'.$file;
-
-                break;
-            }
-        }
-
-        if (! $csvFilePath || ! file_exists($csvFilePath)) {
-            return back()->withErrors(['zip_file' => 'No CSV file found in the extracted ZIP.']);
-        }
-
-        $csv = Reader::createFromPath($csvFilePath, 'r');
-        $csv->setHeaderOffset(0);
-        $records = $csv->getRecords();
-
-        foreach ($records as $record) {
-            $post = Post::updateOrCreate(
-                ['slug' => $record['Slug']],
-                [
-                    'title' => $record['Title'] ?? '',
-                    'sub_title' => $record['Subtitle'] ?? '',
-                    'body' => $record['Content'] ?? '',
-                    'status' => $record['Status'] ?? '',
-                    'user_id' => optional(User::where('name', $record['Author'])->first())->id ?? '1',
-                    'feature_image_alt_text' => $record['Feature Image Alt Text'] ?? '',
-                    'published_at' => ! empty($record['Published At']) ? $record['Published At'] : null,
-                    'scheduled_for' => ! empty($record['Scheduled For']) ? $record['Scheduled For'] : null,
-                    'created_at' => ! empty($record['Created At']) ? $record['Created At'] : null,
-                    'updated_at' => ! empty($record['Updated At']) ? $record['Updated At'] : null,
-                ]
-            );
-
-            if (! empty($record['Categories'])) {
-                $categoryNames = explode(',', $record['Categories']);
-                $categoryIds = [];
-                foreach ($categoryNames as $catName) {
-                    $catName = trim($catName);
-                    if (! $catName) {
-                        continue;
-                    }
-                    $category = Category::firstOrCreate(
-                        ['slug' => Str::slug($catName)],
-                        ['name' => Str::lower($catName)]
-                    );
-                    $categoryIds[] = $category->id;
-                }
-                $post->categories()->sync($categoryIds, false);
-            }
-
-            if (! empty($record['Tags'])) {
-                $tagNames = explode(',', $record['Tags']);
-                $tagIds = [];
-                foreach ($tagNames as $tagName) {
-                    $tagName = trim($tagName);
-                    if (! $tagName) {
-                        continue;
-                    }
-                    $tag = Tag::firstOrCreate(
-                        ['slug' => Str::slug($tagName)],
-                        ['name' => Str::lower($tagName)]
-                    );
-                    $tagIds[] = $tag->id;
-                }
-                $post->tags()->sync($tagIds, false);
-            }
-
-            $imageUrls = explode(', ', $record['Additional Media']);
-            foreach ($imageUrls as $imageUrl) {
-                $imageName = basename(parse_url($imageUrl, PHP_URL_PATH));
-                $imagePath = $extractPath.'/images/'.$imageName;
-
-                if (file_exists($imagePath)) {
-                    $post->clearMediaCollection('post_feature_image');
-
-                    $post->addMedia($imagePath)->toMediaCollection('post_feature_image');
-                }
-            }
-        }
-
-        Storage::disk($diskName)->delete($zipFile);
-        Storage::disk($diskName)->deleteDirectory($extractFolder);
-
-        Notification::make()
-            ->title('Posts imported successfully!')
-            ->success()
-            ->send();
-
-        return back();
+        $importAction = new PostImportAction;
+        $importAction->execute($zipFile);
     }
 
     public static function getRecordTitle($record): string

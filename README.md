@@ -95,6 +95,7 @@ use Fuelviews\SabHeroArticles\Facades\SabHeroArticles;
 public function panel(Panel $panel): Panel
 {
     return $panel
+        ->sidebarCollapsibleOnDesktop() // Optional: Enable collapsible sidebar on desktop
         ->plugins([
             SabHeroArticles::make()
         ]);

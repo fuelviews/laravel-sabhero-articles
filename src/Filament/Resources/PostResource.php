@@ -60,10 +60,13 @@ class PostResource extends Resource
                     ->description(function (Post $record) {
                         return Str::limit($record->sub_title, 60);
                     })
-                    ->searchable()->limit(60),
+                    ->searchable()
+                    ->sortable()
+                    ->limit(60),
 
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
+                    ->sortable()
                     ->color(function ($state) {
                         return $state->getColor();
                     }),
@@ -73,7 +76,8 @@ class PostResource extends Resource
                     ->label('Featured Image'),
 
                 UserAvatar::make('user')
-                    ->label('Author'),
+                    ->label('Author')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime('M j, Y g:i A')

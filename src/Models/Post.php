@@ -197,7 +197,7 @@ class Post extends Model implements Feedable, HasMedia
                                 ->responsiveImages()
                                 ->image()
                                 ->collection('post_feature_image')
-                                ->label('Feature Image')
+                                ->label('Featured Image')
                                 ->required(),
 
                             TextInput::make('feature_image_alt_text')
@@ -317,18 +317,23 @@ class Post extends Model implements Feedable, HasMedia
 
         $link = route('sabhero-articles.post.show', $this);
 
-        return FeedItem::create()
+        $feedItem = FeedItem::create()
             ->id($link)
             ->title($this->title)
             ->summary($this->sub_title ?? $this->excerptHtml())
             ->updated($this->published_at)
             ->link($link)
-            ->enclosure('test.jpg')
             ->authorName($this->user->name)
             ->authorEmail($this->user->email ?? '')
-            ->category($this->categories->isNotEmpty() ? $this->categories->first()->name : '')
-            ->enclosure($this->getFirstMediaUrl('post_feature_image'))
-            ->enclosureLength($this->getFirstMedia('post_feature_image')->size)
-            ->enclosureType($this->getFirstMedia('post_feature_image')->mime_type);
+            ->category($this->categories->isNotEmpty() ? $this->categories->first()->name : '');
+
+        $media = $this->getFirstMedia('post_feature_image');
+        if ($media) {
+            $feedItem->enclosure($this->getFirstMediaUrl('post_feature_image'))
+                ->enclosureLength($media->size)
+                ->enclosureType($media->mime_type);
+        }
+
+        return $feedItem;
     }
 }

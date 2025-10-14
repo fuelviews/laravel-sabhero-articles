@@ -10,12 +10,12 @@ use Fuelviews\SabHeroArticles\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
-use function parse_url;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
-
 use ZipArchive;
+
+use function parse_url;
 
 /**
  * Post Import Action
@@ -133,14 +133,37 @@ class PostImportAction
     }
 
     /**
-     * Process CSV records and import posts
+     * Process CSV records and import posts (oldest to newest)
      */
     protected function processRecords(string $csvFilePath, string $extractPath): void
     {
         $csv = Reader::createFromPath($csvFilePath, 'r');
         $csv->setHeaderOffset(0);
-        $records = $csv->getRecords();
 
+        // Load all records into an array
+        $records = [];
+        foreach ($csv->getRecords() as $record) {
+            $records[] = $record;
+        }
+
+        // Sort by Created At timestamp (oldest to newest)
+        usort($records, function ($a, $b) {
+            // Parse dates with fallback to 0 for invalid/empty dates
+            $dateA = isset($a['Created At']) && $a['Created At'] ? @strtotime($a['Created At']) : 0;
+            $dateB = isset($b['Created At']) && $b['Created At'] ? @strtotime($b['Created At']) : 0;
+
+            // Handle failed parsing
+            if ($dateA === false) {
+                $dateA = 0;
+            }
+            if ($dateB === false) {
+                $dateB = 0;
+            }
+
+            return $dateA <=> $dateB; // Ascending order (oldest first)
+        });
+
+        // Import each record in order
         foreach ($records as $record) {
             $this->importPost($record, $extractPath);
         }
@@ -242,12 +265,23 @@ class PostImportAction
     {
         $imageUrls = explode(', ', $record['Additional Media'] ?? '');
 
+        // Clear media collection once before adding images
+        $hasImages = false;
         foreach ($imageUrls as $imageUrl) {
+            $imageUrl = trim($imageUrl);
+            if (empty($imageUrl)) {
+                continue;
+            }
+
             $imageName = basename(parse_url($imageUrl, PHP_URL_PATH));
             $imagePath = $extractPath.'/images/'.$imageName;
 
             if (file_exists($imagePath)) {
-                $post->clearMediaCollection('post_feature_image');
+                if (! $hasImages) {
+                    $post->clearMediaCollection('post_feature_image');
+                    $hasImages = true;
+                }
+
                 $post->addMedia($imagePath)
                     ->preservingOriginal() // Keep original file in temp directory
                     ->toMediaCollection('post_feature_image');

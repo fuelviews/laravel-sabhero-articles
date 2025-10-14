@@ -60,7 +60,7 @@ class PostResource extends Resource
                     ->description(function (Post $record) {
                         return Str::limit($record->sub_title, 60);
                     })
-                    ->searchable()->limit(20),
+                    ->searchable()->limit(60),
 
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
@@ -75,13 +75,21 @@ class PostResource extends Resource
                 UserAvatar::make('user')
                     ->label('Author'),
 
+                Tables\Columns\TextColumn::make('published_at')
+                    ->dateTime('M j, Y g:i A')
+                    ->timezone('America/New_York')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('M j, Y g:i A')
+                    ->timezone('America/New_York')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('M j, Y g:i A')
+                    ->timezone('America/New_York')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])->defaultSort('id', 'desc')
@@ -107,37 +115,33 @@ class PostResource extends Resource
                     ->requiresConfirmation(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\ReplicateAction::make()
-                    ->beforeReplicaSaved(function (Post $replica, array $data): void {
-                        $replica->title = $replica->title.' (Copy)';
-                        $replica->slug = Str::slug($replica->title.' copy '.time());
-                        $replica->status = \Fuelviews\SabHeroArticles\Enums\PostStatus::PUBLISHED;
-                        $replica->published_at = null;
-                        $replica->scheduled_for = null;
-                    })
-                    ->afterReplicaSaved(function (Post $replica, Post $original): void {
-                        // Copy categories
-                        $replica->categories()->sync($original->categories->pluck('id'));
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\ReplicateAction::make()
+                        ->color('info')
+                        ->excludeAttributes(['scheduled_for'])
+                        ->beforeReplicaSaved(function (Post $replica, array $data): void {
+                            $replica->title = $replica->title.' (Copy)';
+                            $replica->slug = Str::slug($replica->title.' copy '.time());
+                            $replica->scheduled_for = null;
+                        })
+                        ->afterReplicaSaved(function (Post $replica, Post $original): void {
+                            // Copy categories
+                            $replica->categories()->sync($original->categories->pluck('id'));
 
-                        // Copy tags
-                        $replica->tags()->sync($original->tags->pluck('id'));
+                            // Copy tags
+                            $replica->tags()->sync($original->tags->pluck('id'));
 
-                        // Copy media/images
-                        foreach ($original->getMedia('post_feature_image') as $media) {
-                            $mediaPath = $media->getPath();
-                            if (file_exists($mediaPath)) {
-                                $replica->addMedia($mediaPath)
-                                    ->usingName($media->name)
-                                    ->usingFileName($media->file_name)
-                                    ->preservingOriginal()
-                                    ->toMediaCollection('post_feature_image');
+                            // Copy media/images using Spatie's copyMedia method
+                            $mediaItems = $original->getMedia('post_feature_image');
+                            foreach ($mediaItems as $media) {
+                                $media->copy($replica, 'post_feature_image');
                             }
-                        }
-                    })
-                    ->successNotificationTitle('Post copied successfully'),
-                Tables\Actions\DeleteAction::make(),
+                        })
+                        ->successNotificationTitle('Post copied successfully'),
+                    Tables\Actions\DeleteAction::make(),
+                ])->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -180,11 +184,13 @@ class PostResource extends Resource
 
                             TextEntry::make('created_at')
                                 ->label('Created At')
-                                ->dateTime(),
+                                ->dateTime('M j, Y g:i A')
+                                ->timezone('America/New_York'),
 
                             TextEntry::make('updated_at')
                                 ->label('Last Updated')
-                                ->dateTime(),
+                                ->dateTime('M j, Y g:i A')
+                                ->timezone('America/New_York'),
                         ]),
                     Fieldset::make('Categories and Tags')
                         ->schema([
@@ -198,7 +204,7 @@ class PostResource extends Resource
                         ->schema([
                             SpatieMediaLibraryImageEntry::make('feature_image')
                                 ->collection('post_feature_image')
-                                ->label('Feature Image'),
+                                ->label('Featured Image'),
 
                             TextEntry::make('feature_image_alt_text')
                                 ->label('Alt Text'),
@@ -212,10 +218,14 @@ class PostResource extends Resource
 
                             TextEntry::make('published_at')
                                 ->label('Published At')
+                                ->dateTime('M j, Y g:i A')
+                                ->timezone('America/New_York')
                                 ->visible(fn (Post $record) => $record->status === PostStatus::PUBLISHED),
 
                             TextEntry::make('scheduled_for')
                                 ->label('Scheduled For')
+                                ->dateTime('M j, Y g:i A')
+                                ->timezone('America/New_York')
                                 ->visible(fn (Post $record) => $record->status === PostStatus::SCHEDULED),
                         ]),
                 ]),

@@ -15,6 +15,7 @@ use Fuelviews\SabHeroArticles\Filament\Resources\PageResource\Pages\EditPage;
 use Fuelviews\SabHeroArticles\Filament\Resources\PageResource\Pages\ListPages;
 use Fuelviews\SabHeroArticles\Filament\Resources\PageResource\Pages\ViewPage;
 use Fuelviews\SabHeroArticles\Models\Page;
+use Illuminate\Support\Str;
 
 class PageResource extends Resource
 {
@@ -42,36 +43,57 @@ class PageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->limit(50)
-                    ->sortable()
-                    ->searchable(),
+                    ->description(function ($record) {
+                        return Str::limit($record->description, 80);
+                    })
+                    ->searchable()
+                    ->limit(80),
 
                 Tables\Columns\TextColumn::make('slug')
                     ->label('Route')
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Meta Description')
-                    ->limit(50)
-                    ->formatStateUsing(function ($state) {
-                        return ucfirst($state);
-                    })
-                    ->sortable()
-                    ->searchable(),
-
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('feature_image')
-                    ->label('Feature Image')
+                    ->label('Featured Image')
                     ->collection('page_feature_image')
                     ->circular(),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime('M j, Y g:i A')
+                    ->timezone('America/New_York')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime('M j, Y g:i A')
+                    ->timezone('America/New_York')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\ReplicateAction::make()
+                        ->color('info')
+                        ->beforeReplicaSaved(function (Page $replica): void {
+                            $replica->title = $replica->title.' (Copy)';
+                            $replica->slug = Str::slug($replica->title.' copy '.time());
+                        })
+                        ->afterReplicaSaved(function (Page $replica, Page $original): void {
+                            // Copy media/images using Spatie's copyMedia method
+                            $mediaItems = $original->getMedia('page_feature_image');
+                            foreach ($mediaItems as $media) {
+                                $media->copy($replica, 'page_feature_image');
+                            }
+                        })
+                        ->successNotificationTitle('Page copied successfully'),
+                    Tables\Actions\DeleteAction::make(),
+                ])->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

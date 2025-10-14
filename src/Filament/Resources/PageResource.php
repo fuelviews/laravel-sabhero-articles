@@ -50,7 +50,7 @@ class PageResource extends Resource
                     ->sortable()
                     ->limit(80),
 
-                Tables\Columns\TextColumn::make('slug')
+                Tables\Columns\TextColumn::make('route')
                     ->label('Route')
                     ->sortable()
                     ->searchable(),
@@ -83,7 +83,7 @@ class PageResource extends Resource
                         ->color('info')
                         ->beforeReplicaSaved(function (Page $replica): void {
                             $replica->title = $replica->title.' (Copy)';
-                            $replica->slug = Str::slug($replica->title.' copy '.time());
+                            $replica->route = Str::slug($replica->title.' copy '.time());
                         })
                         ->afterReplicaSaved(function (Page $replica, Page $original): void {
                             // Copy media/images using Spatie's copyMedia method
@@ -110,7 +110,7 @@ class PageResource extends Resource
                 ->schema([
                     TextEntry::make('title'),
 
-                    TextEntry::make('slug')
+                    TextEntry::make('route')
                         ->label('Route'),
 
                     TextEntry::make('description')

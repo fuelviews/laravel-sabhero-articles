@@ -31,7 +31,7 @@ class PageTableSeeder extends Seeder
             // Main Pages
             [
                 'title' => 'Title',
-                'slug' => 'title', // actually needs the route name, not the slug
+                'route' => 'title', // Laravel route name for this page
                 'description' => 'Desc here',
                 'page_feature_image' => null,
             ],
@@ -41,29 +41,29 @@ class PageTableSeeder extends Seeder
             // Store the actual image path for media library
             $actualImagePath = $pageData['page_feature_image'] ?? null;
 
-            // Since page_feature_image is nullable in the database, we can set it to null
+            // Remove page_feature_image from data array - it's not a database column
             // The actual image will be stored in the media library
-            $pageData['page_feature_image'] = null;
+            unset($pageData['page_feature_image']);
 
-            // Check if a page with this slug OR title already exists
-            $existingPage = $pageModel::where('slug', $pageData['slug'])
+            // Check if a page with this route OR title already exists
+            $existingPage = $pageModel::where('route', $pageData['route'])
                 ->orWhere('title', $pageData['title'])
                 ->first();
 
             $page = null;
             if ($existingPage) {
-                // Update existing page (prioritize finding by slug)
-                $pageBySlug = $pageModel::where('slug', $pageData['slug'])->first();
-                if ($pageBySlug) {
-                    $pageBySlug->update($pageData);
-                    $page = $pageBySlug;
+                // Update existing page (prioritize finding by route)
+                $pageByRoute = $pageModel::where('route', $pageData['route'])->first();
+                if ($pageByRoute) {
+                    $pageByRoute->update($pageData);
+                    $page = $pageByRoute;
                 } else {
                     // If found by title, update that one
                     $existingPage->update($pageData);
                     $page = $existingPage;
                 }
             } else {
-                // Create new page only if neither slug nor title exist
+                // Create new page only if neither route nor title exist
                 $page = $pageModel::create($pageData);
             }
 

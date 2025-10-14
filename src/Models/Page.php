@@ -24,9 +24,8 @@ class Page extends Model implements HasMedia
 
     protected $fillable = [
         'title',
-        'slug',
+        'route',
         'description',
-        'page_feature_image',
     ];
 
     protected $casts = [
@@ -69,7 +68,7 @@ class Page extends Model implements HasMedia
                     TextInput::make('title')
                         ->required(),
 
-                    TextInput::make('slug')
+                    TextInput::make('route')
                         ->label('Route')
                         ->required()
                         ->unique(__CLASS__, ignoreRecord: true)

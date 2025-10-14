@@ -71,7 +71,7 @@ class PostResource extends Resource
                         return $state->getColor();
                     }),
 
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('page_feature_image')
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('post_feature_image')
                     ->collection('post_feature_image')
                     ->label('Featured Image'),
 
@@ -210,7 +210,7 @@ class PostResource extends Resource
                                 ->collection('post_feature_image')
                                 ->label('Featured Image'),
 
-                            TextEntry::make('feature_image_alt_text')
+                            TextEntry::make('post_feature_image_alt_text')
                                 ->label('Alt Text'),
                         ]),
                     Fieldset::make('Publishing Information')

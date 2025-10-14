@@ -55,7 +55,7 @@ class PageResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('feature_image')
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('page_feature_image')
                     ->label('Featured Image')
                     ->collection('page_feature_image')
                     ->circular(),
@@ -120,7 +120,7 @@ class PageResource extends Resource
                         })
                         ->columnSpanFull(),
 
-                    SpatieMediaLibraryImageEntry::make('Featured Image')
+                    SpatieMediaLibraryImageEntry::make('page_feature_image')
                         ->label('Featured Image')
                         ->collection('page_feature_image')
                         ->columnSpanFull(),

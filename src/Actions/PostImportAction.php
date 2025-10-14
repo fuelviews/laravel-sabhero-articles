@@ -182,7 +182,7 @@ class PostImportAction
                 'body' => $record['Content'] ?? '',
                 'status' => $record['Status'] ?? '',
                 'user_id' => optional(User::where('name', $record['Author'])->first())->id ?? '1',
-                'feature_image_alt_text' => $record['Feature Image Alt Text'] ?? '',
+                'post_feature_image_alt_text' => $record['Feature Image Alt Text'] ?? '',
                 'published_at' => ! empty($record['Published At']) ? $record['Published At'] : null,
                 'scheduled_for' => ! empty($record['Scheduled For']) ? $record['Scheduled For'] : null,
                 'created_at' => ! empty($record['Created At']) ? $record['Created At'] : null,

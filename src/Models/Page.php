@@ -26,7 +26,7 @@ class Page extends Model implements HasMedia
         'title',
         'slug',
         'description',
-        'feature_image',
+        'page_feature_image',
     ];
 
     protected $casts = [
@@ -80,7 +80,7 @@ class Page extends Model implements HasMedia
                         ->required()
                         ->columnSpanFull(),
 
-                    SpatieMediaLibraryFileUpload::make('feature_image')
+                    SpatieMediaLibraryFileUpload::make('page_feature_image')
                         ->disk(config('sabhero-articles.media.disk'))
                         ->label('Featured Image')
                         ->collection('page_feature_image')

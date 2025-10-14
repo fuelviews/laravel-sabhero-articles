@@ -40,7 +40,7 @@ class Post extends Model implements Feedable, HasMedia
         'status',
         'published_at',
         'scheduled_for',
-        'feature_image_alt_text',
+        'post_feature_image_alt_text',
         'user_id',
     ];
 
@@ -200,7 +200,7 @@ class Post extends Model implements Feedable, HasMedia
                                 ->label('Featured Image')
                                 ->required(),
 
-                            TextInput::make('feature_image_alt_text')
+                            TextInput::make('post_feature_image_alt_text')
                                 ->label('Alt Text')
                                 ->required(),
                         ])->collapsible(),

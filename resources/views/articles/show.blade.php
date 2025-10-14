@@ -11,7 +11,7 @@
                                         <img
                                             srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
                                             src="{{ $post->getFirstMedia('post_feature_image')->getUrl() }}"
-                                            alt="{{ $post->feature_image_alt_text }}"
+                                            alt="{{ $post->post_feature_image_alt_text }}"
                                             class="flex h-full w-full min-h-[200px] max-h-[500px] items-center justify-center object-cover object-center"
                                             loading="eager"
                                         >

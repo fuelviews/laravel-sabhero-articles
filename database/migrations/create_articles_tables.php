@@ -34,7 +34,7 @@ return new class extends Migration
             $table->enum('status', ['published', 'scheduled', 'pending'])->default('pending');
             $table->dateTime('published_at')->nullable();
             $table->dateTime('scheduled_for')->nullable();
-            $table->string('feature_image_alt_text');
+            $table->string('post_feature_image_alt_text');
             $table->foreignId(config('sabhero-articles.user.foreign_key'))
                 ->constrained()
                 ->cascadeOnDelete();

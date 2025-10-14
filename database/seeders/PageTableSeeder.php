@@ -33,17 +33,17 @@ class PageTableSeeder extends Seeder
                 'title' => 'Title',
                 'slug' => 'title', // actually needs the route name, not the slug
                 'description' => 'Desc here',
-                'feature_image' => null,
+                'page_feature_image' => null,
             ],
         ];
 
         foreach ($pages as $index => $pageData) {
             // Store the actual image path for media library
-            $actualImagePath = $pageData['feature_image'] ?? null;
+            $actualImagePath = $pageData['page_feature_image'] ?? null;
 
-            // Since feature_image is nullable in the database, we can set it to null
+            // Since page_feature_image is nullable in the database, we can set it to null
             // The actual image will be stored in the media library
-            $pageData['feature_image'] = null;
+            $pageData['page_feature_image'] = null;
 
             // Check if a page with this slug OR title already exists
             $existingPage = $pageModel::where('slug', $pageData['slug'])

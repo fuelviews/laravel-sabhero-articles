@@ -31,7 +31,7 @@ class PostFactory extends Factory
             'status' => PostStatus::PENDING,
             'published_at' => $this->faker->dateTime(),
             'scheduled_for' => $this->faker->dateTime(),
-            'feature_image_alt_text' => $this->faker->word,
+            'post_feature_image_alt_text' => $this->faker->word,
             'user_id' => UserBak::factory(),
         ];
     }

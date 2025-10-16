@@ -35,7 +35,7 @@ class ArticlePublished extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'filament-article::mails.article-published',
+            view: 'filament-articles::mails.article-published',
             with: ['post' => $this->post]
         );
     }

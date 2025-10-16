@@ -24,9 +24,8 @@ class Page extends Model implements HasMedia
 
     protected $fillable = [
         'title',
-        'slug',
+        'route',
         'description',
-        'feature_image',
     ];
 
     protected $casts = [
@@ -69,7 +68,7 @@ class Page extends Model implements HasMedia
                     TextInput::make('title')
                         ->required(),
 
-                    TextInput::make('slug')
+                    TextInput::make('route')
                         ->label('Route')
                         ->required()
                         ->unique(__CLASS__, ignoreRecord: true)
@@ -80,9 +79,9 @@ class Page extends Model implements HasMedia
                         ->required()
                         ->columnSpanFull(),
 
-                    SpatieMediaLibraryFileUpload::make('feature_image')
+                    SpatieMediaLibraryFileUpload::make('page_feature_image')
                         ->disk(config('sabhero-articles.media.disk'))
-                        ->label('Feature Image')
+                        ->label('Featured Image')
                         ->collection('page_feature_image')
                         ->image()
                         ->responsiveImages()

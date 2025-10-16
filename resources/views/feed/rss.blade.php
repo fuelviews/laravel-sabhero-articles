@@ -23,9 +23,9 @@
                 <title>{!! \Spatie\Feed\Helpers\Cdata::out($item->title) !!}</title>
                 <link>{{ url($item->link) }}</link>
                 <description>{!! \Spatie\Feed\Helpers\Cdata::out($item->summary) !!}</description>
-                @if($item->enclosure)
+                @isset($item->enclosure)
                     <enclosure url="{{ $item->enclosure }}" length="{{ $item->enclosureLength }}" type="{{ $item->enclosureType }}" />
-                @endif
+                @endisset
                 <author>{!! \Spatie\Feed\Helpers\Cdata::out($item->authorName.(empty($item->authorEmail)?'':' <'.$item->authorEmail.'>')) !!}</author>
                 <guid>{{ url($item->id) }}</guid>
                 <pubDate>{{ $item->timestamp() }}</pubDate>

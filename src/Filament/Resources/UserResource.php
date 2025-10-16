@@ -127,7 +127,8 @@ class UserResource extends Resource
 
                 Tables\Columns\IconColumn::make('is_author')
                     ->boolean()
-                    ->label('Author'),
+                    ->label('Author')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('posts_count')
                     ->counts('posts')
@@ -153,9 +154,11 @@ class UserResource extends Resource
                     ->falseLabel('Non-authors only'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -79,7 +79,7 @@
         <img
             srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
             src="{{ $post->getFirstMedia('post_feature_image')->getUrl() }}"
-            alt="{{ $post->feature_image_alt_text }}">
+            alt="{{ $post->post_feature_image_alt_text }}">
     </div>
     <div class="content">
         <h2>{{ $post->title }}</h2>

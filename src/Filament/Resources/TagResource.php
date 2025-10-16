@@ -14,6 +14,7 @@ use Fuelviews\SabHeroArticles\Filament\Resources\TagResource\Pages\ListTags;
 use Fuelviews\SabHeroArticles\Filament\Resources\TagResource\Pages\ViewTag;
 use Fuelviews\SabHeroArticles\Filament\Resources\TagResource\RelationManagers\PostsRelationManager;
 use Fuelviews\SabHeroArticles\Models\Tag;
+use Illuminate\Support\Str;
 
 class TagResource extends Resource
 {
@@ -41,22 +42,27 @@ class TagResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
 
-                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('slug')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('posts_count')
                     ->badge()
                     ->label('Posts Count')
-                    ->counts('posts'),
+                    ->counts('posts')
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->dateTime('M j, Y g:i A')
+                    ->timezone('America/New_York')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->dateTime('M j, Y g:i A')
+                    ->timezone('America/New_York')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -64,9 +70,19 @@ class TagResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\ReplicateAction::make()
+                        ->color('info')
+                        ->excludeAttributes(['posts_count'])
+                        ->beforeReplicaSaved(function ($replica): void {
+                            $replica->name = $replica->name.' (Copy)';
+                            $replica->slug = Str::slug($replica->name.' copy '.time());
+                        })
+                        ->successNotificationTitle('Tag copied successfully'),
+                    Tables\Actions\DeleteAction::make(),
+                ])->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

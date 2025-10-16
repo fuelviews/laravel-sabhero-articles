@@ -1,12 +1,10 @@
-<div>
-    @php
-        $record = $getState();
-    @endphp
+@php
+    $record = $getState();
+@endphp
 
-    <div class="flex gap-2 items-center">
-        <img
-            src="{{ $record->avatar }}"
-            alt="{{ $record->{config('sabhero-articles.user.columns.name')} }}" class="w-7 h-7 rounded-full">
-        <p class="text-xs font-semibold text-green-500">{{ $record->name }}</p>
-    </div>
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-right: 2rem;">
+    <img
+        src="{{ $record->avatar }}"
+        alt="{{ $record->{config('sabhero-articles.user.columns.name')} }}"
+        style="width: 1.75rem; height: 1.75rem; border-radius: 9999px;">
 </div>

@@ -2,6 +2,7 @@
 
 namespace Fuelviews\SabHeroArticles;
 
+use Fuelviews\SabHeroArticles\Commands\UpgradeV2Command;
 use Fuelviews\SabHeroArticles\Components\Breadcrumb;
 use Fuelviews\SabHeroArticles\Components\Card;
 use Fuelviews\SabHeroArticles\Components\FeatureCard;
@@ -29,14 +30,21 @@ class SabHeroArticlesServiceProvider extends PackageServiceProvider
                 'sabhero-articles',
                 'feed',
             ])
+            ->hasCommands([
+                UpgradeV2Command::class,
+            ])
             ->hasMigrations([
                 'add_author_fields_to_users_table',
-                'create_article_tables',
+                'create_articles_tables',
                 'create_media_table',
                 'create_imports_table',
                 'create_exports_table',
                 'create_failed_import_rows_table',
                 'create_pages_table',
+                'rename_feature_image_alt_text_column',
+                'rename_media_collection_names',
+                'drop_feature_image_columns',
+                'rename_page_slug_to_route',
             ])
 
             ->hasViewComponents(
@@ -99,7 +107,7 @@ class SabHeroArticlesServiceProvider extends PackageServiceProvider
         View::composer('*', function ($view) {
             $routeName = Route::currentRouteName();
 
-            $seoPage = Page::where('slug', $routeName)
+            $seoPage = Page::where('route', $routeName)
                 ->first();
 
             $view->with('seoPage', $seoPage);

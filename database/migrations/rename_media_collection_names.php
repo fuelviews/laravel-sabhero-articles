@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (! \Schema::hasTable('media')) {
+        if (! Schema::hasTable('media')) {
             return;
         }
 
@@ -38,7 +38,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (! \Schema::hasTable('media')) {
+        if (! Schema::hasTable('media')) {
             return;
         }
 

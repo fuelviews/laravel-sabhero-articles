@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Fuelviews\SabHeroArticles\Actions\PostExportAction;
+use Fuelviews\SabHeroArticles\Actions\PostExportMigrationAction;
 use Fuelviews\SabHeroArticles\Actions\PostImportAction;
 use Fuelviews\SabHeroArticles\Enums\PostStatus;
 use Fuelviews\SabHeroArticles\Filament\Resources\PostResource\Pages\CreatePost;
@@ -151,11 +152,18 @@ class PostResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('export_csv_and_images')
-                        ->label('Export posts')
+                        ->label('Export posts (csv)')
                         ->icon('heroicon-o-arrow-down-tray')
                         ->color('gray')
                         ->action(fn ($records) => static::exportToZip($records))
                         ->requiresConfirmation(),
+                    Tables\Actions\BulkAction::make('export_migration')
+                        ->label('Export posts (migration)')
+                        ->icon('heroicon-o-code-bracket')
+                        ->color('info')
+                        ->action(fn ($records) => static::exportMigration($records))
+                        ->requiresConfirmation()
+                        ->modalDescription('Export posts as a migration file package that can be copied to another project. Includes migration file, images, and installation instructions.'),
                 ]),
             ]);
     }
@@ -244,6 +252,18 @@ class PostResource extends Resource
     public static function exportToZip($records)
     {
         $exportAction = new PostExportAction;
+
+        return $exportAction->execute($records);
+    }
+
+    /**
+     * Export posts as migration file package
+     *
+     * Delegates to PostExportMigrationAction for cleaner, testable code.
+     */
+    public static function exportMigration($records)
+    {
+        $exportAction = new PostExportMigrationAction;
 
         return $exportAction->execute($records);
     }

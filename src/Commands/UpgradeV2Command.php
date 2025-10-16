@@ -107,26 +107,9 @@ class UpgradeV2Command extends Command
         $this->newLine();
         $this->info('Checking published files...');
 
-        $publishedMigration = $this->findPublishedPagesMigration();
         $publishedSeeder = $this->findPublishedPageSeeder();
 
-        $migrationNeedsUpdate = false;
         $seederNeedsUpdate = false;
-
-        if ($publishedMigration) {
-            $migContent = File::get($publishedMigration);
-            $migrationNeedsUpdate = str_contains($migContent, "->string('slug',") ||
-                                    str_contains($migContent, "->string('feature_image',") ||
-                                    str_contains($migContent, "->string('page_feature_image',");
-
-            // Force update if --force flag is set
-            if ($this->option('force') && !$migrationNeedsUpdate) {
-                $migrationNeedsUpdate = true;
-                $this->comment("  → Migration needs update: YES (forced)");
-            } else {
-                $this->comment("  → Migration needs update: " . ($migrationNeedsUpdate ? 'YES' : 'NO'));
-            }
-        }
 
         if ($publishedSeeder) {
             $seederContent = File::get($publishedSeeder);
@@ -146,10 +129,6 @@ class UpgradeV2Command extends Command
                 // Show what will be replaced
                 $this->comment("    - Found 'slug' references in seeder");
             }
-        }
-
-        if ($migrationNeedsUpdate) {
-            $upgrades[] = 'Update published create_pages_table migration';
         }
 
         if ($seederNeedsUpdate) {
@@ -187,6 +166,7 @@ class UpgradeV2Command extends Command
         }
 
         if (empty($upgrades)) {
+            $this->newLine();
             $this->info('✓ Your installation is already up to date!');
             return self::SUCCESS;
         }
@@ -342,7 +322,7 @@ class UpgradeV2Command extends Command
         $this->comment("  → BEFORE migration:");
         $this->comment("     - pages.slug: " . ($hasSlug ? 'YES' : 'NO'));
         $this->comment("     - pages.route: " . ($hasRoute ? 'YES' : 'NO'));
-
+        $this->newLine();
         $this->comment("  → AFTER migration:");
         $this->comment("     - pages.slug: " . ($hasSlugAfter ? 'YES' : 'NO'));
         $this->comment("     - pages.route: " . ($hasRouteAfter ? 'YES' : 'NO'));
@@ -367,18 +347,6 @@ class UpgradeV2Command extends Command
         updateFiles:
         $this->newLine();
         $this->info('Updating published files...');
-
-        // Update migration if needed
-        if ($migrationNeedsUpdate && $publishedMigration) {
-            $this->comment("  → Updating: " . basename($publishedMigration));
-            $this->updatePublishedMigration($publishedMigration);
-            $filesUpdated[] = 'migrations/'.basename($publishedMigration);
-            $this->line("  ✓ Updated: migrations/".basename($publishedMigration));
-        } elseif ($publishedMigration) {
-            $this->comment("  ℹ Migration already up to date");
-        } else {
-            $this->comment("  ℹ No published migration found (skipping)");
-        }
 
         // Update seeder if needed
         if ($seederNeedsUpdate && $publishedSeeder) {
@@ -432,54 +400,6 @@ class UpgradeV2Command extends Command
         }
 
         return self::SUCCESS;
-    }
-
-    /**
-     * Find the published create_pages_table migration in the app.
-     */
-    protected function findPublishedPagesMigration(): ?string
-    {
-        $migrationsPath = database_path('migrations');
-
-        if (! File::exists($migrationsPath)) {
-            return null;
-        }
-
-        $files = File::glob($migrationsPath.'/*_create_pages_table.php');
-
-        return $files[0] ?? null;
-    }
-
-    /**
-     * Update the published migration file to use 'route' instead of 'slug'
-     * and remove feature_image columns (handled by media library).
-     */
-    protected function updatePublishedMigration(string $filePath): void
-    {
-        $content = File::get($filePath);
-
-        // Replace slug column definition with route
-        $content = preg_replace(
-            "/\\\$table->string\('slug',\s*80\)->unique\(\);/",
-            "\$table->string('route', 80)->unique();",
-            $content
-        );
-
-        // Remove feature_image column definition (with or without newline)
-        $content = preg_replace(
-            "/\s*\\\$table->string\('feature_image',\s*\d+\)(?:->unique\(\))?(?:->nullable\(\))?;[\r\n]*/",
-            "",
-            $content
-        );
-
-        // Remove page_feature_image column definition (with or without newline)
-        $content = preg_replace(
-            "/\s*\\\$table->string\('page_feature_image',\s*\d+\)(?:->unique\(\))?(?:->nullable\(\))?;[\r\n]*/",
-            "",
-            $content
-        );
-
-        File::put($filePath, $content);
     }
 
     /**

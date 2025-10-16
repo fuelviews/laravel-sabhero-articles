@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-sabhero-articles` will be documented in this file.
 
+## v2.0.0 - 2025-10-16
+
+### What's Changed
+
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/fuelviews/laravel-sabhero-articles/pull/35
+* Refactor and unify resources, add migration import/export, add upgrade command, update README, etc. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/42
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v1.0.3...v2.0.0
+
 ## v1.0.3 - 2025-10-14
 
 ### What's Changed

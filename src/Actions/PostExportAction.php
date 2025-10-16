@@ -139,7 +139,7 @@ class PostExportAction
                 $post->status->value ?? '',
                 $post->categories->pluck('name')->implode(',') ?? '',
                 $post->tags->pluck('name')->implode(',') ?? '',
-                $post->feature_image_alt_text ?? '',
+                $post->post_feature_image_alt_text ?? '',
                 implode(', ', $mediaUrls) ?? '',
                 $post->user?->name ?? '',
                 $post->published_at ? $post->published_at->format('Y-m-d H:i:s') : '',

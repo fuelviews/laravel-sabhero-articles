@@ -8,7 +8,7 @@
                 <img
                     srcset="{{ $post->getFirstMedia('post_feature_image')->getSrcset() }}"
                     src="{{ $post->getFirstMedia('post_feature_image')->getUrl() }}"
-                    alt="{{ $post->feature_image_alt_text }}"
+                    alt="{{ $post->post_feature_image_alt_text }}"
                     class="md:h-[400px] w-full object-cover"
                     loading="eager">
             </a>

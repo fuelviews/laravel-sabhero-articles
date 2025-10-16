@@ -59,7 +59,7 @@ class UpgradeV2Command extends Command
                 ->whereIn('collection_name', ['feature_image'])
                 ->whereIn('model_type', [
                     'Fuelviews\\SabHeroArticles\\Models\\Page',
-                    'Fuelviews\\SabHeroArticles\\Models\\Post'
+                    'Fuelviews\\SabHeroArticles\\Models\\Post',
                 ])
                 ->exists();
         }
@@ -77,10 +77,10 @@ class UpgradeV2Command extends Command
         // Check if database needs upgrade
         $databaseNeedsUpgrade = false;
 
-        if ($hasSlug && !$hasRoute) {
+        if ($hasSlug && ! $hasRoute) {
             $upgrades[] = 'Rename pages.slug column to pages.route';
             $databaseNeedsUpgrade = true;
-        } elseif ($hasRoute && !$hasSlug) {
+        } elseif ($hasRoute && ! $hasSlug) {
             $this->info('✓ Database already upgraded (route column exists)');
         } elseif ($hasRoute && $hasSlug) {
             $this->warn('⚠ Both slug and route columns exist - inconsistent state!');
@@ -93,7 +93,7 @@ class UpgradeV2Command extends Command
             $databaseNeedsUpgrade = true;
         }
 
-        if ($hasOldAltText && !$hasNewAltText) {
+        if ($hasOldAltText && ! $hasNewAltText) {
             $upgrades[] = 'Rename posts.feature_image_alt_text to posts.post_feature_image_alt_text';
             $databaseNeedsUpgrade = true;
         }
@@ -118,14 +118,14 @@ class UpgradeV2Command extends Command
                                  str_contains($seederContent, '$pageBySlug');
 
             // Force update if --force flag is set
-            if ($this->option('force') && !$seederNeedsUpdate) {
+            if ($this->option('force') && ! $seederNeedsUpdate) {
                 $seederNeedsUpdate = true;
                 $this->comment("  → Seeder needs update: YES (forced)");
             } else {
                 $this->comment("  → Seeder needs update: " . ($seederNeedsUpdate ? 'YES' : 'NO'));
             }
 
-            if ($seederNeedsUpdate && !$this->option('force')) {
+            if ($seederNeedsUpdate && ! $this->option('force')) {
                 // Show what will be replaced
                 $this->comment("    - Found 'slug' references in seeder");
             }
@@ -168,6 +168,7 @@ class UpgradeV2Command extends Command
         if (empty($upgrades)) {
             $this->newLine();
             $this->info('✓ Your installation is already up to date!');
+
             return self::SUCCESS;
         }
 
@@ -186,7 +187,7 @@ class UpgradeV2Command extends Command
         }
 
         // Only run database migration if needed
-        if (!$databaseNeedsUpgrade) {
+        if (! $databaseNeedsUpgrade) {
             $this->info('Skipping database migration (already upgraded)');
             goto updateFiles;
         }
@@ -197,12 +198,13 @@ class UpgradeV2Command extends Command
         $appMigrationsPath = database_path('migrations');
 
         // Publish rename_page_slug_to_route migration if slug column exists
-        if ($hasSlug && !$hasRoute) {
+        if ($hasSlug && ! $hasRoute) {
             $packageMigrationFile = __DIR__ . '/../../database/migrations/rename_page_slug_to_route.php';
             $this->comment("  → Package migration: {$packageMigrationFile}");
 
-            if (!File::exists($packageMigrationFile)) {
+            if (! File::exists($packageMigrationFile)) {
                 $this->error("  ✗ rename_page_slug_to_route.php not found!");
+
                 return self::FAILURE;
             }
 
@@ -211,7 +213,7 @@ class UpgradeV2Command extends Command
 
             $existingMigrations = File::glob($appMigrationsPath . '/*_rename_page_slug_to_route.php');
 
-            if (!empty($existingMigrations)) {
+            if (! empty($existingMigrations)) {
                 $this->warn("  ⚠ rename_page_slug_to_route already published: " . basename($existingMigrations[0]));
             } else {
                 File::copy($packageMigrationFile, $appMigrationFile);
@@ -220,12 +222,13 @@ class UpgradeV2Command extends Command
         }
 
         // Publish rename_feature_image_alt_text_column migration if old alt text column exists
-        if ($hasOldAltText && !$hasNewAltText) {
+        if ($hasOldAltText && ! $hasNewAltText) {
             $packageMigrationFile = __DIR__ . '/../../database/migrations/rename_feature_image_alt_text_column.php';
             $this->comment("  → Package migration: {$packageMigrationFile}");
 
-            if (!File::exists($packageMigrationFile)) {
+            if (! File::exists($packageMigrationFile)) {
                 $this->error("  ✗ rename_feature_image_alt_text_column.php not found!");
+
                 return self::FAILURE;
             }
 
@@ -234,7 +237,7 @@ class UpgradeV2Command extends Command
 
             $existingMigrations = File::glob($appMigrationsPath . '/*_rename_feature_image_alt_text_column.php');
 
-            if (!empty($existingMigrations)) {
+            if (! empty($existingMigrations)) {
                 $this->warn("  ⚠ rename_feature_image_alt_text_column already published: " . basename($existingMigrations[0]));
             } else {
                 File::copy($packageMigrationFile, $appMigrationFile);
@@ -247,8 +250,9 @@ class UpgradeV2Command extends Command
             $packageMigrationFile = __DIR__ . '/../../database/migrations/drop_feature_image_columns.php';
             $this->comment("  → Package migration: {$packageMigrationFile}");
 
-            if (!File::exists($packageMigrationFile)) {
+            if (! File::exists($packageMigrationFile)) {
                 $this->error("  ✗ drop_feature_image_columns.php not found!");
+
                 return self::FAILURE;
             }
 
@@ -257,7 +261,7 @@ class UpgradeV2Command extends Command
 
             $existingMigrations = File::glob($appMigrationsPath . '/*_drop_feature_image_columns.php');
 
-            if (!empty($existingMigrations)) {
+            if (! empty($existingMigrations)) {
                 $this->warn("  ⚠ drop_feature_image_columns already published: " . basename($existingMigrations[0]));
             } else {
                 File::copy($packageMigrationFile, $appMigrationFile);
@@ -270,8 +274,9 @@ class UpgradeV2Command extends Command
             $packageMigrationFile = __DIR__ . '/../../database/migrations/rename_media_collection_names.php';
             $this->comment("  → Package migration: {$packageMigrationFile}");
 
-            if (!File::exists($packageMigrationFile)) {
+            if (! File::exists($packageMigrationFile)) {
                 $this->error("  ✗ rename_media_collection_names.php not found!");
+
                 return self::FAILURE;
             }
 
@@ -280,7 +285,7 @@ class UpgradeV2Command extends Command
 
             $existingMigrations = File::glob($appMigrationsPath . '/*_rename_media_collection_names.php');
 
-            if (!empty($existingMigrations)) {
+            if (! empty($existingMigrations)) {
                 $this->warn("  ⚠ rename_media_collection_names already published: " . basename($existingMigrations[0]));
             } else {
                 File::copy($packageMigrationFile, $appMigrationFile);
@@ -308,6 +313,7 @@ class UpgradeV2Command extends Command
 
         if ($exitCode !== 0) {
             $this->error('Migration failed with exit code: ' . $exitCode);
+
             return self::FAILURE;
         }
 
@@ -329,17 +335,20 @@ class UpgradeV2Command extends Command
 
         $this->newLine();
 
-        if ($hasRouteAfter && !$hasSlugAfter) {
+        if ($hasRouteAfter && ! $hasSlugAfter) {
             $this->line('  ✓ Column successfully renamed: pages.slug → pages.route');
         } elseif ($hasRouteAfter && $hasSlugAfter) {
             $this->error('  ✗ Both columns exist - migration created route but did not remove slug!');
+
             return self::FAILURE;
-        } elseif (!$hasRouteAfter && $hasSlugAfter) {
+        } elseif (! $hasRouteAfter && $hasSlugAfter) {
             $this->error('  ✗ Column rename failed - slug still exists, route was not created');
             $this->error('  ✗ Check migration output above for errors');
+
             return self::FAILURE;
         } else {
             $this->error('  ✗ Both columns missing - unexpected state!');
+
             return self::FAILURE;
         }
 

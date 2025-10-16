@@ -109,6 +109,7 @@ class PostExportMigrationAction
                             $fileContents = Storage::disk($mediaDisk)->get($diskPath);
                             file_put_contents($targetPath, $fileContents);
                             $exportedCount++;
+
                             continue;
                         }
                     }
@@ -138,7 +139,7 @@ class PostExportMigrationAction
             if ($post->user) {
                 $userId = $post->user->id;
 
-                if (!in_array($userId, $exportedAvatars)) {
+                if (! in_array($userId, $exportedAvatars)) {
                     $avatar = $post->user->getFirstMedia('avatar');
 
                     if ($avatar) {
@@ -157,6 +158,7 @@ class PostExportMigrationAction
                                     file_put_contents($targetPath, $fileContents);
                                     $exportedCount++;
                                     $exportedAvatars[] = $userId;
+
                                     continue;
                                 }
                             }
@@ -290,10 +292,10 @@ class PostExportMigrationAction
 
             // Handle links (could be JSON or array)
             $linksCode = 'null';
-            if (!empty($userData['links'])) {
+            if (! empty($userData['links'])) {
                 if (is_string($userData['links'])) {
                     $linksCode = "'" . addslashes($userData['links']) . "'";
-                } else if (is_array($userData['links'])) {
+                } elseif (is_array($userData['links'])) {
                     $linksCode = "json_encode(" . var_export($userData['links'], true) . ")";
                 }
             }
@@ -371,7 +373,7 @@ AVATARCODE;
         // Extract unique users and their data
         $users = [];
         foreach ($posts as $post) {
-            if ($post->user && !isset($users[$post->user->email])) {
+            if ($post->user && ! isset($users[$post->user->email])) {
                 $avatar = $post->user->getFirstMedia('avatar');
                 $avatarSlug = Str::slug($post->user->slug ?? $post->user->name);
 

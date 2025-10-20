@@ -476,12 +476,12 @@ return new class extends Migration
             }
         }
 
-        // Sort by export_order to maintain original order
+        // Sort by export_order in descending order (highest/newest first)
         usort(\$postsToImport, function(\$a, \$b) {
-            return \$a['order'] <=> \$b['order'];
+            return \$b['order'] <=> \$a['order'];
         });
 
-        echo "  ℹ Posts will be imported in original export order\\n";
+        echo "  ℹ Posts will be imported in reverse order (newest first)\\n";
         echo "\\n";
 
         \$imported = 0;
@@ -920,7 +920,7 @@ Your markdown content here...
 
 **Note:** User/author information is hardcoded in the migration file itself, not stored in the frontmatter. The migration creates or updates users with all their data (name, email, slug, bio, links, avatar) and generates random passwords for security.
 
-**Note:** The `export_order` field ensures posts are imported in the exact same order they were exported, maintaining the original sequence.
+**Note:** The `export_order` field determines import order. Posts are imported in **reverse order** (highest export_order first, lowest last), so the newest exported posts are imported first.
 
 ### Import Summary
 After migration completes, you'll see a summary like:

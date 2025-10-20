@@ -392,7 +392,7 @@ Export posts as a production-ready Laravel migration package:
 **Migration Features:**
 - Creates or updates users/authors with avatars
 - Generates random secure passwords for new users
-- Imports posts in original export order
+- Imports posts in reverse order (newest first, oldest last)
 - Creates categories and tags automatically
 - Attaches images via Spatie Media Library
 - Includes reversible `down()` method

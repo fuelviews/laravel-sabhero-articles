@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-articles` will be documented in this file.
 
+## v2.0.1 - 2025-10-20
+
+### What's Changed
+
+* Change post import order to reverse (newest first) to prioritize importing the latest posts before older ones. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/43
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v2.0.0...v2.0.1
+
 ## v2.0.0 - 2025-10-16
 
 ### What's Changed

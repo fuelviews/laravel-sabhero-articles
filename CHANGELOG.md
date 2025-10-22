@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-articles` will be documented in this file.
 
+## v2.0.2 - 2025-10-22
+
+### What's Changed
+
+* Refactor ZIP creation to use explicit file listing instead of recursive directory iteration to avoid symlink resolution issues on Laravel Forge. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/44
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v2.0.1...v2.0.2
+
 ## v2.0.1 - 2025-10-20
 
 ### What's Changed

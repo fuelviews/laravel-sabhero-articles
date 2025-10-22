@@ -1045,6 +1045,7 @@ MD;
 
     /**
      * Create ZIP file from directory
+     * Uses explicit file listing to avoid symlink resolution issues (Laravel Forge)
      */
     protected function createZip(string $zipFilePath, string $sourceDir): void
     {
@@ -1054,16 +1055,33 @@ MD;
             throw new \RuntimeException('Failed to create ZIP file');
         }
 
-        $files = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($sourceDir),
-            \RecursiveIteratorIterator::LEAVES_ONLY
-        );
+        // Add migration file at root (find the .php file)
+        $migrationFiles = glob($sourceDir.'/*.php');
+        foreach ($migrationFiles as $migrationFile) {
+            if (is_file($migrationFile)) {
+                $zip->addFile($migrationFile, basename($migrationFile));
+            }
+        }
 
-        foreach ($files as $file) {
-            if (! $file->isDir()) {
-                $filePath = $file->getRealPath();
-                $relativePath = substr($filePath, strlen($sourceDir) + 1);
-                $zip->addFile($filePath, $relativePath);
+        // Add README.md at root
+        $readmeFile = $sourceDir.'/README.md';
+        if (file_exists($readmeFile)) {
+            $zip->addFile($readmeFile, 'README.md');
+        }
+
+        // Add markdown files in posts/markdown/
+        $markdownFiles = glob($sourceDir.'/posts/markdown/*.md');
+        foreach ($markdownFiles as $markdownFile) {
+            if (is_file($markdownFile)) {
+                $zip->addFile($markdownFile, 'posts/markdown/'.basename($markdownFile));
+            }
+        }
+
+        // Add images in images/
+        $imageFiles = glob($sourceDir.'/images/*');
+        foreach ($imageFiles as $imageFile) {
+            if (is_file($imageFile)) {
+                $zip->addFile($imageFile, 'images/'.basename($imageFile));
             }
         }
 

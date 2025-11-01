@@ -18,7 +18,7 @@ Breadcrumbs::for('sabhero-articles.post.index', static function (BreadcrumbTrail
     $prefix = config('sabhero-articles.route.prefix');
 
     $trail->parent('home');
-    $trail->push(Str::title($prefix), route('sabhero-articles.post.index'));
+    $trail->push(Str::of($prefix)->plural()->ucfirst(), route('sabhero-articles.post.index'));
 });
 
 Breadcrumbs::for('sabhero-articles.post.show', static function (BreadcrumbTrail $trail, $post) {

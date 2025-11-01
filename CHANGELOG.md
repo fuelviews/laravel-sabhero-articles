@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-articles` will be documented in this file.
 
+## v2.0.3 - 2025-11-01
+
+### What's Changed
+
+* Update breadcrumb label to use plural and ucfirst formatting for route prefix to improve display consistency. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/47
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v2.0.2...v2.0.3
+
 ## v2.0.2 - 2025-10-22
 
 ### What's Changed

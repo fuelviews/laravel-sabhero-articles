@@ -20,7 +20,6 @@ use Fuelviews\SabHeroArticles\Filament\Resources\UserResource\Pages\ListUsers;
 use Fuelviews\SabHeroArticles\Filament\Resources\UserResource\Pages\ViewUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules\Password;
 
 class UserResource extends Resource
 {

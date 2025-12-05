@@ -18,7 +18,9 @@ use Fuelviews\SabHeroArticles\Filament\Resources\UserResource\Pages\CreateUser;
 use Fuelviews\SabHeroArticles\Filament\Resources\UserResource\Pages\EditUser;
 use Fuelviews\SabHeroArticles\Filament\Resources\UserResource\Pages\ListUsers;
 use Fuelviews\SabHeroArticles\Filament\Resources\UserResource\Pages\ViewUser;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password;
 
 class UserResource extends Resource
 {
@@ -75,6 +77,25 @@ class UserResource extends Resource
                         Forms\Components\Toggle::make('is_author')
                             ->label('Is Author')
                             ->helperText('Make this user visible as a article author'),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Security')
+                    ->schema([
+                        Forms\Components\TextInput::make('password')
+                            ->password()
+                            ->revealable()
+                            ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
+                            ->dehydrated(fn ($state) => filled($state))
+                            ->required(fn (string $operation): bool => $operation === 'create')
+                            ->label('Password'),
+
+                        Forms\Components\TextInput::make('password_confirmation')
+                            ->password()
+                            ->revealable()
+                            ->requiredWith('password')
+                            ->same('password')
+                            ->dehydrated(false)
+                            ->label('Confirm Password'),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Author Information')

@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-sabhero-articles` will be documented in this file.
 
+## v2.0.4 - 2025-12-05
+
+### What's Changed
+
+* Add feature_image column to pages table and enhance user password handling by adding password confirmation and hashing; improve slug generation and author status assignment in HasArticle trait. by @thejmitchener in https://github.com/fuelviews/laravel-sabhero-articles/pull/49
+
+**Full Changelog**: https://github.com/fuelviews/laravel-sabhero-articles/compare/v2.0.3...v2.0.4
+
 ## v2.0.3 - 2025-11-01
 
 ### What's Changed

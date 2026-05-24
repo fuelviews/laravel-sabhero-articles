@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('route', 80)->unique();
             $table->string('title', 250)->unique();
             $table->text('description')->nullable();
+            $table->string('feature_image', 100)->unique()->nullable();
 
             $table->timestamps();
         });

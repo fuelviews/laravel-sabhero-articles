@@ -13,13 +13,17 @@ trait HasArticle
      */
     protected static function bootHasArticle()
     {
-        static::creating(function ($model) {
-            if (empty($model->slug)) {
-                $model->slug = $model->generateUniqueSlug($model->name);
+        static::saving(function ($model) {
+            // Only process slug if the column exists in fillable
+            if (in_array('slug', $model->getFillable(), true)) {
+                // Generate slug if empty OR if not properly slugified
+                if (empty($model->slug) || $model->slug !== Str::slug($model->slug)) {
+                    $model->slug = $model->generateUniqueSlug($model->name);
+                }
             }
 
-            // Set new users as authors by default
-            if (! isset($model->is_author)) {
+            // Set new users as authors by default (if column exists and not set)
+            if (in_array('is_author', $model->getFillable(), true) && ! isset($model->is_author)) {
                 $model->is_author = true;
             }
         });
